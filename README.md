@@ -1,4 +1,6 @@
 # ACXION
+Pronounced "Action"
+
 Action-focused weapon base for Gmod
 
 Features autoaim so you don't even need to aim, and akimbo so you can shoot two guys at once, automatically
