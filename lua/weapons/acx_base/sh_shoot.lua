@@ -92,6 +92,8 @@ function SWEP:Shoot(left)
     if IsFirstTimePredicted() then
         self:DoMuzzleEffects(left)
 
+        local punchAngle = Angle(util.SharedRandom("acx_recoil_left", -1, 1, self:GetOwner():GetCurrentCommand()) * self.Recoil, util.SharedRandom("acx_recoil_up", -1, 1, self:GetOwner():GetCurrentCommand()) * self.Recoil, 0.5 * math.Rand(-1, 1) * self.Recoil)
+
         if left then
             self:TakeSecondaryAmmo(1)
             self:SetBurst2Count(self:GetBurst2Count() + 1)
@@ -99,8 +101,6 @@ function SWEP:Shoot(left)
             self:TakePrimaryAmmo(1)
             self:SetBurstCount(self:GetBurstCount() + 1)
         end
-
-        local punchAngle = Angle(math.Rand(-1, 1) * self.Recoil, math.Rand(-1, 1) * self.Recoil, 0.5 * math.Rand(-1, 1) * self.Recoil)
 
         self:GetOwner():ViewPunch(punchAngle)
 
@@ -123,6 +123,15 @@ function SWEP:Shoot(left)
         else
             self:SetNeedCycle(true)
         end
+        if self:GetAkimbo() then
+            if left then
+                self:SendNeedCycle()
+            else
+                self:SendNeedCycle2()
+            end
+        else
+            self:SendNeedCycle()
+        end
     end
 end
 
@@ -136,6 +145,18 @@ function SWEP:DryFire(left)
         self:SetShotQueued(false)
         self:SetBurstCount(0)
     end
+end
+
+function SWEP:SendNeedCycle()
+    if game.SinglePlayer() then self:CallOnClient("SendNeedCycle") end
+
+    ACX.CycleAmount = 0
+end
+
+function SWEP:SendNeedCycle2()
+    if game.SinglePlayer() then self:CallOnClient("SendNeedCycle2") end
+
+    ACX.CycleAmount2 = 0
 end
 
 function SWEP:DoMuzzleEffects(left)

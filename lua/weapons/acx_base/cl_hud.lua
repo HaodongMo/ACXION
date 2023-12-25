@@ -43,9 +43,7 @@ function SWEP:DrawHUD()
         surface.SetDrawColor(0, 0, 0, 255)
         surface.DrawLine(x - ScrW(), y, x + ScrW(), y)
         surface.DrawLine(x, y - ScrH(), x, y + ScrH())
-
         local text_ammo_r = tostring(self:Clip1())
-
         surface.SetFont("ACX_8")
         surface.SetTextPos(x + ss * 5, y + ss * 4)
         surface.SetTextColor(col)
@@ -58,6 +56,7 @@ function SWEP:DrawHUD()
     else
         local crosshair_x = ScrW() / 2
         local crosshair_y = ScrH() / 2
+        y = y + self.LowerAmountRight * ScrH()
         surface.SetDrawColor(col)
 
         if self:Clip1() == 0 then
@@ -65,7 +64,6 @@ function SWEP:DrawHUD()
         end
 
         render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-
         surface.DrawRect(crosshair_x - 1, crosshair_y - 1, 3, 3)
         local trueFOV = self:WidescreenFix(self.TrueFOV)
         local crosshair_radius = (ScrH() / trueFOV) * math.deg(self.Spread) + ScreenScale(1)
@@ -80,9 +78,7 @@ function SWEP:DrawHUD()
         end
 
         render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-
         local text_ammo_r = tostring(self:Clip1())
-
         surface.SetFont("ACX_8")
         surface.SetTextPos(x + crosshair_radius + ss * 4, y + ss * 4)
         surface.SetTextColor(col)
@@ -95,15 +91,13 @@ function SWEP:DrawHUD()
 
         if self:GetAkimbo() then
             local text_r = "R"
-
             surface.SetFont("ACX_8")
             surface.SetTextPos(x + crosshair_radius + ss * 6, y - ss * 10)
             surface.DrawText(text_r)
-
             local aim_angle2 = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self.InterpolatedLockAngle2
             local pos2 = self:GetOwner():GetShootPos() + aim_angle2:Forward() * 15000
             local xl, yl = pos2:ToScreen().x, pos2:ToScreen().y
-
+            yl = yl + self.LowerAmountLeft * ScrH()
             surface.SetDrawColor(col)
 
             if self:Clip2() == 0 then
@@ -122,9 +116,7 @@ function SWEP:DrawHUD()
             end
 
             render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-
             local text_ammo_l = tostring(self:Clip2())
-
             surface.SetFont("ACX_8")
             local text_ammo_w, text_ammo_h = surface.GetTextSize(text_ammo_l)
             surface.SetTextPos(xl - crosshair_radius - text_ammo_w - ss * 4, yl + ss * 4)
@@ -135,13 +127,10 @@ function SWEP:DrawHUD()
             end
 
             surface.DrawText(text_ammo_l)
-
             local text_l = "L"
-
             surface.SetFont("ACX_8")
             local text_l_w, _ = surface.GetTextSize(text_l)
             surface.SetTextPos(xl - text_l_w - crosshair_radius - ss * 6, yl - ss * 10)
-
             surface.DrawText(text_l)
         end
     end
@@ -155,9 +144,8 @@ function SWEP:DrawHUD()
         end
 
         render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-
-        // surface.SetDrawColor(col_bg)
-        // surface.DrawRect(reloadline_x, 0, 16 * ss, ScrH())
+        -- surface.SetDrawColor(col_bg)
+        -- surface.DrawRect(reloadline_x, 0, 16 * ss, ScrH())
         local max_reload_time = self:GetMaximumReloadTime()
         local fast_reload_start_time = self:GetMinimumReloadTime()
         local fast_reload_finish_time = self:GetMaximumFastReloadTime()
@@ -172,11 +160,8 @@ function SWEP:DrawHUD()
         local reloadprogress_y = ScrH() * (1 - delta)
         surface.SetDrawColor(col_fg)
         surface.DrawRect(reloadline_x, reloadprogress_y, 16 * ss, 2 * ss)
-
         render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-
         local text_r = "RELOAD"
-
         surface.SetFont("ACX_8")
         local text_w = surface.GetTextSize(text_r)
         surface.SetTextPos(reloadline_x - text_w - 4 * ss, fast_reload_y - 16 * ss)
@@ -185,12 +170,65 @@ function SWEP:DrawHUD()
 
         if not ACX.FastReloadChance then
             local text_r2 = "FAIL"
-
             surface.SetFont("ACX_8")
             local text2_w = surface.GetTextSize(text_r2)
             surface.SetTextPos(reloadline_x - text2_w - 4 * ss, fast_reload_y - 8 * ss)
             surface.SetTextColor(col_fg)
             surface.DrawText(text_r2)
+        end
+    end
+
+    if self:GetAkimbo() then
+        if self:GetNeedCycle2() and self:GetOwner():KeyDown(IN_ATTACK) then
+            local reloadline_x = ScrW() * 2 / 5
+            local col_fg = col
+            render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+            surface.SetDrawColor(col_fg)
+            surface.DrawRect(reloadline_x, 0, 0.5 * ss, ScrH())
+            local reloadline_y = ScrH() * 3 / 4
+            local reload_cycle_line_y = ACX.CycleAmount2 * ScrH() * 3 / 4
+            surface.DrawRect(reloadline_x + 1 - 16 * ss, reload_cycle_line_y, 16 * ss - 1, reloadline_y - reload_cycle_line_y)
+            render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+            local text_r = "PULL DOWN"
+            surface.SetFont("ACX_8")
+            local text_w = surface.GetTextSize(text_r)
+            surface.SetTextPos(reloadline_x - text_w - ss * 4, reloadline_y + ss * 2)
+            surface.SetTextColor(col_fg)
+            surface.DrawText(text_r)
+        end
+
+        if self:GetNeedCycle() and self:GetOwner():KeyDown(IN_ATTACK2) then
+            local reloadline_x = ScrW() * 3 / 5
+            local col_fg = col
+            render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+            surface.SetDrawColor(col_fg)
+            surface.DrawRect(reloadline_x, 0, 0.5 * ss, ScrH())
+            local reloadline_y = ScrH() * 3 / 4
+            local reload_cycle_line_y = ACX.CycleAmount * ScrH() * 3 / 4
+            surface.DrawRect(reloadline_x + 1, reload_cycle_line_y, 16 * ss - 1, reloadline_y - reload_cycle_line_y)
+            render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+            local text_r = "PULL DOWN"
+            surface.SetFont("ACX_8")
+            surface.SetTextPos(reloadline_x + ss * 4, reloadline_y + ss * 2)
+            surface.SetTextColor(col_fg)
+            surface.DrawText(text_r)
+        end
+    else
+        if self:GetNeedCycle() and self:GetOwner():KeyDown(IN_ATTACK) then
+            local reloadline_x = ScrW() * 3 / 5
+            local col_fg = col
+            render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+            surface.SetDrawColor(col_fg)
+            surface.DrawRect(reloadline_x, 0, 0.5 * ss, ScrH())
+            local reloadline_y = ScrH() * 3 / 4
+            local reload_cycle_line_y = ACX.CycleAmount * ScrH() * 3 / 4
+            surface.DrawRect(reloadline_x + 1, reload_cycle_line_y, 16 * ss - 1, reloadline_y - reload_cycle_line_y)
+            render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+            local text_r = "PULL DOWN"
+            surface.SetFont("ACX_8")
+            surface.SetTextPos(reloadline_x + ss * 4, reloadline_y + ss * 2)
+            surface.SetTextColor(col_fg)
+            surface.DrawText(text_r)
         end
     end
 end

@@ -6,6 +6,8 @@ ACX.CycleAmount2 = 0
 
 local lastviewangles = nil
 
+local cycledifficulty = 4
+
 hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
     local wpn = LocalPlayer():GetActiveWeapon()
 
@@ -40,17 +42,74 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
         ACX.ReleasedReload = true
     end
 
-    if bit.band(buttons, IN_ATTACK) != 0 then
-        shouldattack1 = true
-        if wpn:GetNeedCycle() then
-            shouldrestrictview = true
+    if wpn:GetAkimbo() then
+        if bit.band(buttons, IN_ATTACK) != 0 then
+            shouldattack1 = true
+            if wpn:GetNeedCycle2() then
+                shouldrestrictview = true
+            end
+        end
+
+        if bit.band(buttons, IN_ATTACK2) != 0 then
+            shouldattack2 = true
+            if wpn:GetNeedCycle() then
+                shouldrestrictview = true
+            end
+        end
+    else
+        if bit.band(buttons, IN_ATTACK) != 0 then
+            shouldattack1 = true
+            if wpn:GetNeedCycle() then
+                shouldrestrictview = true
+            end
         end
     end
 
-    if bit.band(buttons, IN_ATTACK2) != 0 then
-        shouldattack2 = true
-        if wpn:GetNeedCycle2() then
-            shouldrestrictview = true
+    if shouldrestrictview then
+        local mouseY = cmd:GetMouseY()
+
+        if mouseY > 0 then
+            if wpn:GetAkimbo() then
+                if shouldattack1 then
+                    ACX.CycleAmount2 = ACX.CycleAmount2 + (mouseY / ScrH()) * cycledifficulty
+                    ACX.CycleAmount2 = math.Clamp(ACX.CycleAmount2, 0, 1)
+                end
+
+                if shouldattack2 then
+                    ACX.CycleAmount = ACX.CycleAmount + (mouseY / ScrH()) * cycledifficulty
+                    ACX.CycleAmount = math.Clamp(ACX.CycleAmount, 0, 1)
+                end
+            else
+                if shouldattack1 then
+                    ACX.CycleAmount = ACX.CycleAmount + (mouseY / ScrH()) * cycledifficulty
+                    ACX.CycleAmount = math.Clamp(ACX.CycleAmount, 0, 1)
+                end
+            end
+        end
+
+        cmd:SetMouseY(0)
+        if lastviewangles then
+            cmd:SetViewAngles(lastviewangles)
+        end
+    else
+        lastviewangles = cmd:GetViewAngles()
+    end
+
+    if wpn:GetAkimbo() then
+        if ACX.CycleAmount2 >= 1 then
+            shouldweapon1 = true
+        end
+
+        if ACX.CycleAmount >= 1 then
+            shouldweapon2 = true
+        end
+    else
+        if ACX.CycleAmount >= 1 then
+            shouldweapon1 = true
+        end
+
+        if ACX.CycleAmount2 >= 1 then
+            shouldweapon2 = true
         end
     end
 

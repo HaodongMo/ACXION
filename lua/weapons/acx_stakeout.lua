@@ -22,7 +22,7 @@ SWEP.HeadshotMultiplier = 1
 SWEP.ArmorPiercing = 0
 SWEP.Spread = 0.05
 SWEP.Recoil = 1
-SWEP.RateOfFire = 60
+SWEP.RateOfFire = 150
 
 SWEP.Firemode = "pump"
 -- auto

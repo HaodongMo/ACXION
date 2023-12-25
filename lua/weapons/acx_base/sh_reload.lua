@@ -13,6 +13,9 @@ function SWEP:CustomReload()
     self:SetPlayedReloadHint(false)
     self:SendCanFastReload()
 
+    self:SetNeedCycle(false)
+    self:SetNeedCycle2(false)
+
     self:EmitSound(self.ReloadStartSound, 75, 100, 1, CHAN_AUTO)
 end
 
@@ -69,6 +72,9 @@ function SWEP:SendCanFastReload()
 
     ACX.FastReloadChance = true
     ACX.ReleasedReload = false
+
+    ACX.CycleAmount = 0
+    ACX.CycleAmount2 = 0
 end
 
 function SWEP:RestoreAmmo(amt, limit)

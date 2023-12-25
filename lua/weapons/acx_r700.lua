@@ -23,7 +23,7 @@ SWEP.HeadshotMultiplier = 2
 SWEP.ArmorPiercing = 0.75
 SWEP.Spread = 0.0
 SWEP.Recoil = 1.5
-SWEP.RateOfFire = 60
+SWEP.RateOfFire = 150
 
 SWEP.Firemode = "bolt"
 -- auto
@@ -44,6 +44,8 @@ SWEP.AutoAimSpeed = 5
 
 SWEP.AutoAimOutOfSights = false
 SWEP.AutoAimInSights = true
+
+SWEP.CycleBetweenShots = true
 
 SWEP.Primary.Ammo = "357"
 SWEP.Primary.ClipSize = 10
@@ -88,3 +90,5 @@ SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
 SWEP.ReloadStartSound = "weapons/scout/scout_clipout.wav"
 SWEP.ReloadFinishSound = "weapons/scout/scout_bolt.wav"
+
+SWEP.CycleSound = "weapons/scout/scout_bolt.wav"

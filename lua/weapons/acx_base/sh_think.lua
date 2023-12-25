@@ -78,7 +78,7 @@ function SWEP:Think()
 
         if not self:GetReloading() then
             if self:GetNeedCycle() then
-                if self:GetOwner():KeyPressed(IN_WEAPON2) then
+                if self:GetOwner():KeyDown(IN_WEAPON2) then
                     self:SetNeedCycle(false)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
@@ -103,7 +103,7 @@ function SWEP:Think()
             end
 
             if self:GetNeedCycle2() then
-                if self:GetOwner():KeyPressed(IN_WEAPON1) then
+                if self:GetOwner():KeyDown(IN_WEAPON1) then
                     self:SetNeedCycle2(false)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
@@ -130,7 +130,7 @@ function SWEP:Think()
     else
         if not self:GetReloading() then
             if self:GetNeedCycle() then
-                if self:GetOwner():KeyPressed(IN_WEAPON1) then
+                if self:GetOwner():KeyDown(IN_WEAPON1) then
                     self:SetNeedCycle(false)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
