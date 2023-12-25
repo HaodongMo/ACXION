@@ -48,6 +48,7 @@ SWEP.AutoAimRange = 5000
 SWEP.AutoAimSpeed = 15
 SWEP.AutoAimInSights = true
 SWEP.AutoAimOutOfSights = false
+SWEP.HardLockForTargetData = true
 
 SWEP.Primary.Ammo = "rpg_round"
 SWEP.Primary.ClipSize = 1

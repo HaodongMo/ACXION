@@ -31,6 +31,7 @@ SWEP.HeadshotMultiplier = 2
 SWEP.ArmorPiercing = 0.25
 
 SWEP.ProjectileEntity = nil
+SWEP.ProjectileForce = 5000
 
 SWEP.Spread = 0.01
 SWEP.Recoil = 1
@@ -54,6 +55,9 @@ SWEP.AutoAimRange = 3500
 SWEP.AutoAimSpeed = 1
 SWEP.AutoAimSeek = "both"
 -- "head", "body", "both"
+
+SWEP.ProvideTargetData = true
+SWEP.HardLockForTargetData = false -- Weapon must be directly aiming at a target to provide target data
 
 SWEP.AutoAimOutOfSights = true
 SWEP.AutoAimInSights = false

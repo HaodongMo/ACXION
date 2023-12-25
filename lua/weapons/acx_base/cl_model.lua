@@ -41,6 +41,8 @@ function SWEP:UpdateModelBodygroups(mdl, left)
         end
 
         for c, bgs in pairs(bbg) do
+            if not isnumber(c) then continue end
+
             if amt < c then
                 mdl:SetBodygroup(bgs[1], bgs[2])
                 break

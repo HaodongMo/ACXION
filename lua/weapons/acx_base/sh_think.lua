@@ -45,8 +45,8 @@ function SWEP:Think()
             self.SightAmount = math.Approach(self.SightAmount, 0, FrameTime() / 0.25)
         end
 
-        self.InterpolatedLockAngle = LerpAngle(0.99 * FrameTime(), self.InterpolatedLockAngle, self:GetLockAngle())
-        self.InterpolatedLockAngle2 = LerpAngle(0.99 * FrameTime(), self.InterpolatedLockAngle2, self:GetLockAngle2())
+        self.InterpolatedLockAngle = LerpAngle(0.999999 * FrameTime(), self.InterpolatedLockAngle, self:GetLockAngle())
+        self.InterpolatedLockAngle2 = LerpAngle(0.999999 * FrameTime(), self.InterpolatedLockAngle2, self:GetLockAngle2())
     end
 
     -- Predicted block

@@ -23,16 +23,16 @@ ENT.SmokeTrailTime = 1
 
 ENT.LifeTime = 20
 
-ENT.Damage = 100
+ENT.Damage = 50
 ENT.Radius = 256
-ENT.ImpactDamage = 250
+ENT.ImpactDamage = 1000
 ENT.ExplodeOnImpact = true
 ENT.Boost = 2500
 ENT.Drunkenness = 0
 
 ENT.Flare = true
 
-ENT.SteerSpeed = 300 -- The maximum amount of degrees per second the missile can steer.
-ENT.SeekerAngle = math.cos(90) -- The missile will lose tracking outside of this angle.
+ENT.SteerSpeed = 90 -- The maximum amount of degrees per second the missile can steer.
+ENT.SeekerAngle = math.cos(35) -- The missile will lose tracking outside of this angle.
 ENT.FireAndForget = true -- This missile automatically tracks its target.
 ENT.NoReacquire = true

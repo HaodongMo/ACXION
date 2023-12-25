@@ -17,6 +17,12 @@ SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
 SWEP.Slot = 3
 
+SWEP.Bodygroups = "0000"
+
+SWEP.BulletBodygroups = {
+    [1] = {1, 1}
+}
+
 ----------------- Stats
 
 SWEP.Damage = 20

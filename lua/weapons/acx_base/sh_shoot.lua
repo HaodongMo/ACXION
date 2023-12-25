@@ -19,6 +19,41 @@ function SWEP:GetStillWaiting(left)
     return false
 end
 
+function SWEP:GetShootAngle(left)
+    local ang
+
+    if left then
+        ang = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self:GetLockAngle2()
+    else
+        ang = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self:GetLockAngle()
+    end
+
+    return ang
+end
+
+function SWEP:GetHasHardLock(left)
+    local pos = self:GetOwner():EyePos()
+    local ang = self:GetShootAngle(left)
+    local target
+
+    if !left and IsValid(self:GetLockOnEntity()) then
+        target = self:GetLockOnEntity()
+    elseif left and IsValid(self:GetLockOnEntity2()) then
+        target = self:GetLockOnEntity2()
+    end
+
+    if !target then return false end
+
+    local targeting_tr = util.TraceLine({
+        start = pos,
+        endpos = pos + ang:Forward() * self.AutoAimRange,
+        filter = self:GetOwner(),
+        mask = MASK_SHOT_HULL
+    })
+
+    return targeting_tr.Entity == target
+end
+
 function SWEP:Shoot(left)
     if self:GetStillWaiting(left) then return end
 
@@ -40,13 +75,7 @@ function SWEP:Shoot(left)
 
     local spread = self.Spread
 
-    local ang
-
-    if left then
-        ang = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self:GetLockAngle2()
-    else
-        ang = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self:GetLockAngle()
-    end
+    local ang = self:GetShootAngle(left)
 
     local damage = self.Damage
 
@@ -68,8 +97,6 @@ function SWEP:Shoot(left)
 
             if !IsValid(shoot_entity) then return end
 
-            ang = ang + AngleRand() / 360 * math.deg(self.Spread)
-
             local pos = self:GetOwner():EyePos()
 
             if left then
@@ -80,13 +107,25 @@ function SWEP:Shoot(left)
 
             local shootentdata = {}
 
-            if !left and IsValid(self:GetLockOnEntity()) then
-                shootentdata.Target = self:GetLockOnEntity()
-            elseif left and IsValid(self:GetLockOnEntity2()) then
-                shootentdata.Target = self:GetLockOnEntity2()
+            if self.ProvideTargetData then
+
+                if !left and IsValid(self:GetLockOnEntity()) then
+                    shootentdata.Target = self:GetLockOnEntity()
+                elseif left and IsValid(self:GetLockOnEntity2()) then
+                    shootentdata.Target = self:GetLockOnEntity2()
+                end
+
+                if self.HardLockForTargetData then
+                    if !self:GetHasHardLock(left) then
+                        shootentdata.Target = nil
+                    end
+                end
             end
 
+            ang = ang + AngleRand() / 360 * math.deg(self.Spread)
+
             shoot_entity.ShootEntData = shootentdata
+
             shoot_entity:SetPos(pos)
             shoot_entity:SetAngles(ang)
             shoot_entity:SetOwner(self:GetOwner())
@@ -96,7 +135,7 @@ function SWEP:Shoot(left)
             local phys = shoot_entity:GetPhysicsObject()
 
             if IsValid(phys) then
-                phys:SetVelocity(ang:Forward() * 5000)
+                phys:SetVelocity(ang:Forward() * self.ProjectileForce)
             end
         end
     else

@@ -122,28 +122,7 @@ if SERVER then
                 local target = self.ShootEntData.Target
                 if target.UnTrackable then self.ShootEntData.Target = nil end
 
-                -- if self.TopAttack then
-                --     local tpos = target:GetPos() + Vector(0, 0, 5000)
-                --     if self.SpawnTime + self.TopAttackTime - 1 < CurTime() or self.TopAttackReached then
-                --         tpos = target:GetPos()
-                --     end
-                --     local dir = (tpos - self:GetPos()):GetNormalized()
-                --     local dist = (tpos - self:GetPos()):Length()
-                --     local ang = dir:Angle()
-
-                --     local p = self:GetAngles().p
-                --     local y = self:GetAngles().y
-
-                --     p = math.ApproachAngle(p, ang.p, FrameTime() * self.SteerSpeed)
-                --     y = math.ApproachAngle(y, ang.y, FrameTime() * self.SteerSpeed)
-
-                --     self:SetAngles(Angle(p, y, 0))
-
-                --     if dist <= 1024 then
-                --         self.TopAttackReached = true
-                --     end
-                -- else
-                local tpos = target:EyePos()
+                local tpos = target:WorldSpaceCenter()
                 if self.TopAttack and !self.TopAttackReached then
                     tpos = tpos + Vector(0, 0, self.TopAttackHeight)
 
