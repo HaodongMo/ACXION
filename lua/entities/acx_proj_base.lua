@@ -6,6 +6,7 @@ ENT.PrintName 			= "Base Projectile"
 
 ENT.Spawnable 			= false
 ENT.CollisionGroup = COLLISION_GROUP_PROJECTILE
+ENT.RenderGroup = RENDERGROUP_TRANSLUCENT
 
 ENT.Model = "models/Items/grenadeAmmo.mdl"
 ENT.Ticks = 0
@@ -361,6 +362,9 @@ end
 
 local flaremat = Material("effects/ar2_altfire1b")
 function ENT:Draw()
+end
+
+function ENT:DrawTranslucent(flags)
     if self.Flare and !self.Defused then
         render.SetMaterial(flaremat)
         render.DrawSprite(self:GetPos(), math.Rand(90, 110), math.Rand(90, 110), Color(255, 250, 240))

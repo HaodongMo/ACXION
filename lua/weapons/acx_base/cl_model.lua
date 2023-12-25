@@ -29,6 +29,26 @@ function SWEP:CreateCustomModel()
     table.insert(ACX.CSModelPile, {Model = newmodel_right, Weapon = self})
 end
 
+function SWEP:UpdateModelBodygroups(mdl, left)
+    mdl:SetBodyGroups(self.Bodygroups)
+
+    local bbg = self.BulletBodygroups
+
+    if bbg then
+        local amt = self:Clip1()
+        if left then
+            amt = self:Clip2()
+        end
+
+        for c, bgs in pairs(bbg) do
+            if amt < c then
+                mdl:SetBodygroup(bgs[1], bgs[2])
+                break
+            end
+        end
+    end
+end
+
 function SWEP:KillCustomModels()
     if IsValid(self.ModelLeftView) then
         SafeRemoveEntity(self.ModelLeftView)

@@ -16,6 +16,12 @@ SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
 SWEP.Slot = 4
 
+SWEP.Bodygroups = "0000"
+
+SWEP.BulletBodygroups = {
+    [1] = {1, 1}
+}
+
 ----------------- Stats
 
 SWEP.ProjectileEntity = "acx_proj_rpg"
@@ -39,7 +45,7 @@ SWEP.ShotgunReload = false
 
 SWEP.AutoAimAngle = math.cos(math.rad(10))
 SWEP.AutoAimRange = 5000
-SWEP.AutoAimSpeed = 20
+SWEP.AutoAimSpeed = 15
 SWEP.AutoAimInSights = true
 SWEP.AutoAimOutOfSights = false
 

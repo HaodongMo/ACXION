@@ -13,6 +13,10 @@ SWEP.PrintName = "ACXION Base"
 SWEP.Model = ""
 SWEP.Bodygroups = ""
 
+SWEP.BulletBodygroups = {
+    -- [1] = {5, 1}
+}
+
 SWEP.ModelOffsetView = Vector(0, 0, 0)
 SWEP.ModelAngleView = Angle(0, 0, 0)
 

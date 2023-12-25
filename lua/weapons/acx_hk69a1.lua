@@ -8,7 +8,7 @@ SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/hk69a1.mdl"
 
-SWEP.ModelOffsetView = Vector(4, 13, -5.5)
+SWEP.ModelOffsetView = Vector(5, 13, -7)
 SWEP.ModelAngleView = Angle(0, 0, 90)
 
 SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
@@ -18,15 +18,13 @@ SWEP.Slot = 4
 
 ----------------- Stats
 
-SWEP.Damage = 12
-SWEP.Num = 1
-SWEP.HeadshotMultiplier = 1
-SWEP.ArmorPiercing = 0.25
-SWEP.Spread = 0.03
-SWEP.Recoil = 0.75
-SWEP.RateOfFire = 1000
+SWEP.ProjectileEntity = "acx_proj_40mm"
 
-SWEP.Firemode = "auto"
+SWEP.Spread = 0.05
+SWEP.Recoil = 1.5
+SWEP.RateOfFire = 100
+
+SWEP.Firemode = "semi"
 -- auto
 -- semi
 -- semi_falling
@@ -37,16 +35,16 @@ SWEP.Firemode = "auto"
 
 SWEP.ReloadTime = 0.5
 SWEP.ReloadDifficultyMult = 1
-SWEP.ShotgunReload = false
+SWEP.ShotgunReload = true
 
 SWEP.AutoAimAngle = math.cos(math.rad(30))
 SWEP.AutoAimRange = 3500
 SWEP.AutoAimSpeed = 60
 
-SWEP.Primary.Ammo = "smg1"
-SWEP.Primary.ClipSize = 40
+SWEP.Primary.Ammo = "smg1_grenade"
+SWEP.Primary.ClipSize = 1
 SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize * 3
-SWEP.FastReloadBonus = 10
+SWEP.FastReloadBonus = 1
 
 SWEP.Magnification = 1.25
 
@@ -64,8 +62,8 @@ SWEP.RecoilAngle = Angle(0, 0, 0)
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_PISTOL
 
-SWEP.HoldType = "pistol"
-SWEP.HoldTypeAim = "revolver"
+SWEP.HoldType = "ar2"
+SWEP.HoldTypeAim = "rpg"
 
 SWEP.HolsterTime = 0.4
 
@@ -73,16 +71,16 @@ SWEP.HolsterTime = 0.4
 
 SWEP.MuzzleTexture = "effects/gunshipmuzzle"
 
-SWEP.MuzzleOffset = Vector(-2.5, 6, 0)
+SWEP.MuzzleOffset = Vector(-3.5, 16, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
-SWEP.MuzzleScale = 0.5
+SWEP.MuzzleScale = 1
 
 ----------------- Sounds
 
-SWEP.ShootSound = "weapons/mac10/mac10-1.wav"
+SWEP.ShootSound = "weapons/grenade_launcher1.wav"
 SWEP.ShootVolume = 110
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
-SWEP.ReloadStartSound = "weapons/mac10/mac10_clipout.wav"
-SWEP.ReloadFinishSound = "weapons/mac10/mac10_boltpull.wav"
+SWEP.ReloadStartSound = "weapons/p90/p90_cliprelease.wav"
+SWEP.ReloadFinishSound = "weapons/m3/m3_insertshell.wav"

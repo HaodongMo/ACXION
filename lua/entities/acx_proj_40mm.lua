@@ -9,17 +9,21 @@ ENT.CollisionGroup = COLLISION_GROUP_PROJECTILE
 
 ENT.Model = "models/Items/AR2_Grenade.mdl"
 ENT.Ticks = 0
-ENT.FuseTime = 0.2
+ENT.FuseTime = 0
 ENT.Defused = false
 ENT.SphereSize = 1
 ENT.PhysMat = "grenade"
 
+ENT.Gravity = true
+
 ENT.SmokeTrail = true
 ENT.SmokeTrailMat = "effects/fas_smoke_beam"
-ENT.SmokeTrailSize = 6
+ENT.SmokeTrailSize = 16
 ENT.SmokeTrailTime = 1
 
 ENT.LifeTime = 20
 
-ENT.ImpactDamage = nil
+ENT.Damage = 100
+ENT.Radius = 400
+ENT.ImpactDamage = 25
 ENT.ExplodeOnImpact = true

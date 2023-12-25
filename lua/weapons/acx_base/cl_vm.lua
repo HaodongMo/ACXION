@@ -1,21 +1,35 @@
 function SWEP:PreDrawViewModel(vm, weapon, ply)
+
     self:TryCreateModel()
+
     local model_right = self.ModelRightView
+
+    self:UpdateModelBodygroups(model_right)
+
     model_right:SetupBones()
+
     local pos = vm:GetPos()
     local ang = vm:GetAngles()
     local vpos, vang = self:GetCustomViewPos(pos, ang)
+
     model_right:SetRenderOrigin(vpos)
     model_right:SetRenderAngles(vang)
     model_right:SetPos(vpos)
     model_right:SetAngles(vang)
+
     local model_left = self.ModelLeftView
+
+    self:UpdateModelBodygroups(model_left, true)
+
     model_left:SetupBones()
+
     local lvpos, lvang = self:GetCustomViewPos(pos, ang, true)
+
     model_left:SetRenderOrigin(lvpos)
     model_left:SetRenderAngles(lvang)
     model_left:SetPos(lvpos)
     model_left:SetAngles(lvang)
+
     render.SetBlend(0)
 end
 

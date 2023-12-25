@@ -5,6 +5,8 @@ function SWEP:DrawWorldModel()
 
     model_right:SetupBones()
 
+    self:UpdateModelBodygroups(model_right)
+
     local bone_name_right = "ValveBiped.Bip01_R_Hand"
     local boneid = self:GetOwner():LookupBone(bone_name_right)
     local pos, ang = self:GetOwner():GetBonePosition(boneid)
@@ -19,6 +21,8 @@ function SWEP:DrawWorldModel()
     model_right:DrawModel()
 
     local model_left = self.ModelLeftView
+
+    self:UpdateModelBodygroups(model_left, true)
 
     model_left:SetupBones()
 

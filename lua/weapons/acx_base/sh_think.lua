@@ -127,6 +127,10 @@ function SWEP:Think()
                     end
                 end
             end
+        else
+            if self:GetOwner():KeyPressed(IN_ATTACK) or self:GetOwner():KeyPressed(IN_ATTACK2) then
+                self:SetReloading(false)
+            end
         end
     else
         if not self:GetReloading() then
@@ -153,6 +157,10 @@ function SWEP:Think()
                         self:SetShotQueued(true)
                     end
                 end
+            end
+        else
+            if self:GetOwner():KeyPressed(IN_ATTACK) then
+                self:SetReloading(false)
             end
         end
     end
