@@ -62,32 +62,71 @@ function SWEP:Shoot(left)
         end
     end
 
-    local bullet = {
-        Attacker = self:GetOwner(),
-        Damage = damage,
-        Force = damage / 3,
-        Num = self.Num,
-        Tracer = 0,
-        Dir = ang:Forward(),
-        Src = self:GetOwner():EyePos(),
-        Spread = Vector(spread, spread, 0),
-        Distance = 50000,
-        Callback = function(attacker, tr, dmginfo)
-            local dmg = dmginfo:GetDamage()
+    if self.ProjectileEntity then
+        if SERVER then
+            local shoot_entity = ents.Create(self.ProjectileEntity)
 
-            if tr.HitGroup == HITGROUP_HEAD then
-                dmg = dmg * self.HeadshotMultiplier
+            if !IsValid(shoot_entity) then return end
+
+            ang = ang + AngleRand() / 360 * math.deg(self.Spread)
+
+            local pos = self:GetOwner():EyePos()
+
+            if left then
+                pos = pos + (self:GetOwner():GetRight() * -8)
+            else
+                pos = pos + (self:GetOwner():GetRight() * 8)
             end
 
-            dmginfo:SetDamage(dmg)
-        end
-    }
+            local shootentdata = {}
 
-    if left then
-        self:SetNextSecondaryFire(CurTime() + (60 / self.RateOfFire))
+            if !left and IsValid(self:GetLockOnEntity()) then
+                shootentdata.Target = self:GetLockOnEntity()
+            elseif left and IsValid(self:GetLockOnEntity2()) then
+                shootentdata.Target = self:GetLockOnEntity2()
+            end
+
+            shoot_entity.ShootEntData = shootentdata
+            shoot_entity:SetPos(pos)
+            shoot_entity:SetAngles(ang)
+            shoot_entity:SetOwner(self:GetOwner())
+            shoot_entity:Spawn()
+            shoot_entity:Activate()
+
+            local phys = shoot_entity:GetPhysicsObject()
+
+            if IsValid(phys) then
+                phys:SetVelocity(ang:Forward() * 5000)
+            end
+        end
     else
-        self:SetNextPrimaryFire(CurTime() + (60 / self.RateOfFire))
+        local bullet = {
+            Attacker = self:GetOwner(),
+            Damage = damage,
+            Force = damage / 3,
+            Num = self.Num,
+            Tracer = 0,
+            Dir = ang:Forward(),
+            Src = self:GetOwner():EyePos(),
+            Spread = Vector(spread, spread, 0),
+            Distance = 50000,
+            Callback = function(attacker, tr, dmginfo)
+                local dmg = dmginfo:GetDamage()
+
+                if tr.HitGroup == HITGROUP_HEAD then
+                    dmg = dmg * self.HeadshotMultiplier
+                end
+
+                dmginfo:SetDamage(dmg)
+            end
+        }
+
+        if IsFirstTimePredicted() then
+            self:GetOwner():FireBullets(bullet)
+        end
     end
+
+    
 
     if IsFirstTimePredicted() then
         self:DoMuzzleEffects(left)
@@ -103,8 +142,12 @@ function SWEP:Shoot(left)
         end
 
         self:GetOwner():ViewPunch(punchAngle)
+    end
 
-        self:GetOwner():FireBullets(bullet)
+    if left then
+        self:SetNextSecondaryFire(CurTime() + (60 / self.RateOfFire))
+    else
+        self:SetNextPrimaryFire(CurTime() + (60 / self.RateOfFire))
     end
 
     if self:GetAkimbo() then

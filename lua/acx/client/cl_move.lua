@@ -42,26 +42,17 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
         ACX.ReleasedReload = true
     end
 
-    if wpn:GetAkimbo() then
-        if bit.band(buttons, IN_ATTACK) != 0 then
-            shouldattack1 = true
-            if wpn:GetNeedCycle2() then
-                shouldrestrictview = true
-            end
+    if bit.band(buttons, IN_ATTACK) != 0 then
+        shouldattack1 = true
+        if wpn:GetNeedCycle2() then
+            shouldrestrictview = true
         end
+    end
 
-        if bit.band(buttons, IN_ATTACK2) != 0 then
-            shouldattack2 = true
-            if wpn:GetNeedCycle() then
-                shouldrestrictview = true
-            end
-        end
-    else
-        if bit.band(buttons, IN_ATTACK) != 0 then
-            shouldattack1 = true
-            if wpn:GetNeedCycle() then
-                shouldrestrictview = true
-            end
+    if bit.band(buttons, IN_ATTACK2) != 0 then
+        shouldattack2 = true
+        if wpn:GetNeedCycle() then
+            shouldrestrictview = true
         end
     end
 

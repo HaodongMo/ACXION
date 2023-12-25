@@ -7,11 +7,7 @@ function SWEP:ShouldAim()
 end
 
 function SWEP:ToggleAim(aim)
-    if aim then
-        self:SetAiming(true)
-    else
-        self:SetAiming(false)
-    end
+    self:SetAiming(aim)
 
     self:SetShouldHoldType()
 end

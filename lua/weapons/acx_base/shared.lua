@@ -25,6 +25,9 @@ SWEP.Damage = 30
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 2
 SWEP.ArmorPiercing = 0.25
+
+SWEP.ProjectileEntity = nil
+
 SWEP.Spread = 0.01
 SWEP.Recoil = 1
 SWEP.RateOfFire = 600

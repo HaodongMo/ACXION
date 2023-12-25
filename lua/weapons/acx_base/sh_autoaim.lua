@@ -1,12 +1,11 @@
 function SWEP:ThinkLockOn()
-    if (self:GetAiming() and not self.AutoAimInSights) or (not self:GetAiming() and not self.AutoAimOutOfSights) then
+    if not ((self:GetAiming() and self.AutoAimInSights) or (not self:GetAiming() and self.AutoAimOutOfSights)) then
         self:SetLockOnEntity(nil)
         self:SetHeadLock(false)
 
         self:SetLockOnEntity2(nil)
         self:SetHeadLock2(false)
     else
-
         local lockontargets = ents.FindInCone(self:GetOwner():GetShootPos(), self:GetOwner():GetAimVector(), self.AutoAimRange, self.AutoAimAngle)
 
         local lockontarget = nil
