@@ -29,6 +29,8 @@ function SWEP:Deploy()
 
     self:GetOwner():SetCanZoom(false)
 
+    self:SetShouldHoldType()
+
     return true
 end
 
@@ -54,3 +56,16 @@ function SWEP:Holster(wep)
     end
 end
 
+function SWEP:SetShouldHoldType()
+    local ht = self.HoldType
+
+    if self:ShouldAim() then
+        ht = self.HoldTypeAim
+    end
+
+    if self:GetAkimbo() then
+        ht = "duel"
+    end
+
+    self:SetHoldType(ht)
+end

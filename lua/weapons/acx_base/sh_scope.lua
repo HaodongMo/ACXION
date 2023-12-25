@@ -4,3 +4,13 @@ function SWEP:ShouldAim()
 
     return self:GetOwner():KeyDown(IN_ATTACK2)
 end
+
+function SWEP:ToggleAim(aim)
+    if aim then
+        self:SetAiming(true)
+    else
+        self:SetAiming(false)
+    end
+
+    self:SetShouldHoldType()
+end

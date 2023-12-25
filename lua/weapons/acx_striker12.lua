@@ -70,11 +70,11 @@ SWEP.HolsterTime = 0.4
 
 ----------------- Effects
 
-SWEP.MuzzleTexture = "effects/gunshipmuzzle"
+SWEP.MuzzleTexture = "effects/fire_cloud2"
 
 SWEP.MuzzleOffset = Vector(-2.25, 11, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
-SWEP.MuzzleScale = 0.5
+SWEP.MuzzleScale = 1
 
 ----------------- Sounds
 

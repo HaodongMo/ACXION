@@ -38,9 +38,11 @@ SWEP.ReloadTime = 0.75
 SWEP.ReloadDifficultyMult = 1
 SWEP.ShotgunReload = false
 
-SWEP.AutoAimAngle = math.cos(math.rad(10))
+SWEP.AutoAimAngle = math.cos(math.rad(1))
 SWEP.AutoAimRange = 7500
 SWEP.AutoAimSpeed = 5
+
+SWEP.AutoAimOutOfSights = false
 SWEP.AutoAimInSights = true
 
 SWEP.Primary.Ammo = "357"
@@ -48,7 +50,7 @@ SWEP.Primary.ClipSize = 10
 SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize * 3
 SWEP.FastReloadBonus = 5
 
-SWEP.Magnification = 3
+SWEP.Magnification = 4
 
 SWEP.HasScope = true
 

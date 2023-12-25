@@ -57,6 +57,8 @@ SWEP.AimAngle = Angle(0, 0, 0)
 SWEP.RecoilOffset = Vector(0, -4, 0)
 SWEP.RecoilAngle = Angle(0, 0, 0)
 
+SWEP.CycleBetweenShots = true
+
 ----------------- Gestures
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
@@ -70,7 +72,7 @@ SWEP.HolsterTime = 0.4
 
 ----------------- Effects
 
-SWEP.MuzzleTexture = "effects/combinemuzzle1"
+SWEP.MuzzleTexture = "effects/fire_cloud2"
 
 SWEP.MuzzleOffset = Vector(-3, 11, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
@@ -78,11 +80,12 @@ SWEP.MuzzleScale = 1
 
 ----------------- Sounds
 
-SWEP.ShootSound = "weapons/m3/m3-1.wav"
+SWEP.ShootSound = "weapons/xm1014/xm1014-1.wav"
 SWEP.ShootVolume = 110
-SWEP.ShootPitchVariation = 0
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
 SWEP.ReloadStartSound = "weapons/m3/m3_pump.wav"
 SWEP.ReloadFinishSound = "weapons/m3/m3_insertshell.wav"
+
+SWEP.CycleSound = "weapons/m3/m3_pump.wav"

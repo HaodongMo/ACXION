@@ -45,6 +45,8 @@ SWEP.ShotgunReload = false
 SWEP.AutoAimAngle = math.cos(math.rad(15))
 SWEP.AutoAimRange = 3500
 SWEP.AutoAimSpeed = 1
+
+SWEP.AutoAimOutOfSights = true
 SWEP.AutoAimInSights = false
 
 SWEP.Primary.Ammo = "pistol"
@@ -64,6 +66,9 @@ SWEP.AimAngle = Angle(0, 0, 0)
 SWEP.RecoilOffset = Vector(0, 0, 0)
 SWEP.RecoilAngle = Angle(0, 0, 0)
 
+SWEP.HolsterOffset = Vector(-4, 0, -16)
+SWEP.HolsterAngle = Angle(-90, 0, 0)
+
 ----------------- Gestures
 
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
@@ -71,7 +76,6 @@ SWEP.GestureShootLast = ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_AR2
 
 SWEP.HoldType = "ar2"
-SWEP.HoldTypeSprint = "passive"
 SWEP.HoldTypeAim = "rpg"
 
 SWEP.HolsterTime = 0.1

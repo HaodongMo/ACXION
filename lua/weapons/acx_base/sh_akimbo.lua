@@ -12,4 +12,6 @@ function SWEP:ToggleAkimbo()
         self.Secondary.ClipSize = self.Primary.ClipSize
         self.Secondary.Ammo = self.Primary.Ammo
     end
+
+    self:SetShouldHoldType()
 end

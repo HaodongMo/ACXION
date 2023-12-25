@@ -71,7 +71,7 @@ SWEP.HolsterTime = 0.4
 
 ----------------- Effects
 
-SWEP.MuzzleTexture = "effects/combinemuzzle1"
+SWEP.MuzzleTexture = "effects/fire_cloud2"
 
 SWEP.MuzzleOffset = Vector(-3.5, 11, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)

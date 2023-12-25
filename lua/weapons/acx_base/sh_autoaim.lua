@@ -1,5 +1,5 @@
 function SWEP:ThinkLockOn()
-    if self:GetAiming() and not self.AutoAimInSights then
+    if (self:GetAiming() and not self.AutoAimInSights) or (not self:GetAiming() and not self.AutoAimOutOfSights) then
         self:SetLockOnEntity(nil)
         self:SetHeadLock(false)
 

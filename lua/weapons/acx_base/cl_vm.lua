@@ -70,13 +70,15 @@ function SWEP:GetCustomViewPos(pos, ang, left)
     pos = pos + forward * self.RecoilOffset.y * recoil_delta
     pos = pos + up * self.RecoilOffset.z * recoil_delta
 
-    pos = pos + up * lower_delta * -16
+    pos = pos + up * lower_delta * self.HolsterOffset.x
+    pos = pos + right * lower_delta * self.HolsterOffset.y
+    pos = pos + forward * lower_delta * self.HolsterOffset.z
 
     local recoil_angle = self.RecoilAngle * recoil_delta
 
-    ang:RotateAroundAxis(up, self.ModelAngleView.x + recoil_angle.x + lower_delta * -90)
-    ang:RotateAroundAxis(right, self.ModelAngleView.y + recoil_angle.y)
-    ang:RotateAroundAxis(forward, self.ModelAngleView.z + recoil_angle.z)
+    ang:RotateAroundAxis(up, self.ModelAngleView.x + recoil_angle.x + lower_delta * self.HolsterAngle.p)
+    ang:RotateAroundAxis(right, self.ModelAngleView.y + recoil_angle.y + lower_delta * self.HolsterAngle.y)
+    ang:RotateAroundAxis(forward, self.ModelAngleView.z + recoil_angle.z + lower_delta * self.HolsterAngle.r)
 
     pos, ang = self:DoSway(pos, ang, old_ang)
 

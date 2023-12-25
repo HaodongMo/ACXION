@@ -70,16 +70,18 @@ SWEP.HolsterTime = 0.4
 
 ----------------- Effects
 
-SWEP.MuzzleTexture = "effects/gunshipmuzzle"
+SWEP.MuzzleTexture = "effects/yellowflare"
 
 SWEP.MuzzleOffset = Vector(-1, 10, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
 SWEP.MuzzleScale = 0.5
 
+SWEP.NoFlash = true
+
 ----------------- Sounds
 
-SWEP.ShootSound = "weapons/p90/p90-1.wav"
-SWEP.ShootVolume = 110
+SWEP.ShootSound = "weapons/tmp/tmp-1.wav"
+SWEP.ShootVolume = 95
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 

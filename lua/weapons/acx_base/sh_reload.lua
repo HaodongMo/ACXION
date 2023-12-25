@@ -46,7 +46,7 @@ function SWEP:FinishReload(slow)
         end
 
         if self.ShotgunReload then
-            if slow or self:Clip1() >= limit and (self:Clip2() >= limit or not self:GetAkimbo()) then
+            if self:Ammo1() <= 0 or (self:Clip1() >= limit and (self:Clip2() >= limit or not self:GetAkimbo())) then
                 self:SetReloading(false)
             else
                 self:SetReloading(true)

@@ -16,7 +16,12 @@ local auto_firemodes = {
 }
 
 function SWEP:Think()
-    self:SetAiming(self:ShouldAim())
+    // self:SetAiming(self:ShouldAim())
+    if self:ShouldAim() and not self:GetAiming() then
+        self:ToggleAim(true)
+    elseif not self:ShouldAim() and self:GetAiming() then
+        self:ToggleAim(false)
+    end
 
     self:ThinkLockOn()
 

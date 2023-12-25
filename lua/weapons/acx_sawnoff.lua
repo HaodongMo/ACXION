@@ -22,7 +22,7 @@ SWEP.HeadshotMultiplier = 1
 SWEP.ArmorPiercing = 0
 SWEP.Spread = 0.1
 SWEP.Recoil = 2
-SWEP.RateOfFire = 900
+SWEP.RateOfFire = 300
 
 SWEP.Firemode = "binary"
 -- auto
@@ -33,13 +33,13 @@ SWEP.Firemode = "binary"
 -- bolt
 -- burst_3, burst_2
 
-SWEP.ReloadTime = 0.5
-SWEP.ReloadDifficultyMult = 1
-SWEP.ShotgunReload = false
+SWEP.ReloadTime = 0.25
+SWEP.ReloadDifficultyMult = 0.5
+SWEP.ShotgunReload = true
 
 SWEP.AutoAimAngle = math.cos(math.rad(30))
 SWEP.AutoAimRange = 3500
-SWEP.AutoAimSpeed = 60
+SWEP.AutoAimSpeed = 90
 
 SWEP.Primary.Ammo = "buckshot"
 SWEP.Primary.ClipSize = 2
@@ -54,8 +54,8 @@ SWEP.ScopeOverlay = nil
 SWEP.AimOffset = Vector(0, 0, 0)
 SWEP.AimAngle = Angle(0, 0, 0)
 
-SWEP.RecoilOffset = Vector(0, -2, 0)
-SWEP.RecoilAngle = Angle(0, 0, 0)
+SWEP.RecoilOffset = Vector(0, -4, 0)
+SWEP.RecoilAngle = Angle(15, 0, 0)
 
 ----------------- Gestures
 
@@ -80,8 +80,9 @@ SWEP.MuzzleScale = 1
 
 SWEP.ShootSound = "weapons/xm1014/xm1014-1.wav"
 SWEP.ShootVolume = 110
+SWEP.ShootPitch = 90
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
 SWEP.ReloadStartSound = "weapons/p90/p90_cliprelease.wav"
-SWEP.ReloadFinishSound = "weapons/p90/p90_clipin.wav"
+SWEP.ReloadFinishSound = "weapons/m3/m3_insertshell.wav"
