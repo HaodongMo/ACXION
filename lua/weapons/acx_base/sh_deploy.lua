@@ -34,6 +34,9 @@ function SWEP:Deploy()
     self:SetNeedCycle(false)
     self:SetNeedCycle2(false)
 
+    self:SetNextPrimaryFire(0)
+    self:SetNextSecondaryFire(0)
+
     return true
 end
 
