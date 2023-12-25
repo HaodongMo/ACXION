@@ -45,13 +45,14 @@ SWEP.InterpolatedLockAngle = Angle(0, 0, 0)
 SWEP.InterpolatedLockAngle2 = Angle(0, 0, 0)
 
 function SWEP:GetCustomViewPos(pos, ang, left)
+    local owner = self:GetOwner()
     left = left or false
     local old_ang = Angle(ang)
 
     if left then
-        ang = ang - self:GetOwner():GetViewPunchAngles() * 2 - self.InterpolatedLockAngle2
+        ang = ang - owner:GetViewPunchAngles() * 2 - self.InterpolatedLockAngle2
     else
-        ang = ang - self:GetOwner():GetViewPunchAngles() * 2 - self.InterpolatedLockAngle
+        ang = ang - owner:GetViewPunchAngles() * 2 - self.InterpolatedLockAngle
     end
 
     local up, right, forward = ang:Up(), ang:Right(), ang:Forward()
@@ -78,12 +79,16 @@ function SWEP:GetCustomViewPos(pos, ang, left)
         lower_delta = self.LowerAmountLeft
     end
 
+    local viewOffsetZ = owner:GetViewOffset().z
+    local crouchdelta = math.Clamp(math.ease.InOutSine((viewOffsetZ - owner:GetCurrentViewOffset().z) / (viewOffsetZ - owner:GetViewOffsetDucked().z)), 0, 1)
+
     pos = pos + right * self.ModelOffsetView.x
     pos = pos + forward * self.ModelOffsetView.y
     pos = pos + up * self.ModelOffsetView.z
     pos = pos + right * self.RecoilOffset.x * recoil_delta
     pos = pos + forward * self.RecoilOffset.y * recoil_delta
     pos = pos + up * self.RecoilOffset.z * recoil_delta
+    pos = pos + up * crouchdelta * -1.5
     pos = pos + up * lower_delta * self.HolsterOffset.x
     pos = pos + right * lower_delta * self.HolsterOffset.y
     pos = pos + forward * lower_delta * self.HolsterOffset.z

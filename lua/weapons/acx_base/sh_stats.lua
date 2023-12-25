@@ -6,10 +6,6 @@ function SWEP:GetHeadshotMultiplier()
     return self.HeadshotMultiplier
 end
 
-function SWEP:GetArmorPiercing()
-    return self.ArmorPiercing
-end
-
 function SWEP:GetNum()
     return self.Num
 end

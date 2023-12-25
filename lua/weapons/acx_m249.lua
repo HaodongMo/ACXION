@@ -28,7 +28,6 @@ SWEP.BulletBodygroups = {
 SWEP.Damage = 20
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 1.5
-SWEP.ArmorPiercing = 0.5
 SWEP.Spread = 0.015
 SWEP.Recoil = 0.65
 SWEP.RateOfFire = 650

@@ -21,7 +21,6 @@ SWEP.Slot = 2
 SWEP.Damage = 15
 SWEP.Num = 12
 SWEP.HeadshotMultiplier = 1
-SWEP.ArmorPiercing = 0
 SWEP.Spread = 0.1
 SWEP.Recoil = 2
 SWEP.RateOfFire = 300
