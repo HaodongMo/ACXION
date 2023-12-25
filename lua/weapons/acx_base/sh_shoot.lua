@@ -73,11 +73,11 @@ function SWEP:Shoot(left)
         end
     end
 
-    local spread = self.Spread
+    local spread = self:GetSpread()
 
     local ang = self:GetShootAngle(left)
 
-    local damage = self.Damage
+    local damage = self:GetDamage()
 
     -- "Lucky Last" - Last 10% of the magazine starts to ramp up damage up to 50% more
 
@@ -91,9 +91,9 @@ function SWEP:Shoot(left)
         end
     end
 
-    if self.ProjectileEntity then
+    if self:GetProjectileEntity() then
         if SERVER then
-            local shoot_entity = ents.Create(self.ProjectileEntity)
+            local shoot_entity = ents.Create(self:GetProjectileEntity())
 
             if !IsValid(shoot_entity) then return end
 
@@ -122,7 +122,7 @@ function SWEP:Shoot(left)
                 end
             end
 
-            ang = ang + AngleRand() / 360 * math.deg(self.Spread)
+            ang = ang + AngleRand() / 360 * math.deg(spread)
 
             shoot_entity.ShootEntData = shootentdata
 
@@ -135,7 +135,7 @@ function SWEP:Shoot(left)
             local phys = shoot_entity:GetPhysicsObject()
 
             if IsValid(phys) then
-                phys:SetVelocity(ang:Forward() * self.ProjectileForce)
+                phys:SetVelocity(ang:Forward() * self:GetProjectileForce())
             end
         end
     else
@@ -143,7 +143,7 @@ function SWEP:Shoot(left)
             Attacker = self:GetOwner(),
             Damage = damage,
             Force = damage / 3,
-            Num = self.Num,
+            Num = self:GetNum(),
             Tracer = 0,
             Dir = ang:Forward(),
             Src = self:GetOwner():EyePos(),
@@ -153,7 +153,7 @@ function SWEP:Shoot(left)
                 local dmg = dmginfo:GetDamage()
 
                 if tr.HitGroup == HITGROUP_HEAD then
-                    dmg = dmg * self.HeadshotMultiplier
+                    dmg = dmg * self:GetHeadshotMultiplier()
                 end
 
                 dmginfo:SetDamage(dmg)
@@ -165,12 +165,12 @@ function SWEP:Shoot(left)
         end
     end
 
-    
-
     if IsFirstTimePredicted() then
         self:DoMuzzleEffects(left)
 
-        local punchAngle = Angle(util.SharedRandom("acx_recoil_left", -1, 1, self:GetOwner():GetCurrentCommand()) * self.Recoil, util.SharedRandom("acx_recoil_up", -1, 1, self:GetOwner():GetCurrentCommand()) * self.Recoil, 0.5 * math.Rand(-1, 1) * self.Recoil)
+        local recoil = self:GetRecoil()
+
+        local punchAngle = Angle(util.SharedRandom("acx_recoil_left", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, util.SharedRandom("acx_recoil_up", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, 0.5 * math.Rand(-1, 1) * recoil)
 
         if left then
             self:TakeSecondaryAmmo(1)
@@ -184,9 +184,9 @@ function SWEP:Shoot(left)
     end
 
     if left then
-        self:SetNextSecondaryFire(CurTime() + (60 / self.RateOfFire))
+        self:SetNextSecondaryFire(CurTime() + (60 / self:GetRateOfFire()))
     else
-        self:SetNextPrimaryFire(CurTime() + (60 / self.RateOfFire))
+        self:SetNextPrimaryFire(CurTime() + (60 / self:GetRateOfFire()))
     end
 
     if self:GetAkimbo() then

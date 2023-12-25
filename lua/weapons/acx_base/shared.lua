@@ -53,7 +53,7 @@ SWEP.ShotgunReload = false
 SWEP.AutoAimAngle = math.cos(math.rad(15))
 SWEP.AutoAimRange = 3500
 SWEP.AutoAimSpeed = 1
-SWEP.AutoAimSeek = "both"
+SWEP.AutoAimSeek = "body"
 -- "head", "body", "both"
 
 SWEP.ProvideTargetData = true

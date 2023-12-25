@@ -80,7 +80,7 @@ function SWEP:DrawHUD()
         render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
         surface.DrawRect(crosshair_x - 1, crosshair_y - 1, 3, 3)
         local trueFOV = self:WidescreenFix(self.TrueFOV)
-        local crosshair_radius = (ScrH() / trueFOV) * math.deg(self.Spread) + ScreenScale(1)
+        local crosshair_radius = (ScrH() / trueFOV) * math.deg(self:GetSpread()) + ScreenScale(1)
 
         for i = 0, 15 do
             local angle = (i / 16) * math.pi * 2

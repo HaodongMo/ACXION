@@ -42,6 +42,7 @@ SWEP.ShotgunReload = false
 SWEP.AutoAimAngle = math.cos(math.rad(60))
 SWEP.AutoAimRange = 2500
 SWEP.AutoAimSpeed = 60
+SWEP.AutoAimSeek = "both"
 
 SWEP.Primary.Ammo = "pistol"
 SWEP.Primary.ClipSize = 10

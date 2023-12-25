@@ -19,7 +19,7 @@ SWEP.Slot = 2
 
 ----------------- Stats
 
-SWEP.Damage = 15
+SWEP.Damage = 12
 SWEP.Num = 5
 SWEP.HeadshotMultiplier = 1
 SWEP.ArmorPiercing = 0

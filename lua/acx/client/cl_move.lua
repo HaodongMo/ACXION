@@ -55,7 +55,7 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
 
     if bit.band(buttons, IN_ATTACK2) != 0 then
         shouldattack2 = true
-        if wpn:GetNeedCycle() then
+        if wpn:GetAkimbo() and wpn:GetNeedCycle() then
             shouldrestrictview = true
         end
     end

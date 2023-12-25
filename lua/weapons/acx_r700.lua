@@ -43,6 +43,7 @@ SWEP.ShotgunReload = false
 SWEP.AutoAimAngle = math.cos(math.rad(1))
 SWEP.AutoAimRange = 7500
 SWEP.AutoAimSpeed = 5
+SWEP.AutoAimSeek = "head"
 
 SWEP.AutoAimOutOfSights = false
 SWEP.AutoAimInSights = true
