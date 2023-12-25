@@ -120,16 +120,9 @@ function SWEP:Shoot(left)
     if self.CycleBetweenShots then
         if left then
             self:SetNeedCycle2(true)
+            self:SendNeedCycle2()
         else
             self:SetNeedCycle(true)
-        end
-        if self:GetAkimbo() then
-            if left then
-                self:SendNeedCycle()
-            else
-                self:SendNeedCycle2()
-            end
-        else
             self:SendNeedCycle()
         end
     end
