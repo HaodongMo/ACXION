@@ -77,59 +77,80 @@ function SWEP:Think()
         end
 
         if not self:GetReloading() then
-            if self:Clip1() <= 0 then
-                if self:GetOwner():KeyPressed(IN_ATTACK2) then
-                    self:SetShotQueued(true)
+            if self:GetNeedCycle() then
+                if self:GetOwner():KeyPressed(IN_WEAPON2) then
+                    self:SetNeedCycle(false)
+                    self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
             else
-                if self:GetOwner():KeyPressed(IN_ATTACK2) and self.TriggerSound then
-                    self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
-                end
+                if self:Clip1() <= 0 then
+                    if self:GetOwner():KeyPressed(IN_ATTACK2) then
+                        self:SetShotQueued(true)
+                    end
+                else
+                    if self:GetOwner():KeyPressed(IN_ATTACK2) and self.TriggerSound then
+                        self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
+                    end
 
-                if self:GetOwner():KeyPressed(IN_ATTACK2) and rising_edge_firemodes[self.Firemode] then
-                    self:SetShotQueued(true)
-                elseif self:GetOwner():KeyReleased(IN_ATTACK2) and falling_edge_firemodes[self.Firemode] then
-                    self:SetShotQueued(true)
-                elseif self:GetOwner():KeyDown(IN_ATTACK2) and auto_firemodes[self.Firemode] then
-                    self:SetShotQueued(true)
+                    if self:GetOwner():KeyPressed(IN_ATTACK2) and rising_edge_firemodes[self.Firemode] then
+                        self:SetShotQueued(true)
+                    elseif self:GetOwner():KeyReleased(IN_ATTACK2) and falling_edge_firemodes[self.Firemode] then
+                        self:SetShotQueued(true)
+                    elseif self:GetOwner():KeyDown(IN_ATTACK2) and auto_firemodes[self.Firemode] then
+                        self:SetShotQueued(true)
+                    end
                 end
             end
 
-            if self:Clip2() <= 0 then
-                if self:GetOwner():KeyPressed(IN_ATTACK) then
-                    self:SetShot2Queued(true)
+            if self:GetNeedCycle2() then
+                if self:GetOwner():KeyPressed(IN_WEAPON1) then
+                    self:SetNeedCycle2(false)
+                    self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
             else
-                if self:GetOwner():KeyPressed(IN_ATTACK) and self.TriggerSound then
-                    self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
-                end
+                if self:Clip2() <= 0 then
+                    if self:GetOwner():KeyPressed(IN_ATTACK) then
+                        self:SetShot2Queued(true)
+                    end
+                else
+                    if self:GetOwner():KeyPressed(IN_ATTACK) and self.TriggerSound then
+                        self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
+                    end
 
-                if self:GetOwner():KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
-                    self:SetShot2Queued(true)
-                elseif self:GetOwner():KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
-                    self:SetShot2Queued(true)
-                elseif self:GetOwner():KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
-                    self:SetShot2Queued(true)
+                    if self:GetOwner():KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
+                        self:SetShot2Queued(true)
+                    elseif self:GetOwner():KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
+                        self:SetShot2Queued(true)
+                    elseif self:GetOwner():KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
+                        self:SetShot2Queued(true)
+                    end
                 end
             end
         end
     else
         if not self:GetReloading() then
-            if self:Clip1() <= 0 then
-                if self:GetOwner():KeyPressed(IN_ATTACK) then
-                    self:SetShotQueued(true)
+            if self:GetNeedCycle() then
+                if self:GetOwner():KeyPressed(IN_WEAPON1) then
+                    self:SetNeedCycle(false)
+                    self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
             else
-                if self:GetOwner():KeyPressed(IN_ATTACK) and self.TriggerSound then
-                    self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
-                end
+                if self:Clip1() <= 0 then
+                    if self:GetOwner():KeyPressed(IN_ATTACK) then
+                        self:SetShotQueued(true)
+                    end
+                else
+                    if self:GetOwner():KeyPressed(IN_ATTACK) and self.TriggerSound then
+                        self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
+                    end
 
-                if self:GetOwner():KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
-                    self:SetShotQueued(true)
-                elseif self:GetOwner():KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
-                    self:SetShotQueued(true)
-                elseif self:GetOwner():KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
-                    self:SetShotQueued(true)
+                    if self:GetOwner():KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
+                        self:SetShotQueued(true)
+                    elseif self:GetOwner():KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
+                        self:SetShotQueued(true)
+                    elseif self:GetOwner():KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
+                        self:SetShotQueued(true)
+                    end
                 end
             end
         end

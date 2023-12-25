@@ -23,11 +23,15 @@ function SWEP:Shoot(left)
     if self:GetStillWaiting(left) then return end
 
     if left then
+        if self:GetNeedCycle2() then return end
+
         if self:Clip2() <= 0 then
             self:DryFire(true)
             return
         end
     else
+        if self:GetNeedCycle() then return end
+
         if self:Clip1() <= 0 then
             self:DryFire()
             return
@@ -111,6 +115,14 @@ function SWEP:Shoot(left)
         self:SetShot2Queued(false)
     else
         self:SetShotQueued(false)
+    end
+
+    if self.CycleBetweenShots then
+        if left then
+            self:SetNeedCycle2(true)
+        else
+            self:SetNeedCycle(true)
+        end
     end
 end
 

@@ -92,17 +92,35 @@ function SWEP:ThinkLockOn()
             end
         end
 
-        if lockontarget then
-            local target_angle_head = math.deg(math.acos(player_aim_vector:Dot((lockontarget:EyePos() - self:GetOwner():GetShootPos()):GetNormalized())))
-            if target_angle_head < angle then
+        if self.AutoAimSeek == "both" then
+            if lockontarget then
+                local target_angle_head = math.deg(math.acos(player_aim_vector:Dot((lockontarget:EyePos() - self:GetOwner():GetShootPos()):GetNormalized())))
+                if target_angle_head < angle then
+                    headlock = true
+                end
+            end
+
+            if lockontarget2 then
+                local target_angle_head2 = math.deg(math.acos(player_aim_vector_2:Dot((lockontarget2:EyePos() - self:GetOwner():GetShootPos()):GetNormalized())))
+                if target_angle_head2 < angle2 then
+                    headlock2 = true
+                end
+            end
+        elseif self.AutoAimSeek == "head" then
+            if lockontarget then
                 headlock = true
             end
-        end
 
-        if lockontarget2 then
-            local target_angle_head2 = math.deg(math.acos(player_aim_vector_2:Dot((lockontarget2:EyePos() - self:GetOwner():GetShootPos()):GetNormalized())))
-            if target_angle_head2 < angle2 then
+            if lockontarget2 then
                 headlock2 = true
+            end
+        elseif self.AutoAimSeek == "body" then
+            if lockontarget then
+                headlock = false
+            end
+
+            if lockontarget2 then
+                headlock2 = false
             end
         end
 
@@ -151,9 +169,9 @@ function SWEP:GetTargetAngle(left)
     if left then
         if IsValid(self:GetLockOnEntity2()) then
             if self:GetHeadLock2() then
-                return self:GetOwner():EyeAngles() - (self:GetLockOnEntity2():EyePos() - self:GetOwner():GetShootPos()):Angle()
+                return self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - (self:GetLockOnEntity2():EyePos() - self:GetOwner():GetShootPos()):Angle()
             else
-                return self:GetOwner():EyeAngles() - (self:GetLockOnEntity2():WorldSpaceCenter() - self:GetOwner():GetShootPos()):Angle()
+                return self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - (self:GetLockOnEntity2():WorldSpaceCenter() - self:GetOwner():GetShootPos()):Angle()
             end
         else
             return Angle(0, 0, 0)
@@ -161,9 +179,9 @@ function SWEP:GetTargetAngle(left)
     else
         if IsValid(self:GetLockOnEntity()) then
             if self:GetHeadLock() then
-                return self:GetOwner():EyeAngles() - (self:GetLockOnEntity():EyePos() - self:GetOwner():GetShootPos()):Angle()
+                return self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - (self:GetLockOnEntity():EyePos() - self:GetOwner():GetShootPos()):Angle()
             else
-                return self:GetOwner():EyeAngles() - (self:GetLockOnEntity():WorldSpaceCenter() - self:GetOwner():GetShootPos()):Angle()
+                return self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - (self:GetLockOnEntity():WorldSpaceCenter() - self:GetOwner():GetShootPos()):Angle()
             end
         else
             return Angle(0, 0, 0)

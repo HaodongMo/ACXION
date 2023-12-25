@@ -15,5 +15,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
 
     ang = ang + Angle((recoil_delta + recoil_delta2) * -0.6, 0, (math.sin(CurTime() * 10) * (recoil_delta + recoil_delta2)))
 
+    self.TrueFOV = fov / magnification
+
     return pos, ang, fov / magnification
 end

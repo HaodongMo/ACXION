@@ -45,6 +45,8 @@ SWEP.ShotgunReload = false
 SWEP.AutoAimAngle = math.cos(math.rad(15))
 SWEP.AutoAimRange = 3500
 SWEP.AutoAimSpeed = 1
+SWEP.AutoAimSeek = "both"
+-- "head", "body", "both"
 
 SWEP.AutoAimOutOfSights = true
 SWEP.AutoAimInSights = false
@@ -111,7 +113,7 @@ SWEP.CycleSound = ""
 SWEP.Primary.Automatic = true
 
 SWEP.Secondary.ClipSize = 0
-SWEP.Secondary.DefaultClip = -1
+SWEP.Secondary.DefaultClip = 0
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
@@ -183,6 +185,8 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 7, "Aiming")
     self:NetworkVar("Bool", 8, "Shot2Queued")
     self:NetworkVar("Bool", 9, "HeadLock2")
+    self:NetworkVar("Bool", 10, "NeedCycle")
+    self:NetworkVar("Bool", 11, "NeedCycle2")
 
     self:NetworkVar("Entity", 0, "HolsterEntity")
     self:NetworkVar("Entity", 1, "LockOnEntity")

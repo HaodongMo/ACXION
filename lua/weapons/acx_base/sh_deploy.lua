@@ -31,6 +31,9 @@ function SWEP:Deploy()
 
     self:SetShouldHoldType()
 
+    self:SetNeedCycle(false)
+    self:SetNeedCycle2(false)
+
     return true
 end
 

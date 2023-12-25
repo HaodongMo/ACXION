@@ -22,7 +22,7 @@ SWEP.HeadshotMultiplier = 1
 SWEP.ArmorPiercing = 0
 SWEP.Spread = 0.04
 SWEP.Recoil = 1
-SWEP.RateOfFire = 600
+SWEP.RateOfFire = 350
 
 SWEP.Firemode = "semi"
 -- auto
@@ -54,7 +54,7 @@ SWEP.ScopeOverlay = nil
 SWEP.AimOffset = Vector(0, 0, 0)
 SWEP.AimAngle = Angle(0, 0, 0)
 
-SWEP.RecoilOffset = Vector(0, -4, 0)
+SWEP.RecoilOffset = Vector(0, -8, 0)
 SWEP.RecoilAngle = Angle(0, 0, 0)
 
 ----------------- Gestures

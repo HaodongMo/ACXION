@@ -1,6 +1,11 @@
 ACX.FastReloadChance = false
 ACX.ReleasedReload = false
 
+ACX.CycleAmount = 0
+ACX.CycleAmount2 = 0
+
+local lastviewangles = nil
+
 hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
     local wpn = LocalPlayer():GetActiveWeapon()
 
@@ -10,6 +15,12 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
     local buttons = cmd:GetButtons()
 
     local shouldreload = false
+    local shouldattack1 = false
+    local shouldattack2 = false
+    local shouldweapon1 = false
+    local shouldweapon2 = false
+
+    local shouldrestrictview = false
 
     if bit.band(buttons, IN_RELOAD) != 0 then
         if wpn:GetReloading() then
@@ -29,10 +40,48 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
         ACX.ReleasedReload = true
     end
 
+    if bit.band(buttons, IN_ATTACK) != 0 then
+        shouldattack1 = true
+        if wpn:GetNeedCycle() then
+            shouldrestrictview = true
+        end
+    end
+
+    if bit.band(buttons, IN_ATTACK2) != 0 then
+        shouldattack2 = true
+        if wpn:GetNeedCycle2() then
+            shouldrestrictview = true
+        end
+    end
+
     if shouldreload then
         buttons = bit.bor(buttons, IN_RELOAD)
     else
         buttons = bit.band(buttons, bit.bnot(IN_RELOAD))
+    end
+
+    if shouldattack1 then
+        buttons = bit.bor(buttons, IN_ATTACK)
+    else
+        buttons = bit.band(buttons, bit.bnot(IN_ATTACK))
+    end
+
+    if shouldattack2 then
+        buttons = bit.bor(buttons, IN_ATTACK2)
+    else
+        buttons = bit.band(buttons, bit.bnot(IN_ATTACK2))
+    end
+
+    if shouldweapon1 then
+        buttons = bit.bor(buttons, IN_WEAPON1)
+    else
+        buttons = bit.band(buttons, bit.bnot(IN_WEAPON1))
+    end
+
+    if shouldweapon2 then
+        buttons = bit.bor(buttons, IN_WEAPON2)
+    else
+        buttons = bit.band(buttons, bit.bnot(IN_WEAPON2))
     end
 
     cmd:SetButtons(buttons)
