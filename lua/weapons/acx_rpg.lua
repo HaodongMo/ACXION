@@ -44,7 +44,7 @@ SWEP.ReloadDifficultyMult = 1
 SWEP.ShotgunReload = false
 
 SWEP.AutoAimAngle = math.cos(math.rad(10))
-SWEP.AutoAimRange = 5000
+SWEP.AutoAimRange = 7500
 SWEP.AutoAimSpeed = 15
 SWEP.AutoAimInSights = true
 SWEP.AutoAimOutOfSights = false

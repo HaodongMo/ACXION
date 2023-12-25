@@ -9,7 +9,7 @@ SWEP.Category = "ACXION"
 SWEP.Model = "models/tak/gtaiv/ak47.mdl"
 SWEP.Bodygroups = "000"
 
-SWEP.ModelOffsetView = Vector(5, 9, -6)
+SWEP.ModelOffsetView = Vector(4.5, 9, -6.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)
 
 SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)

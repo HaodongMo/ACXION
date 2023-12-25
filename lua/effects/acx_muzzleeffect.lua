@@ -18,7 +18,9 @@ function EFFECT:GetShouldPos()
             bone_name = "ValveBiped.Bip01_L_Hand"
         end
         local boneid = self.Weapon:GetOwner():LookupBone(bone_name)
-        local wpos, wang = self.Weapon:GetOwner():GetBonePosition(boneid)
+        local bone_matrix = self.Weapon:GetOwner():GetBoneMatrix(boneid)
+        local wpos = bone_matrix:GetTranslation()
+        local wang = bone_matrix:GetAngles()
 
         local pos, ang = self.Weapon:GetCustomWorldPos(wpos, wang, self.Left)
 

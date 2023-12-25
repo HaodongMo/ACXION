@@ -31,9 +31,11 @@ function SWEP:ThinkLockOn()
             player_aim_vector_2 = aim_angle_left:Forward()
         end
 
-        for _, target in pairs(lockontargets) do
+        for _, target in ipairs(lockontargets) do
+            if not target:IsNPC() and not target:IsPlayer() and not target:IsNextBot() then continue end
+
             local try_target = nil
-            if target:IsPlayer() and target:Alive() and target:Team() ~= self:GetOwner():Team() then
+            if target:IsPlayer() and target:Alive() then
                 try_target = target
             elseif (target:IsNPC() or target:IsNextBot()) and target:Health() > 0 then
                 try_target = target

@@ -140,6 +140,8 @@ SWEP.SightAmount = 0
 
 SWEP.ACX = true
 
+SWEP.UseHands = false
+
 SWEP.ParticleEmitters = {}
 
 local searchdir = "weapons/acx_base"

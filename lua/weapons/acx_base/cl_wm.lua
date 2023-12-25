@@ -9,7 +9,9 @@ function SWEP:DrawWorldModel()
 
     local bone_name_right = "ValveBiped.Bip01_R_Hand"
     local boneid = self:GetOwner():LookupBone(bone_name_right)
-    local pos, ang = self:GetOwner():GetBonePosition(boneid)
+    local bone_matrix = self:GetOwner():GetBoneMatrix(boneid)
+    local pos = bone_matrix:GetTranslation()
+    local ang = bone_matrix:GetAngles()
 
     local wpos, wang = self:GetCustomWorldPos(pos, ang)
 
@@ -29,7 +31,9 @@ function SWEP:DrawWorldModel()
     local bone_name_left = "ValveBiped.Bip01_L_Hand"
 
     boneid = self:GetOwner():LookupBone(bone_name_left)
-    pos, ang = self:GetOwner():GetBonePosition(boneid)
+    bone_matrix = self:GetOwner():GetBoneMatrix(boneid)
+    pos = bone_matrix:GetTranslation()
+    ang = bone_matrix:GetAngles()
 
     local lwpos, lwang = self:GetCustomWorldPos(pos, ang, true)
 

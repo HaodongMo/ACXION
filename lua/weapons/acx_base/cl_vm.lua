@@ -8,8 +8,8 @@ function SWEP:PreDrawViewModel(vm, weapon, ply)
 
     model_right:SetupBones()
 
-    local pos = vm:GetPos()
-    local ang = vm:GetAngles()
+    local pos = EyePos()
+    local ang = EyeAngles()
     local vpos, vang = self:GetCustomViewPos(pos, ang)
 
     model_right:SetRenderOrigin(vpos)
@@ -31,6 +31,14 @@ function SWEP:PreDrawViewModel(vm, weapon, ply)
     model_left:SetAngles(lvang)
 
     render.SetBlend(0)
+
+    return false
+end
+
+function SWEP:GetViewModelPosition(pos, ang)
+    pos = pos - ang:Forward() * 32
+
+    return pos, ang
 end
 
 SWEP.InterpolatedLockAngle = Angle(0, 0, 0)
