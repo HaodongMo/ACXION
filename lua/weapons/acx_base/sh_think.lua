@@ -16,7 +16,8 @@ local auto_firemodes = {
 }
 
 function SWEP:Think()
-    if not IsValid(self:GetOwner()) then return false end
+    local owner = self:GetOwner()
+    if not IsValid(owner) then return false end
 
     if self:ShouldAim() and not self:GetAiming() then
         self:ToggleAim(true)
@@ -26,7 +27,7 @@ function SWEP:Think()
 
     self:ThinkLockOn()
 
-    if CLIENT and self:GetOwner() == LocalPlayer() then
+    if CLIENT and owner == LocalPlayer() then
         if self:GetShouldRaiseRight() then
             self.LowerAmountRight = math.Approach(self.LowerAmountRight, 0, FrameTime() / self.HolsterTime)
         else
@@ -45,8 +46,8 @@ function SWEP:Think()
             self.SightAmount = math.Approach(self.SightAmount, 0, FrameTime() / 0.25)
         end
 
-        self.InterpolatedLockAngle = LerpAngle(0.999999 * FrameTime(), self.InterpolatedLockAngle, self:GetLockAngle())
-        self.InterpolatedLockAngle2 = LerpAngle(0.999999 * FrameTime(), self.InterpolatedLockAngle2, self:GetLockAngle2())
+        self.InterpolatedLockAngle = LerpAngle(0.9999 * FrameTime(), self.InterpolatedLockAngle, self:GetLockAngle())
+        self.InterpolatedLockAngle2 = LerpAngle(0.9999 * FrameTime(), self.InterpolatedLockAngle2, self:GetLockAngle2())
     end
 
     -- Predicted block
@@ -79,88 +80,88 @@ function SWEP:Think()
 
         if not self:GetReloading() then
             if self:GetNeedCycle() then
-                if self:GetOwner():KeyDown(IN_WEAPON2) then
+                if owner:KeyDown(IN_WEAPON2) then
                     self:SetNeedCycle(false)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
             else
                 if self:Clip1() <= 0 then
-                    if self:GetOwner():KeyPressed(IN_ATTACK2) then
+                    if owner:KeyPressed(IN_ATTACK2) then
                         self:SetShotQueued(true)
                     end
                 else
-                    if self:GetOwner():KeyPressed(IN_ATTACK2) and self.TriggerSound then
+                    if self.TriggerSound and owner:KeyPressed(IN_ATTACK2) then
                         self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
                     end
 
-                    if self:GetOwner():KeyPressed(IN_ATTACK2) and rising_edge_firemodes[self.Firemode] then
+                    if owner:KeyPressed(IN_ATTACK2) and rising_edge_firemodes[self.Firemode] then
                         self:SetShotQueued(true)
-                    elseif self:GetOwner():KeyReleased(IN_ATTACK2) and falling_edge_firemodes[self.Firemode] then
+                    elseif owner:KeyReleased(IN_ATTACK2) and falling_edge_firemodes[self.Firemode] then
                         self:SetShotQueued(true)
-                    elseif self:GetOwner():KeyDown(IN_ATTACK2) and auto_firemodes[self.Firemode] then
+                    elseif owner:KeyDown(IN_ATTACK2) and auto_firemodes[self.Firemode] then
                         self:SetShotQueued(true)
                     end
                 end
             end
 
             if self:GetNeedCycle2() then
-                if self:GetOwner():KeyDown(IN_WEAPON1) then
+                if owner:KeyDown(IN_WEAPON1) then
                     self:SetNeedCycle2(false)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
             else
                 if self:Clip2() <= 0 then
-                    if self:GetOwner():KeyPressed(IN_ATTACK) then
+                    if owner:KeyPressed(IN_ATTACK) then
                         self:SetShot2Queued(true)
                     end
                 else
-                    if self:GetOwner():KeyPressed(IN_ATTACK) and self.TriggerSound then
+                    if self.TriggerSound and owner:KeyPressed(IN_ATTACK) then
                         self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
                     end
 
-                    if self:GetOwner():KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
+                    if owner:KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
                         self:SetShot2Queued(true)
-                    elseif self:GetOwner():KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
+                    elseif owner:KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
                         self:SetShot2Queued(true)
-                    elseif self:GetOwner():KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
+                    elseif owner:KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
                         self:SetShot2Queued(true)
                     end
                 end
             end
         else
-            if self:GetOwner():KeyPressed(IN_ATTACK) or self:GetOwner():KeyPressed(IN_ATTACK2) then
-                self:SetReloading(false)
+            if owner:KeyPressed(IN_ATTACK) or owner:KeyPressed(IN_ATTACK2) then
+                self:CancelReload()
             end
         end
     else
         if not self:GetReloading() then
             if self:GetNeedCycle() then
-                if self:GetOwner():KeyDown(IN_WEAPON1) then
+                if owner:KeyDown(IN_WEAPON1) then
                     self:SetNeedCycle(false)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
             else
                 if self:Clip1() <= 0 then
-                    if self:GetOwner():KeyPressed(IN_ATTACK) then
+                    if owner:KeyPressed(IN_ATTACK) then
                         self:SetShotQueued(true)
                     end
                 else
-                    if self:GetOwner():KeyPressed(IN_ATTACK) and self.TriggerSound then
+                    if owner:KeyPressed(IN_ATTACK) and self.TriggerSound then
                         self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
                     end
 
-                    if self:GetOwner():KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
+                    if owner:KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
                         self:SetShotQueued(true)
-                    elseif self:GetOwner():KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
+                    elseif owner:KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
                         self:SetShotQueued(true)
-                    elseif self:GetOwner():KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
+                    elseif owner:KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
                         self:SetShotQueued(true)
                     end
                 end
             end
         else
-            if self:GetOwner():KeyPressed(IN_ATTACK) then
-                self:SetReloading(false)
+            if owner:KeyPressed(IN_ATTACK) then
+                self:CancelReload()
             end
         end
     end
@@ -173,11 +174,11 @@ function SWEP:Think()
         self:Shoot()
     end
 
-    if self:GetOwner():KeyPressed(IN_ZOOM) then
+    if owner:KeyPressed(IN_ZOOM) then
         self:ToggleAkimbo()
     end
 
-    if self:GetOwner():KeyPressed(IN_RELOAD) then
+    if owner:KeyPressed(IN_RELOAD) then
         self:CustomReload()
     end
 

@@ -1,4 +1,6 @@
 function SWEP:ThinkLockOn()
+    local owner = self:GetOwner()
+
     if not ((self:GetAiming() and self.AutoAimInSights) or (not self:GetAiming() and self.AutoAimOutOfSights)) then
         self:SetLockOnEntity(nil)
         self:SetHeadLock(false)
@@ -6,7 +8,7 @@ function SWEP:ThinkLockOn()
         self:SetLockOnEntity2(nil)
         self:SetHeadLock2(false)
     else
-        local lockontargets = ents.FindInCone(self:GetOwner():GetShootPos(), self:GetOwner():GetAimVector(), self.AutoAimRange, self.AutoAimAngle)
+        local lockontargets = ents.FindInCone(owner:GetShootPos(), owner:GetAimVector(), self.AutoAimRange, self.AutoAimAngle)
 
         local lockontarget = nil
         local angle = 90
@@ -16,15 +18,15 @@ function SWEP:ThinkLockOn()
         local angle2 = 90
         local headlock2 = false
 
-        local player_aim_vector = self:GetOwner():GetAimVector()
+        local player_aim_vector = owner:GetAimVector()
         local player_aim_vector_2 = nil
 
         if self:GetAkimbo() then
             // Two aim vectors going slightly to the left and right of player eye angles
-            local aim_angle_left = self:GetOwner():EyeAngles()
+            local aim_angle_left = owner:EyeAngles()
             aim_angle_left:RotateAroundAxis(aim_angle_left:Up(), 10)
 
-            local aim_angle_right = self:GetOwner():EyeAngles()
+            local aim_angle_right = owner:EyeAngles()
             aim_angle_right:RotateAroundAxis(aim_angle_right:Up(), -10)
 
             player_aim_vector = aim_angle_right:Forward()
@@ -43,18 +45,18 @@ function SWEP:ThinkLockOn()
 
             if try_target then
                 // Dot product
-                local target_angle = math.deg(math.acos(player_aim_vector:Dot((try_target:WorldSpaceCenter() - self:GetOwner():GetShootPos()):GetNormalized())))
+                local target_angle = math.deg(math.acos(player_aim_vector:Dot((try_target:WorldSpaceCenter() - owner:GetShootPos()):GetNormalized())))
 
                 if target_angle < angle then
 
                     local occlusion_tr = util.TraceLine({
-                        start = self:GetOwner():GetShootPos(),
+                        start = owner:GetShootPos(),
                         endpos = try_target:WorldSpaceCenter(),
                         mask = MASK_SHOT,
                         filter = function(ent)
                             if ent == try_target then return false end
-                            if ent == self:GetOwner() then return false end
-                            if ent:IsPlayer() and ent:Team() == self:GetOwner():Team() then return false end
+                            if ent == owner then return false end
+                            if ent:IsPlayer() and ent:Team() == owner:Team() then return false end
                             return true
                         end
                     })
@@ -66,19 +68,19 @@ function SWEP:ThinkLockOn()
                 end
 
                 if self:GetAkimbo() then
-                    local target_angle2 = math.deg(math.acos(player_aim_vector_2:Dot((try_target:WorldSpaceCenter() - self:GetOwner():GetShootPos()):GetNormalized())))
+                    local target_angle2 = math.deg(math.acos(player_aim_vector_2:Dot((try_target:WorldSpaceCenter() - owner:GetShootPos()):GetNormalized())))
 
                     if target_angle2 < angle2 then
 
                         if lockontarget ~= try_target then
                             local occlusion_tr2 = util.TraceLine({
-                                start = self:GetOwner():GetShootPos(),
+                                start = owner:GetShootPos(),
                                 endpos = try_target:WorldSpaceCenter(),
                                 mask = MASK_SHOT,
                                 filter = function(ent)
                                     if ent == try_target then return false end
-                                    if ent == self:GetOwner() then return false end
-                                    if ent:IsPlayer() and ent:Team() == self:GetOwner():Team() then return false end
+                                    if ent == owner then return false end
+                                    if ent:IsPlayer() and ent:Team() == owner:Team() then return false end
                                     return true
                                 end
                             })
@@ -95,14 +97,14 @@ function SWEP:ThinkLockOn()
 
         if self.AutoAimSeek == "both" then
             if lockontarget then
-                local target_angle_head = math.deg(math.acos(player_aim_vector:Dot((lockontarget:EyePos() - self:GetOwner():GetShootPos()):GetNormalized())))
+                local target_angle_head = math.deg(math.acos(player_aim_vector:Dot((lockontarget:EyePos() - owner:GetShootPos()):GetNormalized())))
                 if target_angle_head < angle then
                     headlock = true
                 end
             end
 
             if lockontarget2 then
-                local target_angle_head2 = math.deg(math.acos(player_aim_vector_2:Dot((lockontarget2:EyePos() - self:GetOwner():GetShootPos()):GetNormalized())))
+                local target_angle_head2 = math.deg(math.acos(player_aim_vector_2:Dot((lockontarget2:EyePos() - owner:GetShootPos()):GetNormalized())))
                 if target_angle_head2 < angle2 then
                     headlock2 = true
                 end
@@ -167,12 +169,14 @@ function SWEP:ThinkLockOn()
 end
 
 function SWEP:GetTargetAngle(left)
+    local owner = self:GetOwner()
+
     if left then
         if IsValid(self:GetLockOnEntity2()) then
             if self:GetHeadLock2() then
-                return self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - (self:GetLockOnEntity2():EyePos() - self:GetOwner():GetShootPos()):Angle()
+                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity2():EyePos() - owner:GetShootPos()):Angle()
             else
-                return self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - (self:GetLockOnEntity2():WorldSpaceCenter() - self:GetOwner():GetShootPos()):Angle()
+                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity2():WorldSpaceCenter() - owner:GetShootPos()):Angle()
             end
         else
             return Angle(0, 0, 0)
@@ -180,9 +184,9 @@ function SWEP:GetTargetAngle(left)
     else
         if IsValid(self:GetLockOnEntity()) then
             if self:GetHeadLock() then
-                return self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - (self:GetLockOnEntity():EyePos() - self:GetOwner():GetShootPos()):Angle()
+                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity():EyePos() - owner:GetShootPos()):Angle()
             else
-                return self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - (self:GetLockOnEntity():WorldSpaceCenter() - self:GetOwner():GetShootPos()):Angle()
+                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity():WorldSpaceCenter() - owner:GetShootPos()):Angle()
             end
         else
             return Angle(0, 0, 0)

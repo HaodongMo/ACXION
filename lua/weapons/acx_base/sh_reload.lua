@@ -49,9 +49,11 @@ function SWEP:FinishReload(slow)
             amount = 1
         end
 
-        self:RestoreAmmo(amount, limit)
+        local amount_restored = 0
+
+        amount_restored = amount_restored + self:RestoreAmmo(amount, limit)
         if self:GetAkimbo() then
-            self:RestoreAmmo2(amount, limit)
+            amount_restored = amount_restored + self:RestoreAmmo2(amount, limit)
         end
 
         if self.ShotgunReload then
@@ -65,11 +67,13 @@ function SWEP:FinishReload(slow)
             end
         else
             self:SetReloading(false)
+            self:SetWaitTime(CurTime() + self.HolsterTime + 0.1)
+            self:SetWait2Time(CurTime() + self.HolsterTime)
         end
 
-        self:EmitSound(self.ReloadFinishSound, 75, 100, 1, CHAN_AUTO)
-
-        self:SetWaitTime(CurTime() + self.HolsterTime + 0.1)
+        if amount_restored > 0 then
+            self:EmitSound(self.ReloadFinishSound, 75, 100, 1, CHAN_AUTO)
+        end
     end
 end
 
@@ -84,7 +88,8 @@ function SWEP:SendCanFastReload()
 end
 
 function SWEP:RestoreAmmo(amt, limit)
-    if self:Clip1() >= limit then return end
+    if self:Clip1() >= limit then return 0 end
+    local old = self:Clip1()
 
     local total = self:Clip1() + self:Ammo1()
 
@@ -94,10 +99,13 @@ function SWEP:RestoreAmmo(amt, limit)
 
     self:GetOwner():SetAmmo(newreserve, self.Primary.Ammo)
     self:SetClip1(restore)
+
+    return restore - old
 end
 
 function SWEP:RestoreAmmo2(amt, limit)
-    if self:Clip2() >= limit then return end
+    if self:Clip2() >= limit then return 0 end
+    local old = self:Clip2()
 
     local total = self:Clip2() + self:Ammo1()
 
@@ -107,6 +115,8 @@ function SWEP:RestoreAmmo2(amt, limit)
 
     self:GetOwner():SetAmmo(newreserve, self.Primary.Ammo)
     self:SetClip2(restore)
+
+    return restore - old
 end
 
 function SWEP:GetMinimumReloadTime()
@@ -119,4 +129,10 @@ end
 
 function SWEP:GetMaximumReloadTime()
     return self.ReloadTime * 1.75
+end
+
+function SWEP:CancelReload()
+    self:SetWaitTime(CurTime() + self.HolsterTime)
+    self:SetWait2Time(CurTime() + self.HolsterTime)
+    self:SetReloading(false)
 end

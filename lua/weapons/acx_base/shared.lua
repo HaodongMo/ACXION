@@ -133,8 +133,8 @@ SWEP.DrawCrosshair = false
 SWEP.SwayScale = 0
 SWEP.BobScale = 0
 
-SWEP.LowerAmountRight = 0
-SWEP.LowerAmountLeft = 0
+SWEP.LowerAmountRight = 1
+SWEP.LowerAmountLeft = 1
 
 SWEP.SightAmount = 0
 

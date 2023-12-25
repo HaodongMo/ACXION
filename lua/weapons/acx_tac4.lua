@@ -44,9 +44,9 @@ SWEP.AutoAimRange = 3500
 SWEP.AutoAimSpeed = 60
 
 SWEP.Primary.Ammo = "buckshot"
-SWEP.Primary.ClipSize = 10
+SWEP.Primary.ClipSize = 8
 SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize * 3
-SWEP.FastReloadBonus = 0
+SWEP.FastReloadBonus = 4
 
 SWEP.Magnification = 1.25
 
