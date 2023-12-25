@@ -107,7 +107,15 @@ function SWEP:Shoot(left)
         self:GetOwner():FireBullets(bullet)
     end
 
-    self:GetOwner():DoAnimationEvent(self.GestureShoot)
+    if self:GetAkimbo() then
+        if left then
+            self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW)
+        else
+            self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
+        end
+    else
+        self:GetOwner():DoAnimationEvent(self.GestureShoot)
+    end
 
     self:EmitSound(self.ShootSound, self.ShootVolume, self.ShootPitch + (math.Rand(-1, 1) * self.ShootPitchVariation), 1, CHAN_WEAPON)
 

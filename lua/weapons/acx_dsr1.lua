@@ -12,8 +12,8 @@ SWEP.Bodygroups = "000"
 SWEP.ModelOffsetView = Vector(4, 9, -6.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)
 
-SWEP.ModelOffsetWorld = Vector(0, 0, 0)
-SWEP.ModelAngleWorld = Angle(0, 0, 0)
+SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
+SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
 ----------------- Stats
 
@@ -77,7 +77,7 @@ SWEP.HolsterTime = 0.4
 
 SWEP.MuzzleTexture = "effects/gunshipmuzzle"
 
-SWEP.MuzzleOffset = Vector(-3.25, 20 , 0)
+SWEP.MuzzleOffset = Vector(-3.25, 25 , 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
 SWEP.MuzzleScale = 2.5
 

@@ -11,8 +11,8 @@ SWEP.Model = "models/tak/gtaiv/sawed-off_shotgun.mdl"
 SWEP.ModelOffsetView = Vector(5, 7, -6.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)
 
-SWEP.ModelOffsetWorld = Vector(0, 0, 0)
-SWEP.ModelAngleWorld = Angle(0, 0, 0)
+SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
+SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
 ----------------- Stats
 
@@ -59,12 +59,12 @@ SWEP.RecoilAngle = Angle(15, 0, 0)
 
 ----------------- Gestures
 
-SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
-SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_AR2
+SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW
+SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_SHOTGUN
 
-SWEP.HoldType = "ar2"
+SWEP.HoldType = "pistol"
 SWEP.HoldTypeSprint = "passive"
-SWEP.HoldTypeAim = "rpg"
+SWEP.HoldTypeAim = "revolver"
 
 SWEP.HolsterTime = 0.2
 
@@ -72,7 +72,7 @@ SWEP.HolsterTime = 0.2
 
 SWEP.MuzzleTexture = "effects/combinemuzzle1"
 
-SWEP.MuzzleOffset = Vector(-3, 11, 0)
+SWEP.MuzzleOffset = Vector(-3, 16, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
 SWEP.MuzzleScale = 1
 

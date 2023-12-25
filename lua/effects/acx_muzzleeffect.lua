@@ -7,17 +7,38 @@ EFFECT.Life = 1
 EFFECT.Weapon = NULL
 EFFECT.Left = false
 
+function EFFECT:IsThirdPerson()
+    return self.Weapon:GetOwner():ShouldDrawLocalPlayer()
+end
+
 function EFFECT:GetShouldPos()
-    local vpos = self.Weapon:GetOwner():EyePos()
-    local vang = self.Weapon:GetOwner():EyeAngles()
+    if self:IsThirdPerson() then
+        local bone_name = "ValveBiped.Bip01_R_Hand"
+        if self.Left then
+            bone_name = "ValveBiped.Bip01_L_Hand"
+        end
+        local boneid = self.Weapon:GetOwner():LookupBone(bone_name)
+        local wpos, wang = self.Weapon:GetOwner():GetBonePosition(boneid)
 
-    local pos, ang = self.Weapon:GetCustomViewPos(vpos, vang, self.Left)
+        local pos, ang = self.Weapon:GetCustomWorldPos(wpos, wang, self.Left)
 
-    pos = pos + ang:Right() * self.Weapon.MuzzleOffset.x
-    pos = pos + ang:Forward() * self.Weapon.MuzzleOffset.y
-    pos = pos + ang:Up() * self.Weapon.MuzzleOffset.z
+        pos = pos + ang:Right() * self.Weapon.MuzzleOffset.x
+        pos = pos + ang:Forward() * self.Weapon.MuzzleOffset.y
+        pos = pos + ang:Up() * self.Weapon.MuzzleOffset.z
 
-    return pos, ang
+        return pos, ang
+    else
+        local vpos = self.Weapon:GetOwner():EyePos()
+        local vang = self.Weapon:GetOwner():EyeAngles()
+
+        local pos, ang = self.Weapon:GetCustomViewPos(vpos, vang, self.Left)
+
+        pos = pos + ang:Right() * self.Weapon.MuzzleOffset.x
+        pos = pos + ang:Forward() * self.Weapon.MuzzleOffset.y
+        pos = pos + ang:Up() * self.Weapon.MuzzleOffset.z
+
+        return pos, ang
+    end
 end
 
 function EFFECT:Init(data)
@@ -35,6 +56,7 @@ function EFFECT:Init(data)
     local pos, ang = self:GetShouldPos()
 
     local emitter = ParticleEmitter( pos )
+    
 
     local particle = emitter:Add(self.Weapon.MuzzleTexture or self.Mat, pos)
     particle:SetAirResistance( 0 )
@@ -71,8 +93,13 @@ function EFFECT:Init(data)
     particle2:SetGravity( Vector(0, 0, 16) + VectorRand() * 8 )
     particle2:SetAirResistance( 64 )
 
-    emitter:Finish()
-
+    if self:IsThirdPerson() then
+        emitter:Finish()
+    else
+        table.insert(self.Weapon.ParticleEmitters, emitter)
+        emitter:SetNoDraw(true)
+        table.insert(ACX.EmitterPile, {Emitter = emitter, Weapon = self.Weapon})
+    end
 
     if !wpn.NoFlash then
         local light = DynamicLight(self.Weapon:GetOwner():EntIndex())

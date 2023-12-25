@@ -11,8 +11,8 @@ SWEP.Model = "models/tak/gtaiv/cz-75.mdl"
 SWEP.ModelOffsetView = Vector(5, 12, -5)
 SWEP.ModelAngleView = Angle(0, 0, 90)
 
-SWEP.ModelOffsetWorld = Vector(0, 0, 0)
-SWEP.ModelAngleWorld = Angle(0, 0, 0)
+SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
+SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
 ----------------- Stats
 
@@ -73,7 +73,7 @@ SWEP.HolsterTime = 0.2
 
 SWEP.MuzzleTexture = "effects/combinemuzzle2"
 
-SWEP.MuzzleOffset = Vector(-2, 4.5, 0)
+SWEP.MuzzleOffset = Vector(-2.5, 7.5, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
 SWEP.MuzzleScale = 0.5
 

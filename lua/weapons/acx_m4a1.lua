@@ -12,8 +12,8 @@ SWEP.Bodygroups = "000"
 SWEP.ModelOffsetView = Vector(3.5, 9, -6)
 SWEP.ModelAngleView = Angle(0, 0, 90)
 
-SWEP.ModelOffsetWorld = Vector(0, 0, 0)
-SWEP.ModelAngleWorld = Angle(0, 0, 0)
+SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
+SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
 ----------------- Stats
 
@@ -73,7 +73,7 @@ SWEP.HolsterTime = 0.4
 
 SWEP.MuzzleTexture = "effects/ar2_altfire1b"
 
-SWEP.MuzzleOffset = Vector(-3, 15, 0)
+SWEP.MuzzleOffset = Vector(-3, 24, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
 SWEP.MuzzleScale = 1
 

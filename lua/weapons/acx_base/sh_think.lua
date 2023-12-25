@@ -16,6 +16,8 @@ local auto_firemodes = {
 }
 
 function SWEP:Think()
+    if not IsValid(self:GetOwner()) then return false end
+
     // self:SetAiming(self:ShouldAim())
     if self:ShouldAim() and not self:GetAiming() then
         self:ToggleAim(true)
@@ -25,7 +27,7 @@ function SWEP:Think()
 
     self:ThinkLockOn()
 
-    if CLIENT then
+    if CLIENT and self:GetOwner() == LocalPlayer() then
         if self:GetShouldRaiseRight() then
             self.LowerAmountRight = math.Approach(self.LowerAmountRight, 0, FrameTime() / self.HolsterTime)
         else

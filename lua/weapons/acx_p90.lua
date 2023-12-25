@@ -11,8 +11,8 @@ SWEP.Model = "models/tak/gtaiv/p90.mdl"
 SWEP.ModelOffsetView = Vector(5.5, 10, -5.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)
 
-SWEP.ModelOffsetWorld = Vector(0, 0, 0)
-SWEP.ModelAngleWorld = Angle(0, 0, 0)
+SWEP.ModelOffsetWorld = Vector(1.5, 0, -1)
+SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
 ----------------- Stats
 
@@ -72,7 +72,7 @@ SWEP.HolsterTime = 0.4
 
 SWEP.MuzzleTexture = "effects/yellowflare"
 
-SWEP.MuzzleOffset = Vector(-1, 10, 0)
+SWEP.MuzzleOffset = Vector(-0.5, 17.5, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
 SWEP.MuzzleScale = 0.5
 

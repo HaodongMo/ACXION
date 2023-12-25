@@ -11,8 +11,8 @@ SWEP.Model = "models/tak/gtaiv/armsel_striker.mdl"
 SWEP.ModelOffsetView = Vector(5.5, 10, -5.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)
 
-SWEP.ModelOffsetWorld = Vector(0, 0, 0)
-SWEP.ModelAngleWorld = Angle(0, 0, 0)
+SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
+SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
 ----------------- Stats
 
@@ -59,10 +59,10 @@ SWEP.RecoilAngle = Angle(0, 0, 0)
 
 ----------------- Gestures
 
-SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
-SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_AR2
+SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_SHOTGUN
+SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_SHOTGUN
 
-SWEP.HoldType = "ar2"
+SWEP.HoldType = "smg"
 SWEP.HoldTypeSprint = "passive"
 SWEP.HoldTypeAim = "rpg"
 
@@ -72,7 +72,7 @@ SWEP.HolsterTime = 0.4
 
 SWEP.MuzzleTexture = "effects/fire_cloud2"
 
-SWEP.MuzzleOffset = Vector(-2.25, 11, 0)
+SWEP.MuzzleOffset = Vector(-2.25, 18, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
 SWEP.MuzzleScale = 1
 

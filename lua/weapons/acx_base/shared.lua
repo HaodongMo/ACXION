@@ -4,7 +4,7 @@ SWEP.Spawnable = false
 SWEP.Category = "ACXION"
 SWEP.AdminOnly = false
 SWEP.ViewModel = "models/weapons/c_pistol.mdl"
-SWEP.WorldModel = ""
+SWEP.WorldModel = "models/weapons/w_pistol.mdl"
 
 ----------------- Main Information
 
@@ -16,8 +16,8 @@ SWEP.Bodygroups = ""
 SWEP.ModelOffsetView = Vector(0, 0, 0)
 SWEP.ModelAngleView = Angle(0, 0, 0)
 
-SWEP.ModelOffsetWorld = Vector(0, 0, 0)
-SWEP.ModelAngleWorld = Angle(0, 0, 0)
+SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
+SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
 ----------------- Stats
 
@@ -129,6 +129,7 @@ SWEP.SightAmount = 0
 
 SWEP.ACX = true
 
+SWEP.ParticleEmitters = {}
 
 local searchdir = "weapons/acx_base"
 

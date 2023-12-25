@@ -1,4 +1,5 @@
 function SWEP:ShouldAim()
+    if not IsValid(self:GetOwner()) then return false end
     if self:GetReloading() then return false end
     if self:GetAkimbo() then return false end
 

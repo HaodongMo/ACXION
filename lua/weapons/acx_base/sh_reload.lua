@@ -13,6 +13,12 @@ function SWEP:CustomReload()
     self:SetPlayedReloadHint(false)
     self:SendCanFastReload()
 
+    if self:GetAkimbo() then
+        self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RELOAD_DUEL)
+    else
+        self:GetOwner():DoAnimationEvent(self.GestureReload)
+    end
+
     self:SetNeedCycle(false)
     self:SetNeedCycle2(false)
 

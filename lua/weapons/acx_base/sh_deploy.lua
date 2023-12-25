@@ -15,6 +15,9 @@ end
 
 function SWEP:Initialize()
     self.Secondary.ClipSize = self.Primary.ClipSize
+    self.WorldModel = self.Model
+
+    self:SetShouldHoldType()
 end
 
 function SWEP:Deploy()

@@ -1,4 +1,5 @@
 ACX.CSModelPile    = {} -- { {Model = NULL, Weapon = NULL} }
+ACX.EmitterPile    = {} -- { {Emitter = NULL, Weapon = NULL} }
 
 function ACX.CollectGarbage()
     local removed = 0
@@ -18,6 +19,21 @@ function ACX.CollectGarbage()
     end
 
     ACX.CSModelPile = newpile
+
+    local newemitterpile = {}
+    local kept_emitters = 0
+
+    for _, k in ipairs(ACX.EmitterPile) do
+        if IsValid(k.Weapon) then
+            newemitterpile[kept_emitters] = k
+            kept_emitters = kept_emitters + 1
+            continue
+        end
+
+        k.Emitter:Finish()
+    end
+
+    ACX.EmitterPile = newemitterpile
 end
 
 hook.Add("PostCleanupMap", "ACX.CleanGarbage", function()
