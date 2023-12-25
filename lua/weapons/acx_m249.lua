@@ -15,6 +15,8 @@ SWEP.ModelAngleView = Angle(0, 0, 90)
 SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
 SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
+SWEP.Slot = 3
+
 ----------------- Stats
 
 SWEP.Damage = 20
@@ -85,4 +87,6 @@ SWEP.ShootVolume = 110
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
 SWEP.ReloadStartSound = "weapons/m249/m249_boxout.wav"
+SWEP.ReloadHintSound = "weapons/m249/m249_boxin.wav"
+SWEP.ReloadHintSoundDelay = -1
 SWEP.ReloadFinishSound = "weapons/galil/galil_boltpull.wav"

@@ -30,7 +30,9 @@ function ACX.CollectGarbage()
             continue
         end
 
-        k.Emitter:Finish()
+        if IsValid(k.Emitter) then
+            k.Emitter:Finish()
+        end
     end
 
     ACX.EmitterPile = newemitterpile

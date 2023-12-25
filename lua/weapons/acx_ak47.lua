@@ -15,6 +15,8 @@ SWEP.ModelAngleView = Angle(0, 0, 90)
 SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
 SWEP.ModelAngleWorld = Angle(5, 0, -90)
 
+SWEP.Slot = 3
+
 ----------------- Stats
 
 SWEP.Damage = 24

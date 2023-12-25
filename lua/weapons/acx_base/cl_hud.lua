@@ -236,3 +236,25 @@ end
 function SWEP:AdjustMouseSensitivity()
     if self:ShouldAim() then return 1 / self.Magnification end
 end
+
+SWEP.Mat_Select = nil
+
+function SWEP:DrawWeaponSelection(x, y, w, h, a)
+    if not self.Mat_Select then
+        self.Mat_Select = Material(self.IconOverride or "entities/" .. self:GetClass() .. ".png", "smooth mips")
+    end
+
+    surface.SetDrawColor(255, 255, 255, 255)
+    surface.SetMaterial(self.Mat_Select)
+
+    if self.IconOverride then
+        w = w - 128
+        x = x + 64
+    end
+
+    if w > h then
+        y = y - ((w - h) / 2)
+    end
+
+    surface.DrawTexturedRect(x, y, w, w)
+end
