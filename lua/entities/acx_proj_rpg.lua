@@ -32,7 +32,7 @@ ENT.Drunkenness = 0
 
 ENT.Flare = true
 
-ENT.SteerSpeed = 150 -- The maximum amount of degrees per second the missile can steer.
+ENT.SteerSpeed = 75 -- The maximum amount of degrees per second the missile can steer.
 ENT.SeekerAngle = math.cos(35) -- The missile will lose tracking outside of this angle.
 ENT.FireAndForget = true -- This missile automatically tracks its target.
 ENT.NoReacquire = true
