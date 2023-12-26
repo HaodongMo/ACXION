@@ -37,3 +37,5 @@ ENT.SeekerAngle = math.cos(35) -- The missile will lose tracking outside of this
 ENT.FireAndForget = true -- This missile automatically tracks its target.
 ENT.NoReacquire = true
 ENT.LeadTarget = true
+
+ENT.HelicopterWorkaround = true

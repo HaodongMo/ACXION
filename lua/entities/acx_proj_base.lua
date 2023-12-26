@@ -252,6 +252,8 @@ if SERVER then
 
         self.LastHitNormal = colData.HitNormal
 
+        local tgt
+
         if self.ExplodeOnImpact then
             if CurTime() - self.SpawnTime < self.FuseTime then
                 if IsValid(colData.HitEntity) then
@@ -285,7 +287,7 @@ if SERVER then
                 effectdata:SetOrigin( self:GetPos() )
 
             -- simulate AP damage on vehicles, mainly simfphys
-            local tgt = colData.HitEntity
+            tgt = colData.HitEntity
             while IsValid(tgt) do
                 if tgt.GetParent and IsValid(tgt:GetParent()) then
                     tgt = tgt:GetParent()
@@ -332,6 +334,7 @@ if SERVER then
         if IsValid(ent:GetOwner()) and ent:GetOwner():GetClass() == "npc_helicopter" then ent = ent:GetOwner() end
         if ent:GetClass() == "npc_helicopter" and dmginfo:GetInflictor().HelicopterWorkaround then
             dmginfo:SetDamageType(bit.bor(dmginfo:GetDamageType(), DMG_AIRBOAT))
+            print("Yeah")
         end
     end)
 end
