@@ -209,10 +209,10 @@ function SWEP:Shoot(left)
     end
 
     if self.CycleBetweenShots then
-        if left then
+        if left and self:Clip2() > 0 then
             self:SetNeedCycle2(true)
             self:SendNeedCycle2()
-        else
+        elseif self:Clip1() > 0 then
             self:SetNeedCycle(true)
             self:SendNeedCycle()
         end

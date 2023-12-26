@@ -85,6 +85,7 @@ SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize * 3
 SWEP.FastReloadBonus = 10 -- Extra rounds awarded for a fast reload
 
 SWEP.CycleBetweenShots = false -- Manual bolt action mechanics :steamhappy:
+SWEP.CycleDelay = 0.25
 
 SWEP.Magnification = 1.5
 

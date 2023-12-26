@@ -89,8 +89,14 @@ function SWEP:Think()
                 self:CancelReload()
             end
         elseif self:GetNeedCycle() then
-            if owner:KeyDown(IN_WEAPON2) then
+            if not self:GetStillWaiting() and (ACX.ConVars["cycle"]:GetInt() == 0 and not owner:KeyDown(IN_ATTACK2)
+                    or (ACX.ConVars["cycle"]:GetInt() == 1 and owner:KeyPressed(IN_ATTACK2))) then
                 self:SetNeedCycle(false)
+                self:SetWaitTime(CurTime() + self.CycleDelay)
+                self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+            elseif ACX.ConVars["cycle"]:GetInt() == 2 and owner:KeyDown(IN_WEAPON2) then
+                self:SetNeedCycle(false)
+                self:SetWaitTime(CurTime() + self.CycleDelay)
                 self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
             end
         else
@@ -118,8 +124,14 @@ function SWEP:Think()
                 self:CancelReload()
             end
         elseif self:GetNeedCycle2() then
-            if owner:KeyDown(IN_WEAPON1) then
+            if not self:GetStillWaiting(true) and (ACX.ConVars["cycle"]:GetInt() == 0 and not owner:KeyDown(IN_ATTACK)
+                    or (ACX.ConVars["cycle"]:GetInt() == 1 and owner:KeyPressed(IN_ATTACK))) then
                 self:SetNeedCycle2(false)
+                self:SetWait2Time(CurTime() + self.CycleDelay)
+                self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+            elseif ACX.ConVars["cycle"]:GetInt() == 2 and owner:KeyDown(IN_WEAPON1) then
+                self:SetNeedCycle2(false)
+                self:SetWait2Time(CurTime() + self.CycleDelay)
                 self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
             end
         else
@@ -144,8 +156,14 @@ function SWEP:Think()
     else
         if not self:GetReloading() then
             if self:GetNeedCycle() then
-                if owner:KeyDown(IN_WEAPON1) then
+                if not self:GetStillWaiting() and ((ACX.ConVars["cycle"]:GetInt() == 0 and not owner:KeyDown(IN_ATTACK))
+                        or (ACX.ConVars["cycle"]:GetInt() == 1 and owner:KeyPressed(IN_ATTACK))) then
                     self:SetNeedCycle(false)
+                    self:SetWaitTime(CurTime() + self.CycleDelay)
+                    self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+                elseif ACX.ConVars["cycle"]:GetInt() == 2 and owner:KeyDown(IN_WEAPON1) then
+                    self:SetNeedCycle(false)
+                    self:SetWaitTime(CurTime() + self.CycleDelay)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
                 end
             else

@@ -29,7 +29,7 @@ SWEP.Num = 1
 SWEP.HeadshotMultiplier = 2
 SWEP.Spread = 0.0035
 SWEP.Recoil = 1.5
-SWEP.RateOfFire = 150
+SWEP.RateOfFire = 600
 
 SWEP.SpreadSightsMult = 0
 SWEP.RecoilSightsMult = 0.25
@@ -62,6 +62,7 @@ SWEP.AutoAimOutOfSights = false
 SWEP.AutoAimInSights = true
 
 SWEP.CycleBetweenShots = true
+SWEP.CycleDelay = 0.4
 
 SWEP.Primary.Ammo = "357"
 SWEP.Primary.ClipSize = 10
