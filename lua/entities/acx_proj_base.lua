@@ -52,6 +52,7 @@ ENT.TopAttack = false -- This missile flies up above its target before going dow
 ENT.TopAttackHeight = 5000
 ENT.SuperSteerBoostTime = 5 -- Time given for this projectile to adjust its trajectory from top attack to direct
 ENT.NoReacquire = false -- F&F target is permanently lost if it cannot reacquire
+ENT.LeadTarget = false -- This missile leads its target.
 
 ENT.ShootEntData = {}
 
@@ -112,17 +113,18 @@ if SERVER then
         local drunk = false
 
         if self.FireAndForget or self.SemiActive then
-            if self.SemiActive then
-                if IsValid(self.Weapon) then
-                    self.ShootEntData = self.Weapon:RunHook("Hook_GetShootEntData", {})
-                end
-            end
-
             if self.ShootEntData.Target and IsValid(self.ShootEntData.Target) then
                 local target = self.ShootEntData.Target
                 if target.UnTrackable then self.ShootEntData.Target = nil end
 
                 local tpos = target:WorldSpaceCenter()
+
+                if self.LeadTarget then
+                    local dist = (tpos - self:GetPos()):Length()
+                    local time = dist / self:GetVelocity():Length()
+                    tpos = tpos + (target:GetVelocity() * time)
+                end
+
                 if self.TopAttack and !self.TopAttackReached then
                     tpos = tpos + Vector(0, 0, self.TopAttackHeight)
 
