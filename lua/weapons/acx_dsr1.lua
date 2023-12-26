@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "DSR-1"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "High caliber and high profile."
+SWEP.TypeName = "Sniper Rifle"
+
 SWEP.Model = "models/tak/gtaiv/dsr-1.mdl"
 SWEP.Bodygroups = "000"
 

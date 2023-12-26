@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Model 700"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "The hunt is on."
+SWEP.TypeName = "Sniper Rifle"
+
 SWEP.Model = "models/tak/gtaiv/remington_m700.mdl"
 SWEP.Bodygroups = "000"
 

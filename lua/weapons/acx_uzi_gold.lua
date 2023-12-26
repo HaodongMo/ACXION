@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Uzi Gold"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Tacky, but hits hard."
+SWEP.TypeName = "SMG"
+
 SWEP.Model = "models/tak/gtaiv/golden_uzi.mdl"
 
 SWEP.ModelOffsetView = Vector(4.5, 14, -5)

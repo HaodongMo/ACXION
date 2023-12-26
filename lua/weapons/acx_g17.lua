@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "G17"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "High capacity and low recoil."
+SWEP.TypeName = "Pistol"
+
 SWEP.Model = "models/tak/gtaiv/glock-17.mdl"
 
 SWEP.ModelOffsetView = Vector(5, 12, -5)

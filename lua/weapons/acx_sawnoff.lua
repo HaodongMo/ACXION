@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Sawn-Off"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Lock, stock, two smoking barrels."
+SWEP.TypeName = "Shotgun"
+
 SWEP.Model = "models/tak/gtaiv/sawed-off_shotgun.mdl"
 
 SWEP.ModelOffsetView = Vector(5, 7, -6.5)

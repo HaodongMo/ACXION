@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Micro Uzi"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Volume of fire above all."
+SWEP.TypeName = "SMG"
+
 SWEP.Model = "models/tak/gtaiv/micro-uzi.mdl"
 
 SWEP.ModelOffsetView = Vector(4, 13, -5.5)

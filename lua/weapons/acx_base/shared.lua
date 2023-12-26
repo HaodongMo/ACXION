@@ -10,6 +10,11 @@ SWEP.WorldModel = "models/weapons/w_pistol.mdl"
 
 SWEP.PrintName = "ACXION Base"
 
+-- Info box
+SWEP.DrawWeaponInfoBox = true
+SWEP.Description = ""
+SWEP.TypeName = "Firearm"
+
 SWEP.Model = ""
 SWEP.Bodygroups = ""
 

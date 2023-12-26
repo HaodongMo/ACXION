@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Stakeout"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Dependable weapon for those who love to work the pump."
+SWEP.TypeName = "Shotgun"
+
 SWEP.Model = "models/tak/gtaiv/compact_shotgun.mdl"
 
 SWEP.ModelOffsetView = Vector(5.5, 10, -5.5)

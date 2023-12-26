@@ -313,6 +313,8 @@ function SWEP:DrawWeaponSelection(x, y, w, h, a)
     end
 
     surface.DrawTexturedRect(x, y, w, w)
+
+    self:PrintWeaponInfo(x + w + 20, y + h * 0.95, a)
 end
 
 function SWEP:CustomAmmoDisplay()
@@ -328,4 +330,75 @@ function SWEP:CustomAmmoDisplay()
     self.AmmoDisplay.PrimaryAmmo = self:Ammo1()
 
     return self.AmmoDisplay
+end
+
+SWEP.InfoMarkup = nil
+function SWEP:PrintWeaponInfo(x, y, alpha)
+    if self.DrawWeaponInfoBox == false then return end
+
+    self.InfoMarkup = nil
+    if self.InfoMarkup == nil then
+        local str
+        local title_color = "<color=230,230,230,255>"
+        local text_color = "<color=150,150,150,255>"
+        str = ""
+
+
+        str = str .. "<font=ACX_HudSelectionTitle>" .. title_color .. self:GetFiremodeName() .. " " .. self.TypeName .. "</color></font>\n"
+
+        if self.Description ~= "" then
+            str = str .. "<font=ACX_HudSelectionDesc>" .. text_color .. self.Description .. "</color></font>\n"
+        end
+
+        str = str .. "\n<font=HudSelectionText>"
+
+        str = str .. title_color .. "Ammo:</color>\t" .. text_color .. language.GetPhrase(self.Primary.Ammo .. "_ammo") .. "</color>\n"
+
+        str = str .. title_color .. "Damage:</color>\t" .. text_color .. self.Damage .. (self.Num > 1 and ("x" .. self.Num) or "") .. "</color>\n"
+
+        str = str .. title_color .. "Fire Rate:</color>\t" .. text_color .. self.RateOfFire .. " RPM</color>\n"
+
+        str = str .. title_color .. "Capacity:</color>\t" .. text_color .. self.Primary.ClipSize .. (self.FastReloadBonus > 0 and " (+" .. self.FastReloadBonus .. ")" or "") .. "</color>\n"
+
+
+        local max = 10
+        local d
+        if self.Num > 1 then
+            str = str .. title_color .. "Spread:</color>\t" .. text_color
+            d = Lerp(self.Spread / 0.125, 0, max)
+        else
+            str = str .. title_color .. "Accuracy:</color>\t" .. text_color
+            d = Lerp(math.log(1 + (self.Spread * self.SpreadSightsMult) / 0.03), max, 0)
+        end
+        local boxc = math.Round(d)
+        for i = 1, max do
+            if i <= boxc then
+                str = str .. "■"
+            else
+                str = str .. "□"
+            end
+        end
+        str = str .. "</color>\n"
+
+        str = str .. title_color .. "Recoil:</color>\t" .. text_color
+        boxc = math.Round(Lerp((math.abs(self.Recoil) ^ 0.5) / 2, 0, max))
+        for i = 1, max do
+            if i <= boxc then
+                str = str .. "■"
+            else
+                str = str .. "□"
+            end
+        end
+        str = str .. "</color>\n"
+
+
+        str = str .. "</font>"
+        self.InfoMarkup = markup.Parse(str, 250)
+    end
+
+    surface.SetDrawColor(60, 60, 60, alpha)
+    surface.SetTexture(self.SpeechBubbleLid)
+    surface.DrawTexturedRect(x, y - 64 - 5, 128, 64)
+    draw.RoundedBox(8, x - 5, y - 6, 260, self.InfoMarkup:GetHeight() + 18, Color(60, 60, 60, alpha))
+    self.InfoMarkup:Draw(x + 5, y + 5, nil, nil, alpha)
 end

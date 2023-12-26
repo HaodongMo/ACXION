@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "M249 SAW"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "One-man fireteam."
+SWEP.TypeName = "Machine Gun"
+
 SWEP.Model = "models/tak/gtaiv/m249.mdl"
 SWEP.Bodygroups = "000"
 

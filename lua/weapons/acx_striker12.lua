@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Striker-12"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Big drum, big damage. May take some time to load."
+SWEP.TypeName = "Shotgun"
+
 SWEP.Model = "models/tak/gtaiv/armsel_striker.mdl"
 
 SWEP.ModelOffsetView = Vector(5.5, 10, -5.5)

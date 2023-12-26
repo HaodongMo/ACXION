@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "RPG-7"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Big explosions solve big problems."
+SWEP.TypeName = "Launcher"
+
 SWEP.Model = "models/tak/gtaiv/rpg-7.mdl"
 
 SWEP.ModelOffsetView = Vector(7, 13, -7)
@@ -23,6 +27,8 @@ SWEP.BulletBodygroups = {
 }
 
 ----------------- Stats
+
+SWEP.Damage = 200
 
 SWEP.ProjectileEntity = "acx_proj_rpg"
 

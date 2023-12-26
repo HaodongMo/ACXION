@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "TAC-4"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Efficent buckshot delivery system."
+SWEP.TypeName = "Shotgun"
+
 SWEP.Model = "models/tak/gtaiv/remington_1100_tac_4.mdl"
 
 SWEP.ModelOffsetView = Vector(3, 4, -5)
