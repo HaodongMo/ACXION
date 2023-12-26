@@ -41,3 +41,13 @@ end
 function SWEP:GetProjectileForce()
     return self.ProjectileForce
 end
+
+function SWEP:GetAutoAimSpeed()
+    local aas = self.AutoAimSpeed
+    if self:GetAkimbo() then
+        aas = aas * self.AutoAimSpeedAkimboMult
+    elseif self:GetAiming() then
+        aas = aas * self.AutoAimSpeedSightsMult
+    end
+    return aas
+end

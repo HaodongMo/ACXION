@@ -150,9 +150,11 @@ function SWEP:ThinkLockOn()
     local target_angle = self:GetTargetAngle()
     local lock_angle = self:GetLockAngle()
 
+    local aas = self:GetAutoAimSpeed()
+
     // Lock angle should approach target angle
-    local p = math.ApproachAngle(lock_angle.p, target_angle.p, FrameTime() * self.AutoAimSpeed)
-    local y = math.ApproachAngle(lock_angle.y, target_angle.y, FrameTime() * self.AutoAimSpeed)
+    local p = math.ApproachAngle(lock_angle.p, target_angle.p, FrameTime() * aas)
+    local y = math.ApproachAngle(lock_angle.y, target_angle.y, FrameTime() * aas)
     local r = 0
 
     self:SetLockOnVector(Vector(p, y, r))
@@ -162,8 +164,8 @@ function SWEP:ThinkLockOn()
         local lock_angle2 = self:GetLockAngle2()
 
         // Lock angle should approach target angle
-        local p2 = math.ApproachAngle(lock_angle2.p, target_angle2.p, FrameTime() * self.AutoAimSpeed)
-        local y2 = math.ApproachAngle(lock_angle2.y, target_angle2.y, FrameTime() * self.AutoAimSpeed)
+        local p2 = math.ApproachAngle(lock_angle2.p, target_angle2.p, FrameTime() * aas)
+        local y2 = math.ApproachAngle(lock_angle2.y, target_angle2.y, FrameTime() * aas)
         local r2 = 0
 
         self:SetLockOnVector2(Vector(p2, y2, r2))

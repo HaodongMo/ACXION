@@ -40,11 +40,13 @@ SWEP.BurstDelay = 0.1
 -- Multiplier in sights
 SWEP.SpreadSightsMult = 0.5
 SWEP.RecoilSightsMult = 0.5
+SWEP.AutoAimSpeedSightsMult = 1
 
 -- Multiplier in akimbo
 SWEP.CanAkimbo = true
-SWEP.SpreadAkimboMult = 2
+SWEP.SpreadAkimboMult = 1.5
 SWEP.RecoilAkimboMult = 1.25
+SWEP.AutoAimSpeedAkimboMult = 1
 
 SWEP.Firemode = "auto"
 -- auto
