@@ -11,6 +11,7 @@ SWEP.Description = "The hunt is on."
 SWEP.TypeName = "Sniper Rifle"
 
 SWEP.Model = "models/tak/gtaiv/remington_m700.mdl"
+SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"
 
 SWEP.ModelOffsetView = Vector(3, 7, -5.5)

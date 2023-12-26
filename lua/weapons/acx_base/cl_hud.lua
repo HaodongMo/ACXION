@@ -45,6 +45,11 @@ function SWEP:DrawHUD()
         surface.SetDrawColor(0, 0, 0, 255)
         surface.DrawLine(x - ScrW(), y, x + ScrW(), y)
         surface.DrawLine(x, y - ScrH(), x, y + ScrH())
+
+        -- Draw dot in the middle
+        surface.SetDrawColor(col)
+        surface.DrawRect(x, y - 1, 3, 3)
+
         local text_ammo_r = tostring(self:Clip1())
         surface.SetFont("ACX_8")
         surface.SetTextPos(x + ss * 5, y + ss * 4)
@@ -56,8 +61,6 @@ function SWEP:DrawHUD()
 
         surface.DrawText(text_ammo_r)
     else
-        local crosshair_x = ScrW() / 2
-        local crosshair_y = ScrH() / 2
         y = y + self.LowerAmountRight * ScrH()
         surface.SetDrawColor(col)
 
@@ -189,6 +192,8 @@ function SWEP:DrawHUD()
     end
 
     if self:GetReloading() then
+        local reload_hint_text = "PRESS [" .. string.upper(input.LookupBinding("+reload") or "") .. "]"
+
         local reloadline_x = ScrW() * 3 / 4
         if self:GetReloading2() then
             reloadline_x = ScrW() * 1 / 4
@@ -224,14 +229,17 @@ function SWEP:DrawHUD()
         surface.SetTextColor(col_fg)
         surface.DrawText(text_r)
 
+        local text_r2 = reload_hint_text
+
         if not ACX.FastReloadChance then
-            local text_r2 = "FAIL"
-            surface.SetFont("ACX_8")
+            text_r2 = "FAIL"
+        end
+
+        surface.SetFont("ACX_8")
             local text2_w = surface.GetTextSize(text_r2)
             surface.SetTextPos(reloadline_x - text2_w - 4 * ss, fast_reload_y - 8 * ss)
             surface.SetTextColor(col_fg)
             surface.DrawText(text_r2)
-        end
     end
 
     if self:GetAkimbo() then

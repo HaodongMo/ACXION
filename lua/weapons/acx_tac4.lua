@@ -11,6 +11,7 @@ SWEP.Description = "Efficent buckshot delivery system."
 SWEP.TypeName = "Shotgun"
 
 SWEP.Model = "models/tak/gtaiv/remington_1100_tac_4.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(3, 4, -5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

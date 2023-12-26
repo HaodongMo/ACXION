@@ -11,6 +11,7 @@ SWEP.Description = "High capacity precision weapon."
 SWEP.TypeName = "Sniper Rifle"
 
 SWEP.Model = "models/tak/gtaiv/psg-1.mdl"
+SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"
 
 SWEP.ModelOffsetView = Vector(4, 10, -6.5)

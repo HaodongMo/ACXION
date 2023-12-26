@@ -11,6 +11,7 @@ SWEP.Description = "Dependable weapon for those who love to work the pump."
 SWEP.TypeName = "Shotgun"
 
 SWEP.Model = "models/tak/gtaiv/compact_shotgun.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5.5, 10, -5.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

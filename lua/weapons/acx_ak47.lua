@@ -11,6 +11,7 @@ SWEP.Description = "Iconic Soviet rifle."
 SWEP.TypeName = "Assault Rifle"
 
 SWEP.Model = "models/tak/gtaiv/ak47.mdl"
+SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"
 
 SWEP.ModelOffsetView = Vector(4.5, 9, -6.5)

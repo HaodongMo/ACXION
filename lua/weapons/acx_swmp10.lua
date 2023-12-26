@@ -11,6 +11,7 @@ SWEP.Description = "Controllable and well-rounded."
 SWEP.TypeName = "SMG"
 
 SWEP.Model = "models/tak/gtaiv/mp10.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5, 10, -6.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

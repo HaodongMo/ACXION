@@ -11,6 +11,7 @@ SWEP.Description = "Big drum, big damage. May take some time to load."
 SWEP.TypeName = "Shotgun"
 
 SWEP.Model = "models/tak/gtaiv/armsel_striker.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5.5, 10, -5.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)
@@ -49,7 +50,7 @@ SWEP.Firemode = "auto"
 SWEP.ReloadTime = 0.4
 SWEP.ReloadDifficultyMult = 0.4
 SWEP.ShotgunReload = true
-SWEP.AkimboSingleReload = false
+SWEP.AkimboSingleReload = true
 
 SWEP.AutoAimAngle = math.cos(math.rad(30))
 SWEP.AutoAimRange = 3500

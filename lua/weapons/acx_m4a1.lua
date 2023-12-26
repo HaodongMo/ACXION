@@ -11,6 +11,7 @@ SWEP.Description = "Iconic American rifle."
 SWEP.TypeName = "Assault Rifle"
 
 SWEP.Model = "models/tak/gtaiv/m4a1.mdl"
+SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"
 
 SWEP.ModelOffsetView = Vector(3.5, 9, -6)

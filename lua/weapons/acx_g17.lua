@@ -11,6 +11,7 @@ SWEP.Description = "High capacity and low recoil."
 SWEP.TypeName = "Pistol"
 
 SWEP.Model = "models/tak/gtaiv/glock-17.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5, 12, -5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

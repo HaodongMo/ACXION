@@ -11,6 +11,7 @@ SWEP.Description = "Explosions solve problems."
 SWEP.TypeName = "Launcher"
 
 SWEP.Model = "models/tak/gtaiv/hk69a1.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5, 13, -7)
 SWEP.ModelAngleView = Angle(0, 0, 90)

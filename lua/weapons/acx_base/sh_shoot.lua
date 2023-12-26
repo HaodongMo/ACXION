@@ -61,14 +61,14 @@ function SWEP:Shoot(left)
     if left then
         if self:GetNeedCycle2() then return end
 
-        if self:Clip2() <= 0 then
+        if self:Clip2() < self.AmmoPerShot then
             self:DryFire(true)
             return
         end
     else
         if self:GetNeedCycle() then return end
 
-        if self:Clip1() <= 0 then
+        if self:Clip1() < self.AmmoPerShot then
             self:DryFire()
             return
         end
@@ -174,10 +174,10 @@ function SWEP:Shoot(left)
         local punchAngle = Angle(util.SharedRandom("acx_recoil_left", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, util.SharedRandom("acx_recoil_up", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, 0.5 * math.Rand(-1, 1) * recoil)
 
         if left then
-            self:TakeSecondaryAmmo(1)
+            self:TakeSecondaryAmmo(self.AmmoPerShot)
             self:SetBurst2Count(self:GetBurst2Count() + 1)
         else
-            self:TakePrimaryAmmo(1)
+            self:TakePrimaryAmmo(self.AmmoPerShot)
             self:SetBurstCount(self:GetBurstCount() + 1)
         end
 

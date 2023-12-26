@@ -11,6 +11,7 @@ SWEP.Description = "Accurate and high damage."
 SWEP.TypeName = "Pistol"
 
 SWEP.Model = "models/tak/gtaiv/auto-mag_pistol.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5, 12, -5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

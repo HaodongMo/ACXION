@@ -33,6 +33,7 @@ SWEP.ModelAngleWorld = Angle(5, 0, -90)
 SWEP.Damage = 30
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 2
+SWEP.AmmoPerShot = 1
 
 SWEP.ProjectileEntity = nil
 SWEP.ProjectileForce = 5000

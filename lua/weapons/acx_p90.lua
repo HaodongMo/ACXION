@@ -11,6 +11,7 @@ SWEP.Description = "High capacity, low noise."
 SWEP.TypeName = "SMG"
 
 SWEP.Model = "models/tak/gtaiv/p90.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5.5, 10, -5.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)
