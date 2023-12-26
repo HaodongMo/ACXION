@@ -55,7 +55,10 @@ function SWEP:DrawHUD()
         surface.SetTextPos(x + ss * 5, y + ss * 4)
         surface.SetTextColor(col)
 
-        if self:Clip1() == 0 then
+        if self:GetNeedCycle() then
+            text_ammo_r = string.upper(self.Firemode)
+            surface.SetTextColor(col2)
+        elseif self:Clip1() == 0 then
             surface.SetTextColor(col2)
         end
 
@@ -110,7 +113,10 @@ function SWEP:DrawHUD()
         surface.SetTextPos(x + crosshair_radius + ss * 4, y + ss * 4)
         surface.SetTextColor(col)
 
-        if self:Clip1() == 0 then
+        if self:GetNeedCycle() then
+            text_ammo_r = string.upper(self.Firemode)
+            surface.SetTextColor(col2)
+        elseif self:Clip1() == 0 then
             surface.SetTextColor(col2)
         end
 
@@ -166,14 +172,18 @@ function SWEP:DrawHUD()
 
             render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
             local text_ammo_l = tostring(self:Clip2())
+            if self:GetNeedCycle2() then
+                text_ammo_l = string.upper(self.Firemode)
+                surface.SetTextColor(col2)
+            elseif self:Clip2() == 0 then
+                surface.SetTextColor(col2)
+            else
+                surface.SetTextColor(col)
+            end
+
             surface.SetFont("ACX_8")
             local text_ammo_w, text_ammo_h = surface.GetTextSize(text_ammo_l)
             surface.SetTextPos(xl - crosshair_radius - text_ammo_w - ss * 4, yl + ss * 4)
-            surface.SetTextColor(col)
-
-            if self:Clip2() == 0 then
-                surface.SetTextColor(col2)
-            end
 
             surface.DrawText(text_ammo_l)
             local text_l = "L"
