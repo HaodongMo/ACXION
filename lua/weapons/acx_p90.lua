@@ -22,8 +22,8 @@ SWEP.Slot = 3
 SWEP.Damage = 10
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 1
-SWEP.Spread = 0.025
-SWEP.Recoil = 0.4
+SWEP.Spread = 0.03
+SWEP.Recoil = 0.5
 SWEP.RateOfFire = 900
 
 SWEP.SpreadSightsMult = 0.5

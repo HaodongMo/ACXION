@@ -19,11 +19,11 @@ SWEP.Slot = 3
 
 ----------------- Stats
 
-SWEP.Damage = 11
+SWEP.Damage = 12
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 1
-SWEP.Spread = 0.025
-SWEP.Recoil = 0.5
+SWEP.Spread = 0.02
+SWEP.Recoil = 0.35
 SWEP.RateOfFire = 800
 
 SWEP.SpreadSightsMult = 0.5
