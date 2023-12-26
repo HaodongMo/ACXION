@@ -61,10 +61,12 @@ end
 local lookup = {
     ["auto"] = "Automatic",
     ["semi"] = "Semi-auto",
-    ["binary"] = "Break-action",
+    ["binary"] = "Binary-trigger",
     ["pump"] = "Pump-action",
     ["bolt"] = "Bolt-action",
-    ["burst"] = "Burst-fire"
+    ["burst"] = "Burst-fire",
+    ["single"] = "Single-shot",
+    ["break"] = "Break-action"
 }
 function SWEP:GetFiremodeName()
     local fm = self.Firemode

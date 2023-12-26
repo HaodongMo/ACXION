@@ -7,7 +7,7 @@ SWEP.PrintName = "Desert Eagle"
 SWEP.Category = "ACXION"
 
 -- Infobox
-SWEP.Description = "A gun to make a statement with."
+SWEP.Description = "Accept no substitutes."
 SWEP.TypeName = "Pistol"
 
 SWEP.Model = "models/tak/gtaiv/desert_eagle.mdl"

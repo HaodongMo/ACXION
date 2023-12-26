@@ -7,7 +7,7 @@ SWEP.PrintName = "Stakeout"
 SWEP.Category = "ACXION"
 
 -- Infobox
-SWEP.Description = "Dependable weapon for those who love to work the pump."
+SWEP.Description = "Reliable but fiddly pump shotgun."
 SWEP.TypeName = "Shotgun"
 
 SWEP.Model = "models/tak/gtaiv/compact_shotgun.mdl"

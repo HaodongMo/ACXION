@@ -3,7 +3,9 @@ local rising_edge_firemodes = {
     ["binary"] = true,
     ["pump"] = true,
     ["bolt"] = true,
-    ["burst_3"] = true
+    ["burst_3"] = true,
+    ["break"] = true,
+    ["single"] = true,
 }
 
 local falling_edge_firemodes = {

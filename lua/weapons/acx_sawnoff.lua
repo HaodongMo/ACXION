@@ -40,7 +40,7 @@ SWEP.SpreadAkimboMult = 1
 SWEP.RecoilAkimboMult = 2
 SWEP.AutoAimSpeedAkimboMult = 0.75
 
-SWEP.Firemode = "semi"
+SWEP.Firemode = "break"
 -- auto
 -- semi
 -- semi_falling

@@ -7,7 +7,7 @@ SWEP.PrintName = "CZ-75A"
 SWEP.Category = "ACXION"
 
 -- Infobox
-SWEP.Description = "Rap-tap-tap."
+SWEP.Description = "Fires in spurts."
 SWEP.TypeName = "Pistol"
 
 SWEP.Model = "models/tak/gtaiv/cz-75.mdl"

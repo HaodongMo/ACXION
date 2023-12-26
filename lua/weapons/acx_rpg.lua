@@ -7,7 +7,7 @@ SWEP.PrintName = "RPG-7"
 SWEP.Category = "ACXION"
 
 -- Infobox
-SWEP.Description = "Big explosions solve big problems."
+SWEP.Description = "Optionally guided."
 SWEP.TypeName = "Launcher"
 
 SWEP.Model = "models/tak/gtaiv/rpg-7.mdl"
@@ -45,7 +45,7 @@ SWEP.SpreadAkimboMult = 1.5
 SWEP.RecoilAkimboMult = 1
 SWEP.AutoAimSpeedAkimboMult = 0.75
 
-SWEP.Firemode = "semi"
+SWEP.Firemode = "single"
 -- auto
 -- semi
 -- semi_falling
