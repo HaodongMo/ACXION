@@ -85,6 +85,16 @@ function SWEP:FinishReload(slow)
         if amount_restored > 0 then
             self:EmitSound(self.ReloadFinishSound, 75, 100, 1, CHAN_AUTO)
         end
+
+        -- interrupts ongoing reload anim
+        if slow then
+            self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_RPG)
+        elseif alt then
+            self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW)
+        else
+            self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
+        end
+
     end
 end
 
