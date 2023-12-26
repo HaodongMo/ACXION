@@ -190,6 +190,9 @@ function SWEP:DrawHUD()
 
     if self:GetReloading() then
         local reloadline_x = ScrW() * 3 / 4
+        if self:GetReloading2() then
+            reloadline_x = ScrW() * 1 / 4
+        end
         local col_fg = col
 
         if not ACX.FastReloadChance then
@@ -310,4 +313,19 @@ function SWEP:DrawWeaponSelection(x, y, w, h, a)
     end
 
     surface.DrawTexturedRect(x, y, w, w)
+end
+
+function SWEP:CustomAmmoDisplay()
+    self.AmmoDisplay = self.AmmoDisplay or {}
+    self.AmmoDisplay.Draw = true
+
+    if self:GetAkimbo() then
+        self.AmmoDisplay.SecondaryAmmo = self:Clip2()
+    else
+        self.AmmoDisplay.SecondaryAmmo = -1
+    end
+    self.AmmoDisplay.PrimaryClip = self:Clip1()
+    self.AmmoDisplay.PrimaryAmmo = self:Ammo1()
+
+    return self.AmmoDisplay
 end

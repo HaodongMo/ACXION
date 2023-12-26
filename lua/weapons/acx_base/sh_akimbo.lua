@@ -1,5 +1,5 @@
 function SWEP:ToggleAkimbo()
-    if not self.CanAkimbo then return end
+    if not self.CanAkimbo or self:GetReloading() then return end
     local akimbo = self:GetAkimbo()
 
     if akimbo then

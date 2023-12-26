@@ -9,6 +9,7 @@ function SWEP:CustomReload()
     if self:Ammo1() <= 0 then return end
 
     self:SetReloading(true)
+    self:SetReloading2(self:GetAkimbo() and self:Clip1() > self:Clip2())
     self:SetReloadTime(CurTime())
     self:SetPlayedReloadHint(false)
     self:SendCanFastReload()
@@ -29,19 +30,21 @@ function SWEP:FinishReload(slow)
     if self:GetReloading() then
         if self:GetReloadTime() + self:GetMinimumReloadTime() > CurTime() then return end
 
-        local limit = self.Primary.ClipSize
+        local alt = self:GetReloading2()
+
+        local limit = alt and self.Secondary.ClipSize or self.Primary.ClipSize
 
         if not slow then
             limit = limit + self.FastReloadBonus
         end
 
-        if self:GetAkimbo() then
-            local total = self:Clip1() + self:Clip2() + self:Ammo1()
+        -- if self:GetAkimbo() then
+        --     local total = self:Clip1() + self:Clip2() + self:Ammo1()
 
-            if total < limit * 2 then
-                limit = math.ceil(total / 2)
-            end
-        end
+        --     if total < limit * 2 then
+        --         limit = math.ceil(total / 2)
+        --     end
+        -- end
 
         local amount = limit
 
@@ -51,13 +54,16 @@ function SWEP:FinishReload(slow)
 
         local amount_restored = 0
 
-        amount_restored = amount_restored + self:RestoreAmmo(amount, limit)
-        if self:GetAkimbo() then
+        if alt then
             amount_restored = amount_restored + self:RestoreAmmo2(amount, limit)
+        else
+            amount_restored = amount_restored + self:RestoreAmmo(amount, limit)
         end
 
+        local clip = alt and self:Clip2() or self:Clip1()
+
         if self.ShotgunReload then
-            if self:Ammo1() <= 0 or (self:Clip1() >= limit and (self:Clip2() >= limit or not self:GetAkimbo())) then
+            if self:Ammo1() <= 0 or clip >= limit then
                 self:SetReloading(false)
             else
                 self:SetReloading(true)
