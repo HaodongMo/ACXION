@@ -11,13 +11,23 @@ function SWEP:GetNum()
 end
 
 function SWEP:GetSpread()
-    if self:GetAiming() then return self.Spread * 0.5 end
-    return self.Spread
+    local spr = self.Spread
+    if self:GetAkimbo() then
+        spr = spr * self.SpreadAkimboMult
+    elseif self:GetAiming() then
+        spr = spr * self.SpreadSightsMult
+    end
+    return spr
 end
 
 function SWEP:GetRecoil()
-    if self:GetAiming() then return self.Recoil * 0.5 end
-    return self.Recoil
+    local rec = self.Recoil
+    if self:GetAkimbo() then
+        rec = rec * self.RecoilAkimboMult
+    elseif self:GetAiming() then
+        rec = rec * self.RecoilSightsMult
+    end
+    return rec
 end
 
 function SWEP:GetRateOfFire()

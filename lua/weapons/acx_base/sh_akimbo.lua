@@ -1,4 +1,5 @@
 function SWEP:ToggleAkimbo()
+    if not self.CanAkimbo then return end
     local akimbo = self:GetAkimbo()
 
     if akimbo then
