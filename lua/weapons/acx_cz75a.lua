@@ -26,6 +26,14 @@ SWEP.Recoil = 1
 SWEP.RateOfFire = 900
 SWEP.BurstDelay = 0.25
 
+SWEP.SpreadSightsMult = 0.5
+SWEP.RecoilSightsMult = 0.5
+SWEP.AutoAimSpeedSightsMult = 1
+
+SWEP.SpreadAkimboMult = 2
+SWEP.RecoilAkimboMult = 1
+SWEP.AutoAimSpeedAkimboMult = 1
+
 SWEP.Firemode = "burst_3"
 -- auto
 -- semi

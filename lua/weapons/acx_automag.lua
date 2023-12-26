@@ -21,9 +21,17 @@ SWEP.Slot = 1
 SWEP.Damage = 40
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 2
-SWEP.Spread = 0.001
+SWEP.Spread = 0.003
 SWEP.Recoil = 2
 SWEP.RateOfFire = 300
+
+SWEP.SpreadSightsMult = 0.25
+SWEP.RecoilSightsMult = 0.5
+SWEP.AutoAimSpeedSightsMult = 1
+
+SWEP.SpreadAkimboMult = 5
+SWEP.RecoilAkimboMult = 1.25
+SWEP.AutoAimSpeedAkimboMult = 1
 
 SWEP.Firemode = "semi"
 -- auto

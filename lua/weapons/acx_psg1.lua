@@ -22,9 +22,17 @@ SWEP.Slot = 4
 SWEP.Damage = 70
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 2
-SWEP.Spread = 0.0
-SWEP.Recoil = 1.5
+SWEP.Spread = 0.005
+SWEP.Recoil = 2.5
 SWEP.RateOfFire = 200
+
+SWEP.SpreadSightsMult = 0
+SWEP.RecoilSightsMult = 0.25
+SWEP.AutoAimSpeedSightsMult = 1
+
+SWEP.SpreadAkimboMult = 2
+SWEP.RecoilAkimboMult = 1
+SWEP.AutoAimSpeedAkimboMult = 1
 
 SWEP.Firemode = "semi"
 -- auto
@@ -38,6 +46,7 @@ SWEP.Firemode = "semi"
 SWEP.ReloadTime = 0.75
 SWEP.ReloadDifficultyMult = 1
 SWEP.ShotgunReload = false
+SWEP.AkimboSingleReload = false
 
 SWEP.AutoAimAngle = math.cos(math.rad(5))
 SWEP.AutoAimRange = 7500

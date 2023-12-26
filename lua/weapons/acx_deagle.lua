@@ -25,6 +25,14 @@ SWEP.Spread = 0.005
 SWEP.Recoil = 1.25
 SWEP.RateOfFire = 300
 
+SWEP.SpreadSightsMult = 0.5
+SWEP.RecoilSightsMult = 0.5
+SWEP.AutoAimSpeedSightsMult = 1
+
+SWEP.SpreadAkimboMult = 5
+SWEP.RecoilAkimboMult = 1.25
+SWEP.AutoAimSpeedAkimboMult = 1
+
 SWEP.Firemode = "semi"
 -- auto
 -- semi

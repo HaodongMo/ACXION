@@ -25,6 +25,14 @@ SWEP.Spread = 0.08
 SWEP.Recoil = 1
 SWEP.RateOfFire = 300
 
+SWEP.SpreadSightsMult = 0.75
+SWEP.RecoilSightsMult = 0.5
+SWEP.AutoAimSpeedSightsMult = 1
+
+SWEP.SpreadAkimboMult = 1.25
+SWEP.RecoilAkimboMult = 2
+SWEP.AutoAimSpeedAkimboMult = 0.75
+
 SWEP.Firemode = "auto"
 -- auto
 -- semi
@@ -37,6 +45,7 @@ SWEP.Firemode = "auto"
 SWEP.ReloadTime = 0.4
 SWEP.ReloadDifficultyMult = 0.4
 SWEP.ShotgunReload = true
+SWEP.AkimboSingleReload = false
 
 SWEP.AutoAimAngle = math.cos(math.rad(30))
 SWEP.AutoAimRange = 3500

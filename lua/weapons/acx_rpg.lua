@@ -26,9 +26,17 @@ SWEP.BulletBodygroups = {
 
 SWEP.ProjectileEntity = "acx_proj_rpg"
 
-SWEP.Spread = 0.025
+SWEP.Spread = 0.035
 SWEP.Recoil = 1
 SWEP.RateOfFire = 150
+
+SWEP.SpreadSightsMult = 0.25
+SWEP.RecoilSightsMult = 1
+SWEP.AutoAimSpeedSightsMult = 1
+
+SWEP.SpreadAkimboMult = 1.5
+SWEP.RecoilAkimboMult = 1
+SWEP.AutoAimSpeedAkimboMult = 0.75
 
 SWEP.Firemode = "semi"
 -- auto

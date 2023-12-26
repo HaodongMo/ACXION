@@ -20,9 +20,17 @@ SWEP.Slot = 4
 
 SWEP.ProjectileEntity = "acx_proj_40mm"
 
-SWEP.Spread = 0.05
+SWEP.Spread = 0.04
 SWEP.Recoil = 1.5
 SWEP.RateOfFire = 100
+
+SWEP.SpreadSightsMult = 0.5
+SWEP.RecoilSightsMult = 1
+SWEP.AutoAimSpeedSightsMult = 1
+
+SWEP.SpreadAkimboMult = 1.5
+SWEP.RecoilAkimboMult = 1
+SWEP.AutoAimSpeedAkimboMult = 0.75
 
 SWEP.Firemode = "semi"
 -- auto
@@ -36,6 +44,7 @@ SWEP.Firemode = "semi"
 SWEP.ReloadTime = 0.5
 SWEP.ReloadDifficultyMult = 1
 SWEP.ShotgunReload = true
+SWEP.AkimboSingleReload = false
 
 SWEP.AutoAimAngle = math.cos(math.rad(30))
 SWEP.AutoAimRange = 3500
