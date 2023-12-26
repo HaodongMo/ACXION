@@ -94,10 +94,12 @@ function SWEP:Think()
                 self:SetNeedCycle(false)
                 self:SetWaitTime(CurTime() + self.CycleDelay)
                 self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+                self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
             elseif ACX.ConVars["cycle"]:GetInt() == 2 and owner:KeyDown(IN_WEAPON2) then
                 self:SetNeedCycle(false)
                 self:SetWaitTime(CurTime() + self.CycleDelay)
                 self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+                self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
             end
         else
             if self:Clip1() <= 0 then
@@ -129,10 +131,12 @@ function SWEP:Think()
                 self:SetNeedCycle2(false)
                 self:SetWait2Time(CurTime() + self.CycleDelay)
                 self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+                self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
             elseif ACX.ConVars["cycle"]:GetInt() == 2 and owner:KeyDown(IN_WEAPON1) then
                 self:SetNeedCycle2(false)
                 self:SetWait2Time(CurTime() + self.CycleDelay)
                 self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+                self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
             end
         else
             if self:Clip2() <= 0 then
@@ -161,10 +165,12 @@ function SWEP:Think()
                     self:SetNeedCycle(false)
                     self:SetWaitTime(CurTime() + self.CycleDelay)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+                    self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
                 elseif ACX.ConVars["cycle"]:GetInt() == 2 and owner:KeyDown(IN_WEAPON1) then
                     self:SetNeedCycle(false)
                     self:SetWaitTime(CurTime() + self.CycleDelay)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+                    self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
                 end
             else
                 if self:Clip1() <= 0 then

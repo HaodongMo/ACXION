@@ -87,14 +87,15 @@ function SWEP:FinishReload(slow)
         end
 
         -- interrupts ongoing reload anim
-        if slow then
-            self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_RPG)
-        elseif alt then
-            self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW)
-        else
-            self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
+        if not self:GetReloading() then
+            if slow then
+                self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_RPG)
+            elseif alt then
+                self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_CROSSBOW)
+            else
+                self:GetOwner():DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_REVOLVER)
+            end
         end
-
     end
 end
 
