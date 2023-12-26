@@ -66,7 +66,7 @@ SWEP.Magnification = 1.25
 SWEP.HasScope = false
 SWEP.ScopeOverlay = nil
 
-SWEP.AimOffset = Vector(0, 0, 0)
+SWEP.AimOffset = Vector(0.1, 0, 0)
 SWEP.AimAngle = Angle(0, 0, 0)
 
 SWEP.RecoilOffset = Vector(0, -4, 0)
