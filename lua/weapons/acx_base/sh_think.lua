@@ -168,10 +168,12 @@ function SWEP:Think()
 
     if self:GetShot2Queued() then
         self:Shoot(true)
+        self:SetShot2Queued(false)
     end
 
     if self:GetShotQueued() then
         self:Shoot()
+        self:SetShotQueued(false)
     end
 
     if owner:KeyPressed(IN_ZOOM) then
