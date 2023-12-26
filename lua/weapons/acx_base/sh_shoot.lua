@@ -9,12 +9,13 @@ function SWEP:GetStillWaiting(left)
     if left then
         if self:GetNextSecondaryFire() > CurTime() then return true end
         if self:GetWait2Time() > CurTime() then return true end
+        if self:GetReloading() and self:GetReloading2() then return true end
     else
         if self:GetNextPrimaryFire() > CurTime() then return true end
         if self:GetWaitTime() > CurTime() then return true end
+        if self:GetReloading() and not self:GetReloading2() then return true end
     end
 
-    if self:GetReloading() then return true end
 
     return false
 end

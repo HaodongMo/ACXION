@@ -4,12 +4,14 @@ end
 function SWEP:CustomReload()
     if self:GetReloading() then self:FinishReload() return end
 
-    if self:GetStillWaiting() then return end
+    local left = self:GetAkimbo() and self:Clip1() > self:Clip2()
+
+    if self:GetStillWaiting(left) then return end
     if (self:Clip1() >= self.Primary.ClipSize + self.FastReloadBonus) and ((self:Clip2() >= self.Primary.ClipSize + self.FastReloadBonus) or not self:GetAkimbo()) then return end
     if self:Ammo1() <= 0 then return end
 
     self:SetReloading(true)
-    self:SetReloading2(self:GetAkimbo() and self:Clip1() > self:Clip2())
+    self:SetReloading2(left)
     self:SetReloadTime(CurTime())
     self:SetPlayedReloadHint(false)
     self:SendCanFastReload()
@@ -32,7 +34,7 @@ function SWEP:FinishReload(slow)
 
         local alt = self:GetReloading2()
 
-        local limit = alt and self.Secondary.ClipSize or self.Primary.ClipSize
+        local limit = self.Primary.ClipSize
 
         if not slow then
             limit = limit + self.FastReloadBonus
@@ -73,8 +75,11 @@ function SWEP:FinishReload(slow)
             end
         else
             self:SetReloading(false)
-            self:SetWaitTime(CurTime() + self.HolsterTime + 0.1)
-            self:SetWait2Time(CurTime() + self.HolsterTime)
+            if alt then
+                self:SetWait2Time(CurTime() + self.HolsterTime + 0.1)
+            else
+                self:SetWaitTime(CurTime() + self.HolsterTime + 0.1)
+            end
         end
 
         if amount_restored > 0 then

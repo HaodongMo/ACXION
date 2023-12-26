@@ -1,13 +1,13 @@
 function SWEP:GetShouldRaiseRight()
     if self:GetHolstering() then return false end
-    if self:GetReloading() then return false end
+    if self:GetReloading() and (not self.AkimboSingleReload or not self:GetReloading2()) then return false end
 
     return true
 end
 
 function SWEP:GetShouldRaiseLeft()
     if self:GetHolstering() then return false end
-    if self:GetReloading() then return false end
+    if self:GetReloading() and (not self.AkimboSingleReload or self:GetReloading2()) then return false end
     if not self:GetAkimbo() then return false end
 
     return true

@@ -78,59 +78,61 @@ function SWEP:Think()
             end
         end
 
-        if not self:GetReloading() then
-            if self:GetNeedCycle() then
-                if owner:KeyDown(IN_WEAPON2) then
-                    self:SetNeedCycle(false)
-                    self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
-                end
-            else
-                if self:Clip1() <= 0 then
-                    if owner:KeyPressed(IN_ATTACK2) then
-                        self:SetShotQueued(true)
-                    end
-                else
-                    if self.TriggerSound and owner:KeyPressed(IN_ATTACK2) then
-                        self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
-                    end
-
-                    if owner:KeyPressed(IN_ATTACK2) and rising_edge_firemodes[self.Firemode] then
-                        self:SetShotQueued(true)
-                    elseif owner:KeyReleased(IN_ATTACK2) and falling_edge_firemodes[self.Firemode] then
-                        self:SetShotQueued(true)
-                    elseif owner:KeyDown(IN_ATTACK2) and auto_firemodes[self.Firemode] then
-                        self:SetShotQueued(true)
-                    end
-                end
+        if self:GetReloading() and (not self.AkimboSingleReload or not self:GetReloading2()) then
+            if owner:KeyPressed(IN_ATTACK2) then
+                self:CancelReload()
             end
-
-            if self:GetNeedCycle2() then
-                if owner:KeyDown(IN_WEAPON1) then
-                    self:SetNeedCycle2(false)
-                    self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
-                end
-            else
-                if self:Clip2() <= 0 then
-                    if owner:KeyPressed(IN_ATTACK) then
-                        self:SetShot2Queued(true)
-                    end
-                else
-                    if self.TriggerSound and owner:KeyPressed(IN_ATTACK) then
-                        self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
-                    end
-
-                    if owner:KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
-                        self:SetShot2Queued(true)
-                    elseif owner:KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
-                        self:SetShot2Queued(true)
-                    elseif owner:KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
-                        self:SetShot2Queued(true)
-                    end
-                end
+        elseif self:GetNeedCycle() then
+            if owner:KeyDown(IN_WEAPON2) then
+                self:SetNeedCycle(false)
+                self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
             end
         else
-            if owner:KeyPressed(IN_ATTACK) or owner:KeyPressed(IN_ATTACK2) then
+            if self:Clip1() <= 0 then
+                if owner:KeyPressed(IN_ATTACK2) then
+                    self:SetShotQueued(true)
+                end
+            else
+                if self.TriggerSound and owner:KeyPressed(IN_ATTACK2) then
+                    self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
+                end
+
+                if owner:KeyPressed(IN_ATTACK2) and rising_edge_firemodes[self.Firemode] then
+                    self:SetShotQueued(true)
+                elseif owner:KeyReleased(IN_ATTACK2) and falling_edge_firemodes[self.Firemode] then
+                    self:SetShotQueued(true)
+                elseif owner:KeyDown(IN_ATTACK2) and auto_firemodes[self.Firemode] then
+                    self:SetShotQueued(true)
+                end
+            end
+        end
+
+        if self:GetReloading() and (not self.AkimboSingleReload or self:GetReloading2()) then
+            if owner:KeyPressed(IN_ATTACK) then
                 self:CancelReload()
+            end
+        elseif self:GetNeedCycle2() then
+            if owner:KeyDown(IN_WEAPON1) then
+                self:SetNeedCycle2(false)
+                self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
+            end
+        else
+            if self:Clip2() <= 0 then
+                if owner:KeyPressed(IN_ATTACK) then
+                    self:SetShot2Queued(true)
+                end
+            else
+                if self.TriggerSound and owner:KeyPressed(IN_ATTACK) then
+                    self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
+                end
+
+                if owner:KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
+                    self:SetShot2Queued(true)
+                elseif owner:KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
+                    self:SetShot2Queued(true)
+                elseif owner:KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
+                    self:SetShot2Queued(true)
+                end
             end
         end
     else
