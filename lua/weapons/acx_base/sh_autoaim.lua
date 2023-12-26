@@ -59,6 +59,7 @@ function SWEP:ThinkLockOn()
                             if ent == try_target then return false end
                             if ent == owner then return false end
                             if ent:IsPlayer() and ent:Team() == owner:Team() then return false end
+                            if ent:GetOwner() == try_target then return false end
                             return true
                         end
                     })
@@ -83,6 +84,7 @@ function SWEP:ThinkLockOn()
                                     if ent == try_target then return false end
                                     if ent == owner then return false end
                                     if ent:IsPlayer() and ent:Team() == owner:Team() then return false end
+                                    if ent:GetOwner() == try_target then return false end
                                     return true
                                 end
                             })

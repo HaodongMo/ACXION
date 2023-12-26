@@ -16,7 +16,6 @@ function SWEP:GetStillWaiting(left)
         if self:GetReloading() and not self:GetReloading2() then return true end
     end
 
-
     return false
 end
 
@@ -37,17 +36,17 @@ function SWEP:GetHasHardLock(left)
     local ang = self:GetShootAngle(left)
     local target
 
-    if !left and IsValid(self:GetLockOnEntity()) then
+    if not left and IsValid(self:GetLockOnEntity()) then
         target = self:GetLockOnEntity()
     elseif left and IsValid(self:GetLockOnEntity2()) then
         target = self:GetLockOnEntity2()
     end
 
-    if !target then return false end
+    if not target then return false end
 
     local targeting_tr = util.TraceLine({
         start = pos,
-        endpos = pos + ang:Forward() * self.AutoAimRange,
+        endpos = pos + ang:Forward() * self.AutoAimRange * 2,
         filter = self:GetOwner(),
         mask = MASK_SHOT_HULL
     })
@@ -63,6 +62,7 @@ function SWEP:Shoot(left)
 
         if self:Clip2() < self.AmmoPerShot then
             self:DryFire(true)
+
             return
         end
     else
@@ -70,18 +70,16 @@ function SWEP:Shoot(left)
 
         if self:Clip1() < self.AmmoPerShot then
             self:DryFire()
+
             return
         end
     end
 
     local spread = self:GetSpread()
-
     local ang = self:GetShootAngle(left)
-
     local damage = self:GetDamage()
 
     -- "Lucky Last" - Last 10% of the magazine starts to ramp up damage up to 50% more
-
     if left then
         if self:Clip2() <= self.Primary.ClipSize * 0.1 then
             damage = damage + (damage * (0.5 * (1 - (self:Clip2() / (self.Primary.ClipSize * 0.1)))))
@@ -95,12 +93,10 @@ function SWEP:Shoot(left)
     if self:GetProjectileEntity() then
         if SERVER then
             local shoot_entity = ents.Create(self:GetProjectileEntity())
-
-            if !IsValid(shoot_entity) then return end
-
+            if not IsValid(shoot_entity) then return end
             local pos = self:GetOwner():EyePos()
 
-            if !self:GetAiming() then
+            if not self:GetAiming() then
                 if left then
                     pos = pos + (self:GetOwner():GetRight() * -8)
                 else
@@ -111,30 +107,26 @@ function SWEP:Shoot(left)
             local shootentdata = {}
 
             if self.ProvideTargetData then
-
-                if !left and IsValid(self:GetLockOnEntity()) then
+                if not left and IsValid(self:GetLockOnEntity()) then
                     shootentdata.Target = self:GetLockOnEntity()
                 elseif left and IsValid(self:GetLockOnEntity2()) then
                     shootentdata.Target = self:GetLockOnEntity2()
                 end
 
                 if self.HardLockForTargetData then
-                    if !self:GetHasHardLock(left) then
+                    if not self:GetHasHardLock(left) then
                         shootentdata.Target = nil
                     end
                 end
             end
 
             ang = ang + AngleRand() / 360 * math.deg(spread)
-
             shoot_entity.ShootEntData = shootentdata
-
             shoot_entity:SetPos(pos)
             shoot_entity:SetAngles(ang)
             shoot_entity:SetOwner(self:GetOwner())
             shoot_entity:Spawn()
             shoot_entity:Activate()
-
             local phys = shoot_entity:GetPhysicsObject()
 
             if IsValid(phys) then
@@ -170,9 +162,7 @@ function SWEP:Shoot(left)
 
     if IsFirstTimePredicted() then
         self:DoMuzzleEffects(left)
-
         local recoil = self:GetRecoil()
-
         local punchAngle = Angle(util.SharedRandom("acx_recoil_left", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, util.SharedRandom("acx_recoil_up", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, 0.5 * math.Rand(-1, 1) * recoil)
 
         if left then
@@ -234,23 +224,25 @@ function SWEP:DryFire(left)
 end
 
 function SWEP:SendNeedCycle()
-    if game.SinglePlayer() then self:CallOnClient("SendNeedCycle") end
+    if game.SinglePlayer() then
+        self:CallOnClient("SendNeedCycle")
+    end
 
     ACX.CycleAmount = 0
 end
 
 function SWEP:SendNeedCycle2()
-    if game.SinglePlayer() then self:CallOnClient("SendNeedCycle2") end
+    if game.SinglePlayer() then
+        self:CallOnClient("SendNeedCycle2")
+    end
 
     ACX.CycleAmount2 = 0
 end
 
 function SWEP:DoMuzzleEffects(left)
-    if !IsFirstTimePredicted() then return end
-
+    if not IsFirstTimePredicted() then return end
     local data = EffectData()
     data:SetEntity(self)
     data:SetFlags(left and 1 or 0)
-
-    util.Effect( self.MuzzleEffect, data )
+    util.Effect(self.MuzzleEffect, data)
 end
