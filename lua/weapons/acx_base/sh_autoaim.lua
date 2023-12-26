@@ -1,7 +1,7 @@
 function SWEP:ThinkLockOn()
     local owner = self:GetOwner()
 
-    if not ((self:GetAiming() and self.AutoAimInSights) or (not self:GetAiming() and self.AutoAimOutOfSights)) then
+    if ACX.ConVars["autoaim"]:GetBool() or not ((self:GetAiming() and self.AutoAimInSights) or (not self:GetAiming() and self.AutoAimOutOfSights)) then
         self:SetLockOnEntity(nil)
         self:SetHeadLock(false)
 

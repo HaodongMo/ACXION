@@ -201,7 +201,7 @@ function SWEP:DrawHUD()
         end
     end
 
-    if self:GetReloading() then
+    if self:GetReloading() and ACX.ConVars["dynamic_reload"]:GetBool() then
         local reload_hint_text = "PRESS [" .. string.upper(input.LookupBinding("+reload") or "") .. "]"
 
         local reloadline_x = ScrW() * 3 / 4
@@ -383,7 +383,13 @@ function SWEP:PrintWeaponInfo(x, y, alpha)
             str = str .. title_color .. "Fire Rate:</color>\t" .. text_color .. self.RateOfFire .. " RPM</color>\n"
         end
 
-        str = str .. title_color .. "Capacity:</color>\t" .. text_color .. self.Primary.ClipSize .. (self.FastReloadBonus > 0 and " (+" .. self.FastReloadBonus .. ")" or "") .. "</color>\n"
+        local bonus = self.FastReloadBonus
+
+        if not ACX.ConVars["dynamic_reload"]:GetBool() then
+            bonus = 0
+        end
+
+        str = str .. title_color .. "Capacity:</color>\t" .. text_color .. self.Primary.ClipSize .. (bonus > 0 and " (+" .. bonus .. ")" or "") .. "</color>\n"
 
 
         local max = 10

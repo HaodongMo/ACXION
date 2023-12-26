@@ -2,33 +2,37 @@ function SWEP:PreDrawViewModel(vm, weapon, ply)
 
     self:TryCreateModel()
 
-    local model_right = self.ModelRightView
-
-    self:UpdateModelBodygroups(model_right)
-
-    model_right:SetupBones()
-
     local pos = EyePos()
     local ang = EyeAngles()
-    local vpos, vang = self:GetCustomViewPos(pos, ang)
 
-    model_right:SetRenderOrigin(vpos)
-    model_right:SetRenderAngles(vang)
-    model_right:SetPos(vpos)
-    model_right:SetAngles(vang)
+    local model_right = self.ModelRightView
+
+    if model_right then
+        self:UpdateModelBodygroups(model_right)
+
+        model_right:SetupBones()
+        local vpos, vang = self:GetCustomViewPos(pos, ang)
+
+        model_right:SetRenderOrigin(vpos)
+        model_right:SetRenderAngles(vang)
+        model_right:SetPos(vpos)
+        model_right:SetAngles(vang)
+    end
 
     local model_left = self.ModelLeftView
 
-    self:UpdateModelBodygroups(model_left, true)
+    if model_left then
+        self:UpdateModelBodygroups(model_left, true)
 
-    model_left:SetupBones()
+        model_left:SetupBones()
 
-    local lvpos, lvang = self:GetCustomViewPos(pos, ang, true)
+        local lvpos, lvang = self:GetCustomViewPos(pos, ang, true)
 
-    model_left:SetRenderOrigin(lvpos)
-    model_left:SetRenderAngles(lvang)
-    model_left:SetPos(lvpos)
-    model_left:SetAngles(lvang)
+        model_left:SetRenderOrigin(lvpos)
+        model_left:SetRenderAngles(lvang)
+        model_left:SetPos(lvpos)
+        model_left:SetAngles(lvang)
+    end
 
     render.SetBlend(0)
 
@@ -123,13 +127,17 @@ function SWEP:PostDrawViewModel(vm, weapon, ply)
     render.SetBlend(1)
 
     local model_right = self.ModelRightView
-    model_right:SetupBones()
-    model_right:DrawModel()
+    if IsValid(model_right) then
+        model_right:SetupBones()
+        model_right:DrawModel()
+    end
 
     if self.LowerAmountLeft < 1 then
         local model_left = self.ModelLeftView
-        model_left:SetupBones()
-        model_left:DrawModel()
+        if IsValid(model_left) then
+            model_left:SetupBones()
+            model_left:DrawModel()
+        end
     end
 
     self:DrawParticles()

@@ -7,7 +7,12 @@ function SWEP:CustomReload()
     local left = self:GetAkimbo() and self:Clip1() > self:Clip2()
 
     if self:GetStillWaiting(left) then return end
-    if (self:Clip1() >= self.Primary.ClipSize + self.FastReloadBonus) and ((self:Clip2() >= self.Primary.ClipSize + self.FastReloadBonus) or not self:GetAkimbo()) then return end
+    local bonus = self.FastReloadBonus
+
+    if not ACX.ConVars["dynamic_reload"]:GetBool() then
+        bonus = 0
+    end
+    if (self:Clip1() >= self.Primary.ClipSize + bonus) and ((self:Clip2() >= self.Primary.ClipSize + bonus) or not self:GetAkimbo()) then return end
     if self:Ammo1() <= 0 then return end
 
     self:SetReloading(true)
@@ -29,6 +34,8 @@ function SWEP:CustomReload()
 end
 
 function SWEP:FinishReload(slow)
+    if ACX.ConVars["dynamic_reload"]:GetBool() then slow = true end
+
     if self:GetReloading() then
         if self:GetReloadTime() + self:GetMinimumReloadTime() > CurTime() then return end
 
@@ -150,7 +157,11 @@ function SWEP:GetMaximumFastReloadTime()
 end
 
 function SWEP:GetMaximumReloadTime()
-    return self.ReloadTime * 1.75
+    if not ACX.ConVars["dynamic_reload"]:GetBool() then
+        return self.ReloadTime
+    else
+        return self.ReloadTime * 1.75
+    end
 end
 
 function SWEP:CancelReload()

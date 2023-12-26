@@ -2,40 +2,40 @@ SWEP.ModelRightView = nil
 SWEP.ModelLeftView = nil
 
 function SWEP:TryCreateModel()
-    if self.ModelRightView then return end
-    if self.ModelLeftView then return end
-
-    self:CreateCustomModel()
-end
-
-function SWEP:CreateCustomModel()
-    local newmodel_left = ClientsideModel(self.Model)
-    local newmodel_right = ClientsideModel(self.Model)
-
-    if not IsValid(newmodel_left) or not IsValid(newmodel_right) then
-        return
+    if not IsValid(self.ModelRightView) then
+        self:CreateCustomModel()
     end
 
-    newmodel_left:SetNoDraw(true)
-    newmodel_right:SetNoDraw(true)
+    if self:GetAkimbo() and not IsValid(self.ModelLeftView) then
+        self:CreateCustomModel(true)
+    end
+end
 
-    newmodel_left:SetBodyGroups(self.Bodygroups)
-    newmodel_right:SetBodyGroups(self.Bodygroups)
+function SWEP:CreateCustomModel(left)
+    local newmodel = ClientsideModel(self.Model)
+    if not IsValid(newmodel) then return end
+    newmodel:SetNoDraw(true)
+    newmodel:SetBodyGroups(self.Bodygroups)
 
-    self.ModelLeftView = newmodel_left
-    self.ModelRightView = newmodel_right
+    if left then
+        self.ModelLeftView = newmodel
+    else
+        self.ModelRightView = newmodel
+    end
 
-    table.insert(ACX.CSModelPile, {Model = newmodel_left, Weapon = self})
-    table.insert(ACX.CSModelPile, {Model = newmodel_right, Weapon = self})
+    table.insert(ACX.CSModelPile, {
+        Model = newmodel,
+        Weapon = self
+    })
 end
 
 function SWEP:UpdateModelBodygroups(mdl, left)
     mdl:SetBodyGroups(self.Bodygroups)
-
     local bbg = self.BulletBodygroups
 
     if bbg then
         local amt = self:Clip1()
+
         if left then
             amt = self:Clip2()
         end
