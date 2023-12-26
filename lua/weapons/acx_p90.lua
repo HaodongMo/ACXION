@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "P90"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "High capacity, low noise."
+SWEP.TypeName = "SMG"
+
 SWEP.Model = "models/tak/gtaiv/p90.mdl"
 SWEP.WorldModel = SWEP.Model
 

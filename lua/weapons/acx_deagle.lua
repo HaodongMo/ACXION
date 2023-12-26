@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Desert Eagle"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "A gun to make a statement with."
+SWEP.TypeName = "Pistol"
+
 SWEP.Model = "models/tak/gtaiv/desert_eagle.mdl"
 SWEP.WorldModel = SWEP.Model
 

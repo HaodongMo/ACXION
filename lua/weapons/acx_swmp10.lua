@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "MP-10"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Controllable and well-rounded."
+SWEP.TypeName = "SMG"
+
 SWEP.Model = "models/tak/gtaiv/mp10.mdl"
 SWEP.WorldModel = SWEP.Model
 

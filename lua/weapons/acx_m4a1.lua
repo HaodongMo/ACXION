@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "M4A1"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Iconic American rifle."
+SWEP.TypeName = "Assault Rifle"
+
 SWEP.Model = "models/tak/gtaiv/m4a1.mdl"
 SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"

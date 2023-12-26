@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "HK69A1"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Explosions solve problems."
+SWEP.TypeName = "Launcher"
+
 SWEP.Model = "models/tak/gtaiv/hk69a1.mdl"
 SWEP.WorldModel = SWEP.Model
 
@@ -18,6 +22,8 @@ SWEP.ModelAngleWorld = Angle(5, 0, -90)
 SWEP.Slot = 4
 
 ----------------- Stats
+
+SWEP.Damage = 100
 
 SWEP.ProjectileEntity = "acx_proj_40mm"
 
@@ -33,7 +39,7 @@ SWEP.SpreadAkimboMult = 1.5
 SWEP.RecoilAkimboMult = 1
 SWEP.AutoAimSpeedAkimboMult = 0.75
 
-SWEP.Firemode = "semi"
+SWEP.Firemode = "binary"
 -- auto
 -- semi
 -- semi_falling

@@ -51,3 +51,23 @@ function SWEP:GetAutoAimSpeed()
     end
     return aas
 end
+
+-- auto
+-- semi
+-- binary
+-- pump
+-- bolt
+-- burst_3, burst_2, etc.
+local lookup = {
+    ["auto"] = "Automatic",
+    ["semi"] = "Semi-auto",
+    ["binary"] = "Break-action",
+    ["pump"] = "Pump-action",
+    ["bolt"] = "Bolt-action",
+    ["burst"] = "Burst-fire"
+}
+function SWEP:GetFiremodeName()
+    local fm = self.Firemode
+    if string.Left(fm, 6) == "burst_" then fm = "burst" end
+    return lookup[fm]
+end

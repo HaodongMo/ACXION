@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "AK-47"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Iconic Soviet rifle."
+SWEP.TypeName = "Assault Rifle"
+
 SWEP.Model = "models/tak/gtaiv/ak47.mdl"
 SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"

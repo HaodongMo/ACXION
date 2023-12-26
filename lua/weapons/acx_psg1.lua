@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "PSG-1"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "High capacity precision weapon."
+SWEP.TypeName = "Sniper Rifle"
+
 SWEP.Model = "models/tak/gtaiv/psg-1.mdl"
 SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"

@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Model 700"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "The hunt is on."
+SWEP.TypeName = "Sniper Rifle"
+
 SWEP.Model = "models/tak/gtaiv/remington_m700.mdl"
 SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"
@@ -25,7 +29,7 @@ SWEP.Num = 1
 SWEP.HeadshotMultiplier = 2
 SWEP.Spread = 0.0035
 SWEP.Recoil = 1.5
-SWEP.RateOfFire = 150
+SWEP.RateOfFire = 600
 
 SWEP.SpreadSightsMult = 0
 SWEP.RecoilSightsMult = 0.25
@@ -58,6 +62,7 @@ SWEP.AutoAimOutOfSights = false
 SWEP.AutoAimInSights = true
 
 SWEP.CycleBetweenShots = true
+SWEP.CycleDelay = 0.4
 
 SWEP.Primary.Ammo = "357"
 SWEP.Primary.ClipSize = 10

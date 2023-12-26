@@ -18,8 +18,24 @@ local function generatefonts()
         } )
 
     end
-
 end
+
+surface.CreateFont( "ACX_HudSelectionTitle", {
+    font = "Verdana",
+    size = 20,
+    weight = 700,
+    antialias = true,
+    extended = true, -- Required for non-latin fonts
+})
+
+surface.CreateFont( "ACX_HudSelectionDesc", {
+    font = "Verdana",
+    size = 14,
+    weight = 700,
+    antialias = true,
+    extended = true, -- Required for non-latin fonts
+})
+
 
 
 generatefonts()

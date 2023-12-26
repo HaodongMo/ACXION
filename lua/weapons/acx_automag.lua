@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Automag"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Accurate and high damage."
+SWEP.TypeName = "Pistol"
+
 SWEP.Model = "models/tak/gtaiv/auto-mag_pistol.mdl"
 SWEP.WorldModel = SWEP.Model
 

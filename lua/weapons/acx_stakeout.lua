@@ -6,6 +6,10 @@ SWEP.Spawnable = true
 SWEP.PrintName = "Stakeout"
 SWEP.Category = "ACXION"
 
+-- Infobox
+SWEP.Description = "Dependable weapon for those who love to work the pump."
+SWEP.TypeName = "Shotgun"
+
 SWEP.Model = "models/tak/gtaiv/compact_shotgun.mdl"
 SWEP.WorldModel = SWEP.Model
 
@@ -24,7 +28,7 @@ SWEP.Num = 8
 SWEP.HeadshotMultiplier = 1
 SWEP.Spread = 0.04
 SWEP.Recoil = 1
-SWEP.RateOfFire = 150
+SWEP.RateOfFire = 300
 
 SWEP.SpreadSightsMult = 0.5
 SWEP.RecoilSightsMult = 0.5
@@ -69,6 +73,7 @@ SWEP.RecoilOffset = Vector(0, -4, 0)
 SWEP.RecoilAngle = Angle(0, 0, 0)
 
 SWEP.CycleBetweenShots = true
+SWEP.CycleDelay = 0.25
 
 ----------------- Gestures
 

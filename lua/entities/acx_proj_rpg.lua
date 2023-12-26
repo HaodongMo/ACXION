@@ -23,8 +23,8 @@ ENT.SmokeTrailTime = 1
 
 ENT.LifeTime = 20
 
-ENT.Damage = 50
-ENT.Radius = 256
+ENT.Damage = 200
+ENT.Radius = 328
 ENT.ImpactDamage = 1000
 ENT.ExplodeOnImpact = true
 ENT.Boost = 2500
