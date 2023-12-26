@@ -25,7 +25,7 @@ ENT.LifeTime = 20
 
 ENT.Damage = 200
 ENT.Radius = 328
-ENT.ImpactDamage = 1000
+ENT.ImpactDamage = 600
 ENT.ExplodeOnImpact = true
 ENT.Boost = 2500
 ENT.Drunkenness = 0
