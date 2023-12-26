@@ -7,7 +7,7 @@ function SWEP:PreDrawViewModel(vm, weapon, ply)
 
     local model_right = self.ModelRightView
 
-    if model_right then
+    if IsValid(model_right) then
         self:UpdateModelBodygroups(model_right)
 
         model_right:SetupBones()
@@ -21,7 +21,7 @@ function SWEP:PreDrawViewModel(vm, weapon, ply)
 
     local model_left = self.ModelLeftView
 
-    if model_left then
+    if IsValid(model_left) then
         self:UpdateModelBodygroups(model_left, true)
 
         model_left:SetupBones()
@@ -83,12 +83,17 @@ function SWEP:GetCustomViewPos(pos, ang, left)
         lower_delta = self.LowerAmountLeft
     end
 
+    local aim_delta = self.SightAmount
+
     local viewOffsetZ = owner:GetViewOffset().z
     local crouchdelta = math.Clamp(math.ease.InOutSine((viewOffsetZ - owner:GetCurrentViewOffset().z) / (viewOffsetZ - owner:GetViewOffsetDucked().z)), 0, 1)
 
-    pos = pos + right * self.ModelOffsetView.x
+    pos = pos + right * self.ModelOffsetView.x * (1 - aim_delta)
     pos = pos + forward * self.ModelOffsetView.y
     pos = pos + up * self.ModelOffsetView.z
+    pos = pos + right * self.AimOffset.x * aim_delta
+    pos = pos + forward * self.AimOffset.y * aim_delta
+    pos = pos + up * self.AimOffset.z * aim_delta
     pos = pos + right * self.RecoilOffset.x * recoil_delta
     pos = pos + forward * self.RecoilOffset.y * recoil_delta
     pos = pos + up * self.RecoilOffset.z * recoil_delta
@@ -100,6 +105,10 @@ function SWEP:GetCustomViewPos(pos, ang, left)
     ang:RotateAroundAxis(up, self.ModelAngleView.x + recoil_angle.x + lower_delta * self.HolsterAngle.p)
     ang:RotateAroundAxis(right, self.ModelAngleView.y + recoil_angle.y + lower_delta * self.HolsterAngle.y)
     ang:RotateAroundAxis(forward, self.ModelAngleView.z + recoil_angle.z + lower_delta * self.HolsterAngle.r)
+    local aim_angle = self.AimAngle * aim_delta
+    ang:RotateAroundAxis(up, aim_angle.x)
+    ang:RotateAroundAxis(right, aim_angle.y)
+    ang:RotateAroundAxis(forward, aim_angle.z)
     pos, ang = self:DoSway(pos, ang, old_ang)
 
     return pos, ang
@@ -126,6 +135,10 @@ end
 function SWEP:PostDrawViewModel(vm, weapon, ply)
     render.SetBlend(1)
 
+    if self.SightAmount > 0 and self.HasScope then
+        render.SetBlend(0)
+    end
+
     local model_right = self.ModelRightView
     if IsValid(model_right) then
         model_right:SetupBones()
@@ -139,6 +152,8 @@ function SWEP:PostDrawViewModel(vm, weapon, ply)
             model_left:DrawModel()
         end
     end
+
+    render.SetBlend(1)
 
     self:DrawParticles()
 end

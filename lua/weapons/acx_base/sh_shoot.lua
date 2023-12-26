@@ -100,10 +100,12 @@ function SWEP:Shoot(left)
 
             local pos = self:GetOwner():EyePos()
 
-            if left then
-                pos = pos + (self:GetOwner():GetRight() * -8)
-            else
-                pos = pos + (self:GetOwner():GetRight() * 8)
+            if !self:GetAiming() then
+                if left then
+                    pos = pos + (self:GetOwner():GetRight() * -8)
+                else
+                    pos = pos + (self:GetOwner():GetRight() * 8)
+                end
             end
 
             local shootentdata = {}

@@ -30,6 +30,8 @@ function SWEP:CreateCustomModel(left)
 end
 
 function SWEP:UpdateModelBodygroups(mdl, left)
+    if not IsValid(mdl) then return end
+
     mdl:SetBodyGroups(self.Bodygroups)
     local bbg = self.BulletBodygroups
 
