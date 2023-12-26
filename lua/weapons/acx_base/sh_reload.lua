@@ -12,6 +12,7 @@ function SWEP:CustomReload()
     if not ACX.ConVars["dynamic_reload"]:GetBool() then
         bonus = 0
     end
+
     if (self:Clip1() >= self.Primary.ClipSize + bonus) and ((self:Clip2() >= self.Primary.ClipSize + bonus) or not self:GetAkimbo()) then return end
     if self:Ammo1() <= 0 then return end
 
@@ -34,7 +35,7 @@ function SWEP:CustomReload()
 end
 
 function SWEP:FinishReload(slow)
-    if ACX.ConVars["dynamic_reload"]:GetBool() then slow = true end
+    if not ACX.ConVars["dynamic_reload"]:GetBool() then slow = true end
 
     if self:GetReloading() then
         if self:GetReloadTime() + self:GetMinimumReloadTime() > CurTime() then return end
