@@ -7,6 +7,7 @@ SWEP.PrintName = "Sawn-Off"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/sawed-off_shotgun.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5, 7, -6.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

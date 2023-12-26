@@ -7,6 +7,7 @@ SWEP.PrintName = "RPG-7"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/rpg-7.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(7, 13, -7)
 SWEP.ModelAngleView = Angle(0, 0, 90)

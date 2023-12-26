@@ -7,6 +7,7 @@ SWEP.PrintName = "Automag"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/auto-mag_pistol.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5, 12, -5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

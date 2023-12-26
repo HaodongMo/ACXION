@@ -7,6 +7,7 @@ SWEP.PrintName = "TAC-4"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/remington_1100_tac_4.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(3, 4, -5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

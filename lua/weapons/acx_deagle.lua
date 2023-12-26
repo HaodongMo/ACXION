@@ -7,6 +7,7 @@ SWEP.PrintName = "Desert Eagle"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/desert_eagle.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(6, 12, -5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

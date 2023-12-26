@@ -7,6 +7,7 @@ SWEP.PrintName = "Striker-12"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/armsel_striker.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5.5, 10, -5.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

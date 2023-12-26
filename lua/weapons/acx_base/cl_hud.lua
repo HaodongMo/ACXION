@@ -45,6 +45,11 @@ function SWEP:DrawHUD()
         surface.SetDrawColor(0, 0, 0, 255)
         surface.DrawLine(x - ScrW(), y, x + ScrW(), y)
         surface.DrawLine(x, y - ScrH(), x, y + ScrH())
+
+        -- Draw dot in the middle
+        surface.SetDrawColor(col)
+        surface.DrawRect(x, y - 1, 3, 3)
+
         local text_ammo_r = tostring(self:Clip1())
         surface.SetFont("ACX_8")
         surface.SetTextPos(x + ss * 5, y + ss * 4)

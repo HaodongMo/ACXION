@@ -7,6 +7,7 @@ SWEP.PrintName = "PSG-1"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/psg-1.mdl"
+SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"
 
 SWEP.ModelOffsetView = Vector(4, 10, -6.5)

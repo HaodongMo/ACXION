@@ -7,6 +7,7 @@ SWEP.PrintName = "Micro Uzi"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/micro-uzi.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(4, 13, -5.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

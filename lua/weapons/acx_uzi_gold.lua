@@ -7,6 +7,7 @@ SWEP.PrintName = "Uzi Gold"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/golden_uzi.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(4.5, 14, -5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

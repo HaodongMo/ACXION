@@ -7,6 +7,8 @@ SWEP.PrintName = "DSR-1"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/dsr-1.mdl"
+SWEP.WorldModel = SWEP.Model
+
 SWEP.Bodygroups = "000"
 
 SWEP.ModelOffsetView = Vector(4, 9, -6.5)

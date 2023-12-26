@@ -7,6 +7,7 @@ SWEP.PrintName = "MP-10"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/mp10.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5, 10, -6.5)
 SWEP.ModelAngleView = Angle(0, 0, 90)

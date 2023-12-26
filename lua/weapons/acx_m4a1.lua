@@ -7,6 +7,7 @@ SWEP.PrintName = "M4A1"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/m4a1.mdl"
+SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "000"
 
 SWEP.ModelOffsetView = Vector(3.5, 9, -6)

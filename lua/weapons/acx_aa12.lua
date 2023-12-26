@@ -7,6 +7,7 @@ SWEP.PrintName = "AA-12"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/aa-12.mdl"
+SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = "0002"
 
 SWEP.ModelOffsetView = Vector(4, 9, -8)

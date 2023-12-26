@@ -1,4 +1,9 @@
 function SWEP:DrawWorldModel()
+    if not IsValid(self:GetOwner()) then
+        self:DrawModel()
+        return
+    end
+
     self:TryCreateModel()
 
     local model_right = self.ModelRightView

@@ -7,6 +7,7 @@ SWEP.PrintName = "HK69A1"
 SWEP.Category = "ACXION"
 
 SWEP.Model = "models/tak/gtaiv/hk69a1.mdl"
+SWEP.WorldModel = SWEP.Model
 
 SWEP.ModelOffsetView = Vector(5, 13, -7)
 SWEP.ModelAngleView = Angle(0, 0, 90)
