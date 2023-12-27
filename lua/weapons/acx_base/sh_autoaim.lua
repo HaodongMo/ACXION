@@ -1,5 +1,33 @@
+SWEP.LockOnEntity = NULL
+SWEP.LockOnEntity2 = NULL
+
+SWEP.LastLockOnEntity = NULL
+SWEP.LastLockOnEntity2 = NULL
+
+SWEP.LastSearchTime = 0
+
 function SWEP:ThinkLockOn()
     local owner = self:GetOwner()
+
+    local should_autoaim_scan = false
+
+    if CLIENT then
+        if self.LastSearchTime + 0.1 < CurTime() then
+            should_autoaim_scan = true
+            self.LastSearchTime = CurTime()
+        end
+    else
+        if owner:KeyPressed(IN_BULLRUSH) then
+            should_autoaim_scan = true
+        end
+
+        if self.LastSearchTime + 0.25 < CurTime() then
+            should_autoaim_scan = true
+            self.LastSearchTime = CurTime()
+        end
+    end
+
+    if not ACX.ConVars["autoaim"]:GetBool() then should_autoaim_scan = false end
 
     if not ACX.ConVars["autoaim"]:GetBool() or not ((self:GetAiming() and self.AutoAimInSights) or (not self:GetAiming() and self.AutoAimOutOfSights)) then
         self:SetLockOnEntity(nil)
@@ -7,7 +35,7 @@ function SWEP:ThinkLockOn()
 
         self:SetLockOnEntity2(nil)
         self:SetHeadLock2(false)
-    else
+    elseif should_autoaim_scan then
         local lockontargets = ents.FindInCone(owner:GetShootPos(), owner:GetAimVector(), self.AutoAimRange, self.AutoAimAngle)
 
         local lockontarget = nil
@@ -132,19 +160,33 @@ function SWEP:ThinkLockOn()
         if lockontarget then
             self:SetLockOnEntity(lockontarget)
             self:SetHeadLock(headlock)
+            self.LockOnEntity = lockontarget
         else
             self:SetLockOnEntity(nil)
             self:SetHeadLock(false)
+            self.LockOnEntity = nil
         end
 
         if lockontarget2 then
             self:SetLockOnEntity2(lockontarget2)
             self:SetHeadLock2(headlock2)
+            self.LockOnEntity2 = lockontarget2
         else
             self:SetLockOnEntity2(nil)
             self:SetHeadLock2(false)
+            self.LockOnEntity2 = nil
         end
 
+    end
+
+    if not IsValid(self:GetLockOnEntity()) then
+        self:SetLockOnEntity(nil)
+        self:SetHeadLock(false)
+    end
+
+    if not IsValid(self:GetLockOnEntity2()) then
+        self:SetLockOnEntity2(nil)
+        self:SetHeadLock2(false)
     end
 
     local target_angle = self:GetTargetAngle()

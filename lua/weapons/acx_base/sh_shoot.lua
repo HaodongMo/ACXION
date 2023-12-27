@@ -132,7 +132,7 @@ function SWEP:Shoot(left)
             local phys = shoot_entity:GetPhysicsObject()
 
             if IsValid(phys) then
-                phys:SetVelocity(ang:Forward() * self:GetProjectileForce())
+                phys:SetVelocity(ang:Forward() * self:GetProjectileForce() + self:GetOwner():GetVelocity())
             end
         end
     else

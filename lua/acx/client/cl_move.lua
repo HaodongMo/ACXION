@@ -4,6 +4,8 @@ ACX.ReleasedReload = false
 ACX.CycleAmount = 0
 ACX.CycleAmount2 = 0
 
+ACX.ShouldEndBullrushTime = 0
+
 local lastviewangles = nil
 
 local cycledifficulty = 4
@@ -21,6 +23,7 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
     local shouldattack2 = false
     local shouldweapon1 = false
     local shouldweapon2 = false
+    local shouldbullrush = false
 
     local shouldrestrictview = false
 
@@ -41,6 +44,24 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
     else
         ACX.ReleasedReload = true
     end
+
+    local lockontarget = wpn.LockOnEntity
+    local lockontarget2 = wpn.LockOnEntity2
+
+    if lockontarget != wpn.LastLockOnEntity then
+        ACX.ShouldEndBullrushTime = CurTime() + 0.1
+    end
+
+    if lockontarget2 != wpn.LastLockOnEntity2 then
+        ACX.ShouldEndBullrushTime = CurTime() + 0.1
+    end
+
+    if ACX.ShouldEndBullrushTime > CurTime() then
+        shouldbullrush = true
+    end
+
+    wpn.LastLockOnEntity = lockontarget
+    wpn.LastLockOnEntity2 = lockontarget2
 
     if bit.band(buttons, IN_ATTACK) != 0 then
         shouldattack1 = true
@@ -138,6 +159,12 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
         buttons = bit.bor(buttons, IN_WEAPON2)
     else
         buttons = bit.band(buttons, bit.bnot(IN_WEAPON2))
+    end
+
+    if shouldbullrush then
+        buttons = bit.bor(buttons, IN_BULLRUSH)
+    else
+        buttons = bit.band(buttons, bit.bnot(IN_BULLRUSH))
     end
 
     cmd:SetButtons(buttons)
