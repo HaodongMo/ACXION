@@ -8,47 +8,51 @@ function SWEP:DrawWorldModel()
 
     local model_right = self.ModelRightView
 
-    model_right:SetupBones()
+    if IsValid(model_right) then
+        model_right:SetupBones()
 
-    self:UpdateModelBodygroups(model_right)
+        self:UpdateModelBodygroups(model_right)
 
-    local bone_name_right = "ValveBiped.Bip01_R_Hand"
-    local boneid = self:GetOwner():LookupBone(bone_name_right)
-    local bone_matrix = self:GetOwner():GetBoneMatrix(boneid)
-    local pos = bone_matrix:GetTranslation()
-    local ang = bone_matrix:GetAngles()
+        local bone_name_right = "ValveBiped.Bip01_R_Hand"
+        local boneid = self:GetOwner():LookupBone(bone_name_right)
+        local bone_matrix = self:GetOwner():GetBoneMatrix(boneid)
+        local pos = bone_matrix:GetTranslation()
+        local ang = bone_matrix:GetAngles()
 
-    local wpos, wang = self:GetCustomWorldPos(pos, ang)
+        local wpos, wang = self:GetCustomWorldPos(pos, ang)
 
-    model_right:SetRenderOrigin(wpos)
-    model_right:SetRenderAngles(wang)
-    model_right:SetPos(wpos)
-    model_right:SetAngles(wang)
+        model_right:SetRenderOrigin(wpos)
+        model_right:SetRenderAngles(wang)
+        model_right:SetPos(wpos)
+        model_right:SetAngles(wang)
 
-    model_right:DrawModel()
+        model_right:DrawModel()
+    end
 
     local model_left = self.ModelLeftView
 
-    self:UpdateModelBodygroups(model_left, true)
+    if IsValid(model_left) then
+        self:UpdateModelBodygroups(model_left, true)
 
-    model_left:SetupBones()
+        model_left:SetupBones()
 
-    local bone_name_left = "ValveBiped.Bip01_L_Hand"
+        local bone_name_left = "ValveBiped.Bip01_L_Hand"
 
-    boneid = self:GetOwner():LookupBone(bone_name_left)
-    bone_matrix = self:GetOwner():GetBoneMatrix(boneid)
-    pos = bone_matrix:GetTranslation()
-    ang = bone_matrix:GetAngles()
+        boneid = self:GetOwner():LookupBone(bone_name_left)
+        bone_matrix = self:GetOwner():GetBoneMatrix(boneid)
+        pos = bone_matrix:GetTranslation()
+        ang = bone_matrix:GetAngles()
 
-    local lwpos, lwang = self:GetCustomWorldPos(pos, ang, true)
+        local lwpos, lwang = self:GetCustomWorldPos(pos, ang, true)
 
-    model_left:SetRenderOrigin(lwpos)
-    model_left:SetRenderAngles(lwang)
-    model_left:SetPos(lwpos)
-    model_left:SetAngles(lwang)
+        model_left:SetRenderOrigin(lwpos)
+        model_left:SetRenderAngles(lwang)
+        model_left:SetPos(lwpos)
+        model_left:SetAngles(lwang)
 
-    if self:GetAkimbo() then
-        model_left:DrawModel()
+        if self:GetAkimbo() then
+            model_left:DrawModel()
+        end
     end
 end
 

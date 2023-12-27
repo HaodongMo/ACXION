@@ -50,7 +50,7 @@ SWEP.Firemode = "auto"
 SWEP.ReloadTime = 0.4
 SWEP.ReloadDifficultyMult = 0.4
 SWEP.ShotgunReload = true
-SWEP.AkimboSingleReload = true
+SWEP.AkimboSingleReload = false
 
 SWEP.AutoAimAngle = math.cos(math.rad(30))
 SWEP.AutoAimRange = 3500

@@ -65,7 +65,8 @@ SWEP.Firemode = "auto"
 SWEP.ReloadTime = 1
 SWEP.ReloadDifficultyMult = 1
 SWEP.ShotgunReload = false
-SWEP.AkimboSingleReload = true -- in akimbo, allows firing other gun while one is reloading
+SWEP.AkimboSingleReload = false -- in akimbo, allows firing other gun while one is reloading
+SWEP.BothReload = true -- Both guns reload at once
 
 SWEP.AutoAimAngle = math.cos(math.rad(15))
 SWEP.AutoAimRange = 3500
