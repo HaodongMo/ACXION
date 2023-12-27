@@ -62,7 +62,9 @@ function SWEP:FinishReload(slow)
         local amount_restored = 0
 
         if self.BothReload then
-            amount_restored = amount_restored + self:RestoreAmmo2(amount, limit)
+            if self:GetAkimbo() then
+                amount_restored = amount_restored + self:RestoreAmmo2(amount, limit)
+            end
             amount_restored = amount_restored + self:RestoreAmmo(amount, limit)
         else
             if alt then
