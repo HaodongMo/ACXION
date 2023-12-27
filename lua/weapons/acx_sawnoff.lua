@@ -49,8 +49,8 @@ SWEP.Firemode = "break"
 -- bolt
 -- burst_3, burst_2
 
-SWEP.ReloadTime = 0.25
-SWEP.ReloadDifficultyMult = 0.5
+SWEP.ReloadTime = 0.5
+SWEP.ReloadDifficultyMult = 1
 SWEP.ShotgunReload = false
 SWEP.AkimboSingleReload = true
 

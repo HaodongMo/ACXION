@@ -190,7 +190,7 @@ if SERVER then
             self.GunshipCheck = CurTime() + 0.33
             local tr = util.TraceLine({
                 start = self:GetPos(),
-                endpos = self:GetPos() + (self:GetVelocity() * 6 * engine.TickInterval()),
+                endpos = self:GetPos() + (self:GetVelocity() * 12 * engine.TickInterval()),
                 filter = self,
                 mask = MASK_SHOT
             })
@@ -252,6 +252,8 @@ if SERVER then
 
         self.LastHitNormal = colData.HitNormal
 
+        local tgt
+
         if self.ExplodeOnImpact then
             if CurTime() - self.SpawnTime < self.FuseTime then
                 if IsValid(colData.HitEntity) then
@@ -285,7 +287,7 @@ if SERVER then
                 effectdata:SetOrigin( self:GetPos() )
 
             -- simulate AP damage on vehicles, mainly simfphys
-            local tgt = colData.HitEntity
+            tgt = colData.HitEntity
             while IsValid(tgt) do
                 if tgt.GetParent and IsValid(tgt:GetParent()) then
                     tgt = tgt:GetParent()

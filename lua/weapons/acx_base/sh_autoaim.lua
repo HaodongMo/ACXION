@@ -1,7 +1,7 @@
 function SWEP:ThinkLockOn()
     local owner = self:GetOwner()
 
-    if not ((self:GetAiming() and self.AutoAimInSights) or (not self:GetAiming() and self.AutoAimOutOfSights)) then
+    if not ACX.ConVars["autoaim"]:GetBool() or not ((self:GetAiming() and self.AutoAimInSights) or (not self:GetAiming() and self.AutoAimOutOfSights)) then
         self:SetLockOnEntity(nil)
         self:SetHeadLock(false)
 
@@ -58,7 +58,7 @@ function SWEP:ThinkLockOn()
                         filter = function(ent)
                             if ent == try_target then return false end
                             if ent == owner then return false end
-                            if ent:IsPlayer() and ent:Team() == owner:Team() then return false end
+                            if ent:GetOwner() == try_target then return false end
                             return true
                         end
                     })
@@ -82,7 +82,7 @@ function SWEP:ThinkLockOn()
                                 filter = function(ent)
                                     if ent == try_target then return false end
                                     if ent == owner then return false end
-                                    if ent:IsPlayer() and ent:Team() == owner:Team() then return false end
+                                    if ent:GetOwner() == try_target then return false end
                                     return true
                                 end
                             })

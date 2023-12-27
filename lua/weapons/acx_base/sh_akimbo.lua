@@ -2,7 +2,7 @@ function SWEP:ToggleAkimbo()
     if not self.CanAkimbo or self:GetReloading() then return end
     local akimbo = self:GetAkimbo()
 
-    if akimbo then
+    if akimbo or not ACX.ConVars["akimbo"]:GetBool() then
         self:SetAkimbo(false)
 
         self.Secondary.ClipSize = -1
