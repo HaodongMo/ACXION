@@ -58,7 +58,6 @@ function EFFECT:Init(data)
     local pos, ang = self:GetShouldPos()
 
     local emitter = ParticleEmitter( pos )
-    
 
     local particle = emitter:Add(self.Weapon.MuzzleTexture or self.Mat, pos)
     particle:SetAirResistance( 0 )

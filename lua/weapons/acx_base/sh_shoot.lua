@@ -92,6 +92,8 @@ function SWEP:Shoot(left)
         end
     end
 
+    self:SetLastShotLeft(left)
+
     if self:GetProjectileEntity() then
         if SERVER then
             local shoot_entity = ents.Create(self:GetProjectileEntity())
@@ -145,7 +147,8 @@ function SWEP:Shoot(left)
             Damage = damage,
             Force = damage / 3,
             Num = self:GetNum(),
-            Tracer = 0,
+            Tracer = 1,
+            TracerName = "acx_tracer",
             Dir = ang:Forward(),
             Src = self:GetOwner():EyePos(),
             Spread = Vector(spread, spread, 0),
