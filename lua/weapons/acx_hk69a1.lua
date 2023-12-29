@@ -98,5 +98,5 @@ SWEP.ShootVolume = 110
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
-SWEP.ReloadStartSound = "weapons/p90/p90_cliprelease.wav"
-SWEP.ReloadFinishSound = "weapons/m3/m3_insertshell.wav"
+SWEP.ReloadStartSound = "acxion/wep/hk69a1_r1.ogg"
+SWEP.ReloadFinishSound = "acxion/wep/hk69a1_r2.ogg"
