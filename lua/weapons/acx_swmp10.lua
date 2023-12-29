@@ -97,5 +97,5 @@ SWEP.ShootVolume = 110
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
-SWEP.ReloadStartSound = "weapons/ump45/ump45_clipout.wav"
-SWEP.ReloadFinishSound = "weapons/ump45/ump45_boltslap.wav"
+SWEP.ReloadStartSound = "acxion/wep/swmp10_r1.ogg"
+SWEP.ReloadFinishSound = "acxion/wep/swmp10_r2.ogg"
