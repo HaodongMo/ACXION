@@ -105,7 +105,7 @@ SWEP.ShootVolume = 110
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
-SWEP.ReloadStartSound = "weapons/awp/awp_clipout.wav"
-SWEP.ReloadFinishSound = "weapons/scout/scout_bolt.wav"
+SWEP.ReloadStartSound = "acxion/wep/dsr1_r1.ogg"
+SWEP.ReloadFinishSound = "acxion/wep/dsr1_bolt.ogg"
 
-SWEP.CycleSound = "weapons/scout/scout_bolt.wav"
+SWEP.CycleSound = "acxion/wep/dsr1_bolt.ogg"
