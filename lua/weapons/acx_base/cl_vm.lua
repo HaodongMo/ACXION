@@ -77,6 +77,11 @@ function SWEP:GetCustomViewPos(pos, ang, left)
         recoil_delta = 0
     end
 
+    -- so the tracer can come out of the gun pointing straight
+    if recoil_delta > 0.95 then
+        recoil_delta = 0
+    end
+
     local lower_delta = self.LowerAmountRight
 
     if left then
