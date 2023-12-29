@@ -99,5 +99,5 @@ SWEP.ShootVolume = 110
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
-SWEP.ReloadStartSound = "weapons/glock/glock_clipout.wav"
-SWEP.ReloadFinishSound = "weapons/glock/glock_sliderelease.wav"
+SWEP.ReloadStartSound = "acxion/wep/cz75a_r1.ogg"
+SWEP.ReloadFinishSound = "acxion/wep/cz75a_r2.ogg"
