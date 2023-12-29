@@ -94,7 +94,7 @@ SWEP.NoFlash = true
 
 ----------------- Sounds
 
-SWEP.ShootSound = "weapons/tmp/tmp-1.wav"
+SWEP.ShootSound = "acxion/wep/p90.ogg"
 SWEP.ShootVolume = 95
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"

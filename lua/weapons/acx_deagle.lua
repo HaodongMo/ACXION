@@ -93,7 +93,7 @@ SWEP.MuzzleScale = 0.5
 
 ----------------- Sounds
 
-SWEP.ShootSound = "weapons/deagle/deagle-1.wav"
+SWEP.ShootSound = "acxion/wep/deagle.ogg"
 SWEP.ShootVolume = 110
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"

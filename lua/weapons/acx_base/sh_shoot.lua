@@ -195,7 +195,7 @@ function SWEP:Shoot(left)
         self:GetOwner():DoAnimationEvent(self.GestureShoot)
     end
 
-    self:EmitSound(self.ShootSound, self.ShootVolume, self.ShootPitch + (math.Rand(-1, 1) * self.ShootPitchVariation), 1, CHAN_WEAPON)
+    self:EmitSound(self.ShootSound, self.ShootVolume, self.ShootPitch + (math.Rand(-1, 1) * self.ShootPitchVariation), 1, CHAN_STATIC)
 
     if left then
         self:SetShot2Queued(false)
