@@ -171,11 +171,12 @@ function SWEP:Shoot(left)
 
     if IsFirstTimePredicted() then
         self:DoMuzzleEffects(left)
-        local recoil = self:GetRecoil()
-        local punchAngle = Angle(util.SharedRandom("acx_recoil_left", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, util.SharedRandom("acx_recoil_up", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, 0.5 * math.Rand(-1, 1) * recoil)
-
-        self:GetOwner():ViewPunch(punchAngle)
     end
+
+    local recoil = self:GetRecoil()
+    local punchAngle = Angle(util.SharedRandom("acx_recoil_left", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, util.SharedRandom("acx_recoil_up", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, 0.5 * math.Rand(-1, 1) * recoil)
+
+    self:GetOwner():ViewPunch(punchAngle)
 
     if left then
         self:SetBurst2Count(self:GetBurst2Count() + 1)
