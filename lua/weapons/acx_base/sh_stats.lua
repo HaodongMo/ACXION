@@ -85,16 +85,16 @@ end
 function SWEP:GetPingOffsetScale()
     if game.SinglePlayer() then return 0 end
 
-    return self:GetOwner():Ping() / 1000
+    return (self:GetOwner():Ping() - 10) / 1000
 end
 
 function SWEP:GetRecoilDelta(left)
     local recoil_delta
 
     if left then
-        recoil_delta = (self:GetNextSecondaryFire() - CurTime() - self:GetPingOffsetScale()) / (0.2 * self.Recoil)
+        recoil_delta = (self:GetNextSecondaryFire() - (60 / self:GetRateOfFire()) - CurTime() - self:GetPingOffsetScale()) / (0.2 * self.Recoil)
     else
-        recoil_delta = (self:GetNextPrimaryFire() - CurTime() - self:GetPingOffsetScale()) / (0.2 * self.Recoil)
+        recoil_delta = (self:GetNextPrimaryFire() - (60 / self:GetRateOfFire()) - CurTime() - self:GetPingOffsetScale()) / (0.2 * self.Recoil)
     end
 
     if recoil_delta < 0 then
