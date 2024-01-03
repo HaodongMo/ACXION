@@ -81,3 +81,25 @@ end
 function SWEP:GetSwayOffsetLeft()
     return Vector(math.sin(CurTime() * 1.1) * self.Sway, 0, math.cos(CurTime() * 1.3) * self.Sway) * 0.1
 end
+
+function SWEP:GetPingOffsetScale()
+    if game.SinglePlayer() then return 0 end
+
+    return self:GetOwner():Ping() / 1000
+end
+
+function SWEP:GetRecoilDelta(left)
+    local recoil_delta
+
+    if left then
+        recoil_delta = (self:GetNextSecondaryFire() - CurTime() - self:GetPingOffsetScale()) / (0.2 * self.Recoil)
+    else
+        recoil_delta = (self:GetNextPrimaryFire() - CurTime() - self:GetPingOffsetScale()) / (0.2 * self.Recoil)
+    end
+
+    if recoil_delta < 0 then
+        recoil_delta = 0
+    end
+
+    return recoil_delta
+end

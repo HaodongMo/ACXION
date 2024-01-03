@@ -27,9 +27,17 @@ function SWEP:Think()
         self:ToggleAim(false)
     end
 
+    if owner:IsPlayer() then
+        owner:LagCompensation(true)
+    end
+
     self:ThinkLockOn()
 
-    if CLIENT and owner == LocalPlayer() then
+    if owner:IsPlayer() then
+        owner:LagCompensation(false)
+    end
+
+    if CLIENT and owner == LocalPlayer() and (IsFirstTimePredicted() or game.SinglePlayer()) then
         if self:GetShouldRaiseRight() then
             self.LowerAmountRight = math.Approach(self.LowerAmountRight, 0, FrameTime() / self.HolsterTime)
         else
@@ -49,12 +57,10 @@ function SWEP:Think()
         end
 
         local r = 9.9999 * FrameTime()
-
         self.InterpolatedLockAngle = LerpAngle(r, self.InterpolatedLockAngle, self:GetLockAngle())
         self.InterpolatedLockAngle2 = LerpAngle(r, self.InterpolatedLockAngle2, self:GetLockAngle2())
     end
 
-    -- Predicted block
     if game.SinglePlayer() and CLIENT then return end
 
     if self:GetBurstCount() > 0 and string.sub(self.Firemode, 1, 6) == "burst_" then
@@ -87,8 +93,7 @@ function SWEP:Think()
                 self:CancelReload()
             end
         elseif self:GetNeedCycle() then
-            if not self:GetStillWaiting() and (ACX.ConVars["cycle"]:GetInt() == 0 and not owner:KeyDown(IN_ATTACK2)
-                    or (ACX.ConVars["cycle"]:GetInt() == 1 and owner:KeyPressed(IN_ATTACK2))) then
+            if not self:GetStillWaiting() and (ACX.ConVars["cycle"]:GetInt() == 0 and not owner:KeyDown(IN_ATTACK2) or (ACX.ConVars["cycle"]:GetInt() == 1 and owner:KeyPressed(IN_ATTACK2))) then
                 self:SetNeedCycle(false)
                 self:SetWaitTime(CurTime() + self.CycleDelay)
                 self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
@@ -124,8 +129,7 @@ function SWEP:Think()
                 self:CancelReload()
             end
         elseif self:GetNeedCycle2() then
-            if not self:GetStillWaiting(true) and (ACX.ConVars["cycle"]:GetInt() == 0 and not owner:KeyDown(IN_ATTACK)
-                    or (ACX.ConVars["cycle"]:GetInt() == 1 and owner:KeyPressed(IN_ATTACK))) then
+            if not self:GetStillWaiting(true) and (ACX.ConVars["cycle"]:GetInt() == 0 and not owner:KeyDown(IN_ATTACK) or (ACX.ConVars["cycle"]:GetInt() == 1 and owner:KeyPressed(IN_ATTACK))) then
                 self:SetNeedCycle2(false)
                 self:SetWait2Time(CurTime() + self.CycleDelay)
                 self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
@@ -158,8 +162,7 @@ function SWEP:Think()
     else
         if not self:GetReloading() then
             if self:GetNeedCycle() then
-                if not self:GetStillWaiting() and ((ACX.ConVars["cycle"]:GetInt() == 0 and not owner:KeyDown(IN_ATTACK))
-                        or (ACX.ConVars["cycle"]:GetInt() == 1 and owner:KeyPressed(IN_ATTACK))) then
+                if not self:GetStillWaiting() and ((ACX.ConVars["cycle"]:GetInt() == 0 and not owner:KeyDown(IN_ATTACK)) or (ACX.ConVars["cycle"]:GetInt() == 1 and owner:KeyPressed(IN_ATTACK))) then
                     self:SetNeedCycle(false)
                     self:SetWaitTime(CurTime() + self.CycleDelay)
                     self:EmitSound(self.CycleSound, 75, 100, 1, CHAN_AUTO)
@@ -196,14 +199,22 @@ function SWEP:Think()
         end
     end
 
-    if self:GetShot2Queued() then
-        self:Shoot(true)
-        self:SetShot2Queued(false)
+    if owner:IsPlayer() then
+        owner:LagCompensation(true)
     end
 
-    if self:GetShotQueued() then
-        self:Shoot()
-        self:SetShotQueued(false)
+        if self:GetShot2Queued() then
+            self:Shoot(true)
+            self:SetShot2Queued(false)
+        end
+
+        if self:GetShotQueued() then
+            self:Shoot()
+            self:SetShotQueued(false)
+        end
+
+    if owner:IsPlayer() then
+        owner:LagCompensation(false)
     end
 
     if owner:KeyPressed(IN_ZOOM) then

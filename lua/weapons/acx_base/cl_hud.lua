@@ -235,7 +235,7 @@ function SWEP:DrawHUD()
         surface.SetDrawColor(col_fg)
         surface.DrawRect(reloadline_x, 0, 0.5 * ss, ScrH())
         -- Draw reload progress
-        local delta = (CurTime() - self:GetReloadTime()) / max_reload_time
+        local delta = (CurTime() - self:GetReloadTime() + self:GetPingOffsetScale()) / max_reload_time
         local reloadprogress_y = ScrH() * (1 - delta)
         surface.SetDrawColor(col_fg)
         surface.DrawRect(reloadline_x, reloadprogress_y, 16 * ss, 2 * ss)

@@ -16,6 +16,14 @@ function SWEP:ThinkLockOn()
             should_autoaim_scan = true
             self.LastSearchTime = CurTime()
         end
+
+        if not IsFirstTimePredicted() then
+            // There is zero sense in running this very expensive block of calculations every time prediction is called
+            // We have to PRETEND like we find this in the predicted blocks, but we'll actually find it the first time around
+            // So... This is a shortcut!
+            self:SetLockOnEntity(self.LockOnEntity)
+            self:SetLockOnEntity2(self.LockOnEntity2)
+        end
     else
         if owner:KeyPressed(IN_BULLRUSH) then
             should_autoaim_scan = true

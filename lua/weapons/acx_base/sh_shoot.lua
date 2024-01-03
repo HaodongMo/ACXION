@@ -193,15 +193,19 @@ function SWEP:Shoot(left)
         local recoil = self:GetRecoil()
         local punchAngle = Angle(util.SharedRandom("acx_recoil_left", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, util.SharedRandom("acx_recoil_up", -1, 1, self:GetOwner():GetCurrentCommand()) * recoil, 0.5 * math.Rand(-1, 1) * recoil)
 
-        if left then
-            self:TakeSecondaryAmmo(self.AmmoPerShot)
-            self:SetBurst2Count(self:GetBurst2Count() + 1)
-        else
-            self:TakePrimaryAmmo(self.AmmoPerShot)
-            self:SetBurstCount(self:GetBurstCount() + 1)
-        end
-
         self:GetOwner():ViewPunch(punchAngle)
+    end
+
+    if left then
+        self:SetBurst2Count(self:GetBurst2Count() + 1)
+    else
+        self:SetBurstCount(self:GetBurstCount() + 1)
+    end
+
+    if left then
+        self:TakeSecondaryAmmo(self.AmmoPerShot)
+    else
+        self:TakePrimaryAmmo(self.AmmoPerShot)
     end
 
     if left then
@@ -256,6 +260,8 @@ function SWEP:SendNeedCycle()
         self:CallOnClient("SendNeedCycle")
     end
 
+    if not IsFirstTimePredicted() then return end
+
     ACX.CycleAmount = 0
 end
 
@@ -263,6 +269,8 @@ function SWEP:SendNeedCycle2()
     if game.SinglePlayer() then
         self:CallOnClient("SendNeedCycle2")
     end
+
+    if not IsFirstTimePredicted() then return end
 
     ACX.CycleAmount2 = 0
 end

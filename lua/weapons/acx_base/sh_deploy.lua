@@ -16,29 +16,26 @@ end
 function SWEP:Initialize()
     self.Secondary.ClipSize = self.Primary.ClipSize
     self.WorldModel = self.Model
-
-    // self:SetClip2(self.Primary.ClipSize)
-
+    -- self:SetClip2(self.Primary.ClipSize)
     self:SetShouldHoldType()
 end
 
 function SWEP:Deploy()
-    if game.SinglePlayer() then self:CallOnClient("Deploy") end
+    if game.SinglePlayer() then
+        self:CallOnClient("Deploy")
+    end
 
-    self.LowerAmountRight = 1
-    self.LowerAmountLeft = 1
+    if IsFirstTimePredicted() then
+        self.LowerAmountRight = 1
+        self.LowerAmountLeft = 1
+    end
 
     self:SetHolstering(false)
-
     self:SetBurstCount(0)
-
     self:GetOwner():SetCanZoom(false)
-
     self:SetShouldHoldType()
-
     self:SetNeedCycle(false)
     self:SetNeedCycle2(false)
-
     self:SetNextPrimaryFire(0)
     self:SetNextSecondaryFire(0)
 
@@ -47,12 +44,10 @@ end
 
 function SWEP:Holster(wep)
     if game.SinglePlayer() and CLIENT then return end
-
     if self:GetHolsterTime() > CurTime() then return false end
-
     self:SetReloading(false)
 
-    if (self:GetHolsterTime() != 0 and self:GetHolsterTime() <= CurTime()) or !IsValid(wep) then
+    if (self:GetHolsterTime() ~= 0 and self:GetHolsterTime() <= CurTime()) or not IsValid(wep) then
         -- Do the final holster request
         -- Picking up props try to switch to NULL, by the way
         self:SetHolsterTime(0)
@@ -61,7 +56,7 @@ function SWEP:Holster(wep)
 
         return true
     else
-        self:SetHolsterTime(CurTime() + (self.HolsterTime))
+        self:SetHolsterTime(CurTime() + self.HolsterTime)
         self:SetHolsterEntity(wep)
         self:SetHolstering(true)
     end

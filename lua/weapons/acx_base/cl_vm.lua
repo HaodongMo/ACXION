@@ -65,13 +65,7 @@ function SWEP:GetCustomViewPos(pos, ang, left)
         right = right * -1
     end
 
-    local recoil_delta
-
-    if left then
-        recoil_delta = (self:GetNextSecondaryFire() - CurTime()) / (0.2 * self.Recoil)
-    else
-        recoil_delta = (self:GetNextPrimaryFire() - CurTime()) / (0.2 * self.Recoil)
-    end
+    local recoil_delta = self:GetRecoilDelta(left)
 
     if recoil_delta < 0 then
         recoil_delta = 0

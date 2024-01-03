@@ -30,7 +30,7 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
     if bit.band(buttons, IN_RELOAD) != 0 then
         if wpn:GetReloading() then
             if ACX.FastReloadChance and ACX.ReleasedReload and ACX.ConVars["dynamic_reload"]:GetBool() then
-                local reload_progress = CurTime() - wpn:GetReloadTime()
+                local reload_progress = CurTime() - wpn:GetReloadTime() + wpn:GetPingOffsetScale()
 
                 if reload_progress >= wpn:GetMinimumReloadTime() and reload_progress <= wpn:GetMaximumFastReloadTime() then
                     shouldreload = true
