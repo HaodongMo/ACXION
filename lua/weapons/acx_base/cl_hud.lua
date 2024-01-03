@@ -20,7 +20,7 @@ SWEP.TrueFOV = 90
 
 function SWEP:DrawHUD()
     local aim_angle = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self.InterpolatedLockAngle
-    local pos = self:GetOwner():GetShootPos() + aim_angle:Forward() * 15000
+    local pos = self:GetShootPos(false) + aim_angle:Forward() * 15000
     cam.Start3D(nil, nil, self:WidescreenFix(self.TrueFOV))
     local x, y = pos:ToScreen().x, pos:ToScreen().y
     cam.End3D()
@@ -128,6 +128,10 @@ function SWEP:DrawHUD()
             text_r = "R"
         end
 
+        if IsValid(self:GetLockOnEntity()) then
+            text_r = "R-TRK"
+        end
+
         if hardlock_r then
             if math.sin(CurTime() * 10) > 0 then
                 text_r = "SHOOT"
@@ -140,7 +144,7 @@ function SWEP:DrawHUD()
 
         if self:GetAkimbo() then
             local aim_angle2 = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self.InterpolatedLockAngle2
-            local pos2 = self:GetOwner():GetShootPos() + aim_angle2:Forward() * 15000
+            local pos2 = self:GetShootPos(true) + aim_angle2:Forward() * 15000
             local xl, yl = pos2:ToScreen().x, pos2:ToScreen().y
             yl = yl + self.LowerAmountLeft * ScrH()
             surface.SetDrawColor(col)
@@ -187,6 +191,10 @@ function SWEP:DrawHUD()
 
             surface.DrawText(text_ammo_l)
             local text_l = "L"
+
+            if IsValid(self:GetLockOnEntity2()) then
+                text_l = "L-TRK"
+            end
 
             if hardlock_l then
                 if math.sin(CurTime() * 10) > 0 then

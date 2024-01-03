@@ -68,9 +68,9 @@ function SWEP:GetCustomViewPos(pos, ang, left)
     local recoil_delta
 
     if left then
-        recoil_delta = (self:GetNextSecondaryFire() - CurTime()) / (60 / self.RateOfFire)
+        recoil_delta = (self:GetNextSecondaryFire() - CurTime()) / (0.2 * self.Recoil)
     else
-        recoil_delta = (self:GetNextPrimaryFire() - CurTime()) / (60 / self.RateOfFire)
+        recoil_delta = (self:GetNextPrimaryFire() - CurTime()) / (0.2 * self.Recoil)
     end
 
     if recoil_delta < 0 then
@@ -93,6 +93,14 @@ function SWEP:GetCustomViewPos(pos, ang, left)
     local viewOffsetZ = owner:GetViewOffset().z
     local crouchdelta = math.Clamp(math.ease.InOutSine((viewOffsetZ - owner:GetCurrentViewOffset().z) / (viewOffsetZ - owner:GetViewOffsetDucked().z)), 0, 1)
 
+    local sway_offset
+
+    if left then
+        sway_offset = self:GetSwayOffsetLeft()
+    else
+        sway_offset = self:GetSwayOffsetRight()
+    end
+
     pos = pos + right * self.ModelOffsetView.x * (1 - aim_delta)
     pos = pos + forward * self.ModelOffsetView.y
     pos = pos + up * self.ModelOffsetView.z
@@ -106,6 +114,9 @@ function SWEP:GetCustomViewPos(pos, ang, left)
     pos = pos + up * lower_delta * self.HolsterOffset.x
     pos = pos + right * lower_delta * self.HolsterOffset.y
     pos = pos + forward * lower_delta * self.HolsterOffset.z
+    pos = pos + right * sway_offset.x
+    pos = pos + forward * sway_offset.y
+    pos = pos + up * sway_offset.z
     local recoil_angle = self.RecoilAngle * recoil_delta
     ang:RotateAroundAxis(up, self.ModelAngleView.x + recoil_angle.x + lower_delta * self.HolsterAngle.p)
     ang:RotateAroundAxis(right, self.ModelAngleView.y + recoil_angle.y + lower_delta * self.HolsterAngle.y)

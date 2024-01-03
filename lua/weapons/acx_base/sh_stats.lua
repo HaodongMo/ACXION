@@ -73,3 +73,11 @@ function SWEP:GetFiremodeName()
     if string.Left(fm, 6) == "burst_" then fm = "burst" end
     return lookup[fm]
 end
+
+function SWEP:GetSwayOffsetRight()
+    return Vector(math.sin(CurTime() * 1) * self.Sway, 0, math.cos(CurTime() * 1.5) * self.Sway) * 0.1
+end
+
+function SWEP:GetSwayOffsetLeft()
+    return Vector(math.sin(CurTime() * 1.1) * self.Sway, 0, math.cos(CurTime() * 1.3) * self.Sway) * 0.1
+end

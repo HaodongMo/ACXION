@@ -48,11 +48,7 @@ function SWEP:Think()
             self.SightAmount = math.Approach(self.SightAmount, 0, FrameTime() / 0.25)
         end
 
-        local r = 0.9999 * FrameTime()
-        -- Rapidly reset to center if autoaim is disabled
-        if (self:GetAiming() and not self.AutoAimInSights) or (not self:GetAiming() and not self.AutoAimOutOfSights) then
-            r = 10 * FrameTime()
-        end
+        local r = 9.9999 * FrameTime()
 
         self.InterpolatedLockAngle = LerpAngle(r, self.InterpolatedLockAngle, self:GetLockAngle())
         self.InterpolatedLockAngle2 = LerpAngle(r, self.InterpolatedLockAngle2, self:GetLockAngle2())

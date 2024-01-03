@@ -220,9 +220,9 @@ function SWEP:GetTargetAngle(left)
     if left then
         if IsValid(self:GetLockOnEntity2()) then
             if self:GetHeadLock2() then
-                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity2():EyePos() - owner:GetShootPos()):Angle()
+                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity2():EyePos() - self:GetShootPos(true)):Angle()
             else
-                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity2():WorldSpaceCenter() - owner:GetShootPos()):Angle()
+                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity2():WorldSpaceCenter() - self:GetShootPos(true)):Angle()
             end
         else
             return Angle(0, 0, 0)
@@ -230,9 +230,9 @@ function SWEP:GetTargetAngle(left)
     else
         if IsValid(self:GetLockOnEntity()) then
             if self:GetHeadLock() then
-                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity():EyePos() - owner:GetShootPos()):Angle()
+                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity():EyePos() - self:GetShootPos()):Angle()
             else
-                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity():WorldSpaceCenter() - owner:GetShootPos()):Angle()
+                return owner:EyeAngles() - owner:GetViewPunchAngles() - (self:GetLockOnEntity():WorldSpaceCenter() - self:GetShootPos()):Angle()
             end
         else
             return Angle(0, 0, 0)

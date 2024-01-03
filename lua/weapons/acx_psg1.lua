@@ -26,7 +26,7 @@ SWEP.Slot = 4
 
 SWEP.Damage = 70
 SWEP.Num = 1
-SWEP.HeadshotMultiplier = 2
+SWEP.HeadshotMultiplier = 1
 SWEP.Spread = 0.005
 SWEP.Recoil = 2.5
 SWEP.RateOfFire = 200
@@ -53,13 +53,13 @@ SWEP.ReloadDifficultyMult = 1
 SWEP.ShotgunReload = false
 SWEP.AkimboSingleReload = false
 
-SWEP.AutoAimAngle = math.cos(math.rad(5))
+SWEP.AutoAimAngle = math.cos(math.rad(1))
 SWEP.AutoAimRange = 7500
 SWEP.AutoAimSpeed = 5
 SWEP.AutoAimSeek = "head"
 
-SWEP.AutoAimOutOfSights = false
-SWEP.AutoAimInSights = true
+SWEP.AutoAimOutOfSights = true
+SWEP.AutoAimInSights = false
 
 SWEP.Primary.Ammo = "357"
 SWEP.Primary.ClipSize = 10

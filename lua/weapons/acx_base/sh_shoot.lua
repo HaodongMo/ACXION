@@ -54,6 +54,39 @@ function SWEP:GetHasHardLock(left)
     return targeting_tr.Entity == target
 end
 
+function SWEP:GetShootPos(left)
+    local pos = self:GetOwner():EyePos()
+    local ang = self:GetShootAngle(left)
+
+    if not self:GetAiming() and self.ProjectileEntity then
+        if left then
+            pos = pos + (self:GetOwner():GetRight() * -8)
+        else
+            pos = pos + (self:GetOwner():GetRight() * 8)
+        end
+    end
+
+    local sway_offset
+
+    if left then
+        sway_offset = self:GetSwayOffsetLeft()
+    else
+        sway_offset = self:GetSwayOffsetRight()
+    end
+
+    local right = ang:Right()
+
+    if left then
+        right = right * -1
+    end
+
+    pos = pos + ang:Right() * sway_offset.x
+    pos = pos + ang:Forward() * sway_offset.y
+    pos = pos + ang:Up() * sway_offset.z
+
+    return pos
+end
+
 function SWEP:Shoot(left)
     if self:GetStillWaiting(left) then return end
 
@@ -96,15 +129,7 @@ function SWEP:Shoot(left)
         if SERVER then
             local shoot_entity = ents.Create(self:GetProjectileEntity())
             if not IsValid(shoot_entity) then return end
-            local pos = self:GetOwner():EyePos()
-
-            if not self:GetAiming() then
-                if left then
-                    pos = pos + (self:GetOwner():GetRight() * -8)
-                else
-                    pos = pos + (self:GetOwner():GetRight() * 8)
-                end
-            end
+            local pos = self:GetShootPos()
 
             local shootentdata = {}
 
@@ -144,7 +169,7 @@ function SWEP:Shoot(left)
             Tracer = 1,
             TracerName = "acx_tracer",
             Dir = ang:Forward(),
-            Src = self:GetOwner():EyePos(),
+            Src = self:GetShootPos(),
             Spread = Vector(spread, spread, 0),
             Distance = 50000,
             Callback = function(attacker, tr, dmginfo)

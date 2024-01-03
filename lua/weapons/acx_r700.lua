@@ -26,7 +26,7 @@ SWEP.Slot = 4
 
 SWEP.Damage = 80
 SWEP.Num = 1
-SWEP.HeadshotMultiplier = 2
+SWEP.HeadshotMultiplier = 1
 SWEP.Spread = 0.0035
 SWEP.Recoil = 1.5
 SWEP.RateOfFire = 600
@@ -58,8 +58,8 @@ SWEP.AutoAimRange = 7500
 SWEP.AutoAimSpeed = 5
 SWEP.AutoAimSeek = "head"
 
-SWEP.AutoAimOutOfSights = false
-SWEP.AutoAimInSights = true
+SWEP.AutoAimOutOfSights = true
+SWEP.AutoAimInSights = false
 
 SWEP.CycleBetweenShots = true
 SWEP.CycleDelay = 0.4

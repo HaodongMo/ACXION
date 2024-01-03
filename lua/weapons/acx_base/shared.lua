@@ -54,6 +54,8 @@ SWEP.SpreadAkimboMult = 1.5
 SWEP.RecoilAkimboMult = 1.25
 SWEP.AutoAimSpeedAkimboMult = 1
 
+SWEP.Sway = 1
+
 SWEP.Firemode = "auto"
 -- auto
 -- semi
