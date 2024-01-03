@@ -23,6 +23,7 @@ function SWEP:ThinkLockOn()
             // So... This is a shortcut!
             self:SetLockOnEntity(self.LockOnEntity)
             self:SetLockOnEntity2(self.LockOnEntity2)
+            should_autoaim_scan = false
         end
     else
         if owner:KeyPressed(IN_BULLRUSH) then
