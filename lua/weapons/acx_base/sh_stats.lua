@@ -99,10 +99,12 @@ function SWEP:GetRecoilDelta(left)
         nextfire = self:GetNextPrimaryFire()
     end
 
+    local recoil = math.min(self.Recoil, 0.1)
+
     if game.SinglePlayer() then
-        recoil_delta = (nextfire - CurTime()) / (0.2 * self.Recoil)
+        recoil_delta = (nextfire - CurTime()) / (0.2 * recoil)
     else
-        recoil_delta = (nextfire - (60 / self:GetRateOfFire()) - CurTime() - self:GetPingOffsetScale()) / (0.2 * self.Recoil)
+        recoil_delta = (nextfire - (60 / self:GetRateOfFire()) - CurTime() - self:GetPingOffsetScale()) / (0.2 * recoil)
     end
 
     if recoil_delta < 0 then

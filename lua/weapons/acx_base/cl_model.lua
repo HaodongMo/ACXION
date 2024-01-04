@@ -1,26 +1,54 @@
 SWEP.ModelRightView = nil
 SWEP.ModelLeftView = nil
 
+SWEP.ModelRightWorld = nil
+SWEP.ModelLeftWorld = nil
+
+function SWEP:NeedsToCreateWorldModels()
+    return self.Model != self.WorldModel
+end
+
 function SWEP:TryCreateModel()
     if not IsValid(self.ModelRightView) then
-        self:CreateCustomModel()
+        self:CreateCustomModel(false)
     end
 
     if self:GetAkimbo() and not IsValid(self.ModelLeftView) then
         self:CreateCustomModel(true)
     end
+
+    if self:NeedsToCreateWorldModels() then
+        if not IsValid(self.ModelRightWorld) then
+            self:CreateCustomModel(false, true)
+        end
+
+        if self:GetAkimbo() and not IsValid(self.ModelLeftWorld) then
+            self:CreateCustomModel(true, true)
+        end
+    end
 end
 
-function SWEP:CreateCustomModel(left)
-    local newmodel = ClientsideModel(self.Model)
+function SWEP:CreateCustomModel(left, world)
+    world = world or false
+    local model = self.Model
+    if world then model = self.WorldModel end
+    local newmodel = ClientsideModel(model)
     if not IsValid(newmodel) then return end
     newmodel:SetNoDraw(true)
     newmodel:SetBodyGroups(self.Bodygroups)
 
-    if left then
-        self.ModelLeftView = newmodel
+    if world then
+        if left then
+            self.ModelLeftWorld = newmodel
+        else
+            self.ModelRightWorld = newmodel
+        end
     else
-        self.ModelRightView = newmodel
+        if left then
+            self.ModelLeftView = newmodel
+        else
+            self.ModelRightView = newmodel
+        end
     end
 
     table.insert(ACX.CSModelPile, {
@@ -62,5 +90,15 @@ function SWEP:KillCustomModels()
     if IsValid(self.ModelRightView) then
         SafeRemoveEntity(self.ModelRightView)
         self.ModelRightView = nil
+    end
+
+    if IsValid(self.ModelLeftWorld) then
+        SafeRemoveEntity(self.ModelLeftWorld)
+        self.ModelLeftWorld = nil
+    end
+
+    if IsValid(self.ModelRightWorld) then
+        SafeRemoveEntity(self.ModelRightWorld)
+        self.ModelRightWorld = nil
     end
 end
