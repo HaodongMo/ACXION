@@ -242,7 +242,7 @@ function SWEP:SendNeedCycle()
         self:CallOnClient("SendNeedCycle")
     end
 
-    if not IsFirstTimePredicted() then return end
+    if not game.SinglePlayer() and not IsFirstTimePredicted() then return end
 
     ACX.CycleAmount = 0
 end
@@ -252,7 +252,7 @@ function SWEP:SendNeedCycle2()
         self:CallOnClient("SendNeedCycle2")
     end
 
-    if not IsFirstTimePredicted() then return end
+    if not game.SinglePlayer() and not IsFirstTimePredicted() then return end
 
     ACX.CycleAmount2 = 0
 end

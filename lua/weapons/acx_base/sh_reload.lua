@@ -112,7 +112,7 @@ end
 function SWEP:SendCanFastReload()
     if game.SinglePlayer() then self:CallOnClient("SendCanFastReload") end
 
-    if not IsFirstTimePredicted() then return end
+    if not game.SinglePlayer() and not IsFirstTimePredicted() then return end
 
     ACX.FastReloadChance = true
     ACX.ReleasedReload = false
