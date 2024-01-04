@@ -16,17 +16,19 @@ function SWEP:DrawWorldModel()
         local bone_name_right = "ValveBiped.Bip01_R_Hand"
         local boneid = self:GetOwner():LookupBone(bone_name_right)
         local bone_matrix = self:GetOwner():GetBoneMatrix(boneid)
-        local pos = bone_matrix:GetTranslation()
-        local ang = bone_matrix:GetAngles()
+        if bone_matrix then
+            local pos = bone_matrix:GetTranslation()
+            local ang = bone_matrix:GetAngles()
 
-        local wpos, wang = self:GetCustomWorldPos(pos, ang)
+            local wpos, wang = self:GetCustomWorldPos(pos, ang)
 
-        model_right:SetRenderOrigin(wpos)
-        model_right:SetRenderAngles(wang)
-        model_right:SetPos(wpos)
-        model_right:SetAngles(wang)
+            model_right:SetRenderOrigin(wpos)
+            model_right:SetRenderAngles(wang)
+            model_right:SetPos(wpos)
+            model_right:SetAngles(wang)
 
-        model_right:DrawModel()
+            model_right:DrawModel()
+        end
     end
 
     local model_left = self.ModelLeftView
@@ -40,18 +42,20 @@ function SWEP:DrawWorldModel()
 
         boneid = self:GetOwner():LookupBone(bone_name_left)
         bone_matrix = self:GetOwner():GetBoneMatrix(boneid)
-        pos = bone_matrix:GetTranslation()
-        ang = bone_matrix:GetAngles()
+        if bone_matrix then
+            pos = bone_matrix:GetTranslation()
+            ang = bone_matrix:GetAngles()
 
-        local lwpos, lwang = self:GetCustomWorldPos(pos, ang, true)
+            local lwpos, lwang = self:GetCustomWorldPos(pos, ang, true)
 
-        model_left:SetRenderOrigin(lwpos)
-        model_left:SetRenderAngles(lwang)
-        model_left:SetPos(lwpos)
-        model_left:SetAngles(lwang)
+            model_left:SetRenderOrigin(lwpos)
+            model_left:SetRenderAngles(lwang)
+            model_left:SetPos(lwpos)
+            model_left:SetAngles(lwang)
 
-        if self:GetAkimbo() then
-            model_left:DrawModel()
+            if self:GetAkimbo() then
+                model_left:DrawModel()
+            end
         end
     end
 end
