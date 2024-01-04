@@ -48,9 +48,10 @@ end
 SWEP.InterpolatedLockAngle = Angle(0, 0, 0)
 SWEP.InterpolatedLockAngle2 = Angle(0, 0, 0)
 
-function SWEP:GetCustomViewPos(pos, ang, left)
+function SWEP:GetCustomViewPos(pos, ang, left, tracer)
     local owner = self:GetOwner()
     left = left or false
+    tracer = tracer or false
     local old_ang = Angle(ang)
 
     if left then
@@ -68,7 +69,7 @@ function SWEP:GetCustomViewPos(pos, ang, left)
     local recoil_delta = self:GetRecoilDelta(left)
 
     -- so the tracer can come out of the gun pointing straight
-    if recoil_delta > 0.95 then
+    if recoil_delta > 0.95 and tracer then
         recoil_delta = 0
     end
 

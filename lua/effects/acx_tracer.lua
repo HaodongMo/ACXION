@@ -37,7 +37,7 @@ function EFFECT:GetShouldPos()
         local vpos = self.Weapon:GetOwner():EyePos()
         local vang = self.Weapon:GetOwner():EyeAngles()
 
-        local pos, ang = self.Weapon:GetCustomViewPos(vpos, vang, self.Left)
+        local pos, ang = self.Weapon:GetCustomViewPos(vpos, vang, self.Left, true)
 
         pos = pos + ang:Right() * self.Weapon.MuzzleOffset.x
         pos = pos + ang:Forward() * self.Weapon.MuzzleOffset.y
