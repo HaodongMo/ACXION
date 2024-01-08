@@ -56,9 +56,9 @@ SWEP.AutoAimRange = 3500
 SWEP.AutoAimSpeed = 60
 
 SWEP.Primary.Ammo = "smg1"
-SWEP.Primary.ClipSize = 50
+SWEP.Primary.ClipSize = 80
 SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize * 3
-SWEP.FastReloadBonus = 15
+SWEP.FastReloadBonus = 20
 
 SWEP.Magnification = 1.25
 

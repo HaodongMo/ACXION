@@ -60,7 +60,7 @@ SWEP.AutoAimSpeed = 20
 SWEP.Primary.Ammo = "ar2"
 SWEP.Primary.ClipSize = 30
 SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize * 3
-SWEP.FastReloadBonus = 10
+SWEP.FastReloadBonus = 5
 
 SWEP.Magnification = 1.25
 

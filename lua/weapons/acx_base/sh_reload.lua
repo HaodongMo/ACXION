@@ -63,6 +63,12 @@ function SWEP:FinishReload(slow)
 
         if self.BothReload then
             if self:GetAkimbo() then
+                local total = self:Clip1() + self:Clip2() + self:Ammo1()
+
+                if total < limit * 2 then
+                    limit = math.ceil(total / 2)
+                end
+
                 amount_restored = amount_restored + self:RestoreAmmo2(amount, limit)
             end
             amount_restored = amount_restored + self:RestoreAmmo(amount, limit)
