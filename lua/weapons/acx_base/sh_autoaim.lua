@@ -17,7 +17,7 @@ function SWEP:ThinkLockOn()
             self.LastSearchTime = CurTime()
         end
 
-        if not IsFirstTimePredicted() then
+        if not game.SinglePlayer() and not IsFirstTimePredicted() then
             // There is zero sense in running this very expensive block of calculations every time prediction is called
             // We have to PRETEND like we find this in the predicted blocks, but we'll actually find it the first time around
             // So... This is a shortcut!
