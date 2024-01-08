@@ -110,7 +110,7 @@ function SWEP:Shoot(left)
         if SERVER then
             local shoot_entity = ents.Create(self:GetProjectileEntity())
             if not IsValid(shoot_entity) then return end
-            local pos = self:GetShootPos()
+            local pos = self:GetShootPos(left)
 
             local shootentdata = {}
 
