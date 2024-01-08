@@ -23,6 +23,9 @@ function EFFECT:GetShouldPos()
         end
         local boneid = self.Weapon:GetOwner():LookupBone(bone_name)
         local bone_matrix = self.Weapon:GetOwner():GetBoneMatrix(boneid)
+        if not bone_matrix then
+            return self.Weapon:GetPos()
+        end
         local wpos = bone_matrix:GetTranslation()
         local wang = bone_matrix:GetAngles()
 
