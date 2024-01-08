@@ -14,9 +14,40 @@ function SWEP:GetShouldRaiseLeft()
 end
 
 function SWEP:Initialize()
+    self:SetHolstering(false)
+    self:SetBurstCount(0)
+    self:GetOwner():SetCanZoom(false)
+    self:SetShouldHoldType()
+
+    self:SetShotQueued(false)
+
+    self:SetReloadTime(0)
+
+    self:SetBurstCount(0)
+    self:SetBurst2Count(0)
+
+    self:SetNeedCycle(false)
+    self:SetNeedCycle2(false)
+
+    self:SetNextPrimaryFire(0)
+    self:SetNextSecondaryFire(0)
+
+    self:SetWaitTime(0)
+    self:SetWait2Time(0)
+
+    self:SetLockOnEntity(NULL)
+    self:SetLockOnEntity2(NULL)
+
+    self:SetLockOnVector(Vector(0, 0, 0))
+    self:SetLockOnVector2(Vector(0, 0, 0))
+
+    self:SetReloading(false)
+    self:SetReloading2(false)
+    self:SetAiming(false)
+    self:SetLastShotLeft(false)
+
     self.Secondary.ClipSize = self.Primary.ClipSize
     self.WorldModel = self.Model
-    -- self:SetClip2(self.Primary.ClipSize)
     self:SetShouldHoldType()
 end
 
@@ -34,10 +65,26 @@ function SWEP:Deploy()
     self:SetBurstCount(0)
     self:GetOwner():SetCanZoom(false)
     self:SetShouldHoldType()
+
     self:SetNeedCycle(false)
     self:SetNeedCycle2(false)
+
     self:SetNextPrimaryFire(0)
     self:SetNextSecondaryFire(0)
+
+    self:SetWaitTime(CurTime() + self.HolsterTime)
+    self:SetWait2Time(CurTime() + self.HolsterTime)
+
+    self:SetLockOnEntity(NULL)
+    self:SetLockOnEntity2(NULL)
+
+    self:SetLockOnVector(Vector(0, 0, 0))
+    self:SetLockOnVector2(Vector(0, 0, 0))
+
+    self:SetReloading(false)
+    self:SetReloading2(false)
+    self:SetAiming(false)
+    self:SetLastShotLeft(false)
 
     return true
 end

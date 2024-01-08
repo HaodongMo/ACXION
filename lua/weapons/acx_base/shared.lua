@@ -201,11 +201,10 @@ function SWEP:SecondaryAttack()
 end
 
 function SWEP:SetupDataTables()
-    self:NetworkVar("Float", 0, "AimDelta")
-    self:NetworkVar("Float", 1, "HolsterTime")
-    self:NetworkVar("Float", 2, "WaitTime")
-    self:NetworkVar("Float", 3, "ReloadTime")
-    self:NetworkVar("Float", 4, "Wait2Time")
+    self:NetworkVar("Float", 0, "HolsterTime")
+    self:NetworkVar("Float", 1, "WaitTime")
+    self:NetworkVar("Float", 2, "ReloadTime")
+    self:NetworkVar("Float", 3, "Wait2Time")
 
     self:NetworkVar("Int", 0, "BurstCount")
     self:NetworkVar("Int", 1, "Burst2Count")
