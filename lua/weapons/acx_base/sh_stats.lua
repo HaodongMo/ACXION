@@ -104,7 +104,7 @@ function SWEP:GetRecoilDelta(left)
     if game.SinglePlayer() then
         recoil_delta = (nextfire - CurTime()) / (0.2 * recoil)
     else
-        recoil_delta = (nextfire - (60 / self:GetRateOfFire()) - CurTime() - self:GetPingOffsetScale()) / (0.2 * recoil)
+        recoil_delta = (nextfire - CurTime() - self:GetPingOffsetScale()) / (0.2 * recoil)
     end
 
     if recoil_delta < 0 then
