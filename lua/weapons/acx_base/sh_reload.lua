@@ -9,7 +9,7 @@ function SWEP:ShouldReloadBoth()
     if self.BothReload ~= nil then
         return self.BothReload
     else
-        return !ACX.ConVars["single_reload"]:GetBool()
+        return not ACX.ConVars["single_reload"]:GetBool()
     end
 end
 
@@ -20,15 +20,15 @@ function SWEP:CustomReload()
     local left = self:GetAkimbo() and self:Clip1() > self:Clip2()
 
     if self:GetStillWaiting(left) then
-        if !both and !self:GetStillWaiting(!left) then
-            left = !left
+        if not both and not self:GetStillWaiting(not left) then
+            left = not left
         else
             return
         end
     end
     local bonus = self.FastReloadBonus
 
-    if !ACX.ConVars["dynamic_reload"]:GetBool() then
+    if not ACX.ConVars["dynamic_reload"]:GetBool() or not ACX.ConVars["reload_bonus"]:GetBool() then
         bonus = 0
     end
 
@@ -59,7 +59,9 @@ function SWEP:CustomReload()
 end
 
 function SWEP:FinishReload(slow)
-    if not ACX.ConVars["dynamic_reload"]:GetBool() then slow = true end
+    if not ACX.ConVars["dynamic_reload"]:GetBool() or not ACX.ConVars["reload_bonus"]:GetBool() then
+        slow = true
+    end
 
     if self:GetReloading() then
         if self:GetReloadTime() + self:GetMinimumReloadTime() > CurTime() then return end

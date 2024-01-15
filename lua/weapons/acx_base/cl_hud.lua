@@ -405,7 +405,7 @@ function SWEP:PrintWeaponInfo(x, y, alpha)
 
         local bonus = self.FastReloadBonus
 
-        if not ACX.ConVars["dynamic_reload"]:GetBool() then
+        if not ACX.ConVars["dynamic_reload"]:GetBool() or not ACX.ConVars["reload_bonus"]:GetBool() then
             bonus = 0
         end
 
