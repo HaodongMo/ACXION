@@ -20,7 +20,7 @@ function SWEP:CustomReload()
     local left = self:GetAkimbo() and self:Clip1() > self:Clip2()
 
     if self:GetStillWaiting(left) then
-        if not both and not self:GetStillWaiting(not left) then
+        if not both and not self:GetStillWaiting(not left) and (left or self:GetAkimbo()) then
             left = not left
         else
             return
