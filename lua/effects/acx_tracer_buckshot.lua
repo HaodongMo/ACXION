@@ -4,10 +4,10 @@ EFFECT.StartTime = 0
 EFFECT.LifeTime = 0.15
 EFFECT.LifeTime2 = 0.15
 EFFECT.DieTime = 0
-EFFECT.Color = Color(255, 225, 150)
+EFFECT.Color = Color(255, 255, 255)
 EFFECT.Speed = 20000
 
-local tracer = Material("acxion/tracer")
+local head = Material("particle/fire")
 
 function EFFECT:Init(data)
 
@@ -48,15 +48,18 @@ function EFFECT:Render()
     if !self.Dir then return end
 
     local d = (UnPredictedCurTime() - self.StartTime) / self.LifeTime
-    local startpos = self.StartPos + (d * 0.2 * (self.EndPos - self.StartPos))
+    -- local startpos = self.StartPos + (d * 0.2 * (self.EndPos - self.StartPos))
     local endpos = self.StartPos + (d * (self.EndPos - self.StartPos))
 
-    local size = math.Clamp(math.log(EyePos():DistToSqr(endpos) - math.pow(256, 2)), 4, math.huge)
+    local size = 8
+
+    local vel = self.Dir * self.Speed - LocalPlayer():GetVelocity()
+
+    local dot = math.abs(EyeAngles():Forward():Dot(vel:GetNormalized()))
+    local headsize = size * dot
 
     local col = self.Color
 
-    local tail = (self.Dir * math.Clamp((endpos - startpos):Length() - 16, 16, 328))
-
-    render.SetMaterial(tracer)
-    render.DrawBeam(endpos, endpos - tail, size * 1, 0, 1, col)
+    render.SetMaterial(head)
+    render.DrawSprite(endpos, headsize, headsize, col)
 end

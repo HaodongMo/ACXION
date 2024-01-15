@@ -68,7 +68,7 @@ function SWEP:NPC_PrimaryAttack()
             Force = damage / 3,
             Num = self:GetNum(),
             Tracer = 1,
-            TracerName = "acx_tracer",
+            TracerName = self:GetTracerName(),
             Dir = dir,
             Src = self:GetShootPos(),
             Spread = Vector(spread, spread, 0),

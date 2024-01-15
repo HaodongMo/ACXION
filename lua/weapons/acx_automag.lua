@@ -85,6 +85,8 @@ SWEP.HolsterTime = 0.2
 
 ----------------- Effects
 
+SWEP.TracerName = "acx_tracer"
+
 SWEP.MuzzleTexture = "effects/combinemuzzle2"
 
 SWEP.MuzzleOffset = Vector(-2, 10, 0)

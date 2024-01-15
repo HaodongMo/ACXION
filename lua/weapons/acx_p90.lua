@@ -84,6 +84,8 @@ SWEP.HolsterTime = 0.4
 
 ----------------- Effects
 
+SWEP.TracerName = false
+
 SWEP.MuzzleTexture = "effects/yellowflare"
 
 SWEP.MuzzleOffset = Vector(-0.5, 17.5, 0)

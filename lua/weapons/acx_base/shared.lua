@@ -116,6 +116,8 @@ SWEP.HolsterTime = 0.1
 
 ----------------- Effects
 
+SWEP.TracerName = nil -- override default tracer. Set false to disable tracers
+
 SWEP.MuzzleEffect = "acx_muzzleeffect"
 SWEP.MuzzleTexture = "effects/gunshipmuzzle"
 

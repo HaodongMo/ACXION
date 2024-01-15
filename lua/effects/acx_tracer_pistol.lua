@@ -4,7 +4,7 @@ EFFECT.StartTime = 0
 EFFECT.LifeTime = 0.15
 EFFECT.LifeTime2 = 0.15
 EFFECT.DieTime = 0
-EFFECT.Color = Color(255, 225, 150)
+EFFECT.Color = Color(255, 255, 255, 150)
 EFFECT.Speed = 20000
 
 local tracer = Material("acxion/tracer")
@@ -51,7 +51,7 @@ function EFFECT:Render()
     local startpos = self.StartPos + (d * 0.2 * (self.EndPos - self.StartPos))
     local endpos = self.StartPos + (d * (self.EndPos - self.StartPos))
 
-    local size = math.Clamp(math.log(EyePos():DistToSqr(endpos) - math.pow(256, 2)), 4, math.huge)
+    local size = 4
 
     local col = self.Color
 

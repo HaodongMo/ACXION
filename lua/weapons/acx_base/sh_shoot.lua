@@ -9,6 +9,22 @@ end
 function SWEP:SecondaryAttack()
 end
 
+local ammo_lookup = {
+    ["buckshot"] = "acx_tracer_buckshot",
+    ["357"] = "acx_tracer_sniper",
+    ["pistol"] = "acx_tracer_pistol",
+    ["smg1"] = "acx_tracer_smg",
+}
+
+function SWEP:GetTracerName()
+    if self.TracerName != nil then
+        return self.TracerName
+    elseif ammo_lookup[self.Primary.Ammo] then
+        return ammo_lookup[self.Primary.Ammo]
+    end
+    return "acx_tracer"
+end
+
 function SWEP:GetStillWaiting(left)
     if left then
         if self:GetNextSecondaryFire() > CurTime() then return true end
@@ -153,8 +169,8 @@ function SWEP:Shoot(left)
             Damage = damage,
             Force = damage / 3,
             Num = self:GetNum(),
-            Tracer = 1,
-            TracerName = "acx_tracer",
+            Tracer = self:GetTracerName() and 1 or 0,
+            TracerName = self:GetTracerName(),
             Dir = ang:Forward(),
             Src = self:GetShootPos(),
             Spread = Vector(spread, spread, 0),
