@@ -36,6 +36,7 @@ hook.Add("CreateMove", "ACX_CreateMove", function(cmd)
                     shouldreload = true
                 elseif reload_progress > 0.1 then
                     ACX.FastReloadChance = false
+                    wpn:EmitSound("buttons/button10.wav", 60, 80)
                 end
             end
         else
