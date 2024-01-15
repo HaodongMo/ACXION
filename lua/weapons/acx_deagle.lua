@@ -23,11 +23,11 @@ SWEP.Slot = 1
 
 ----------------- Stats
 
-SWEP.Damage = 35
+SWEP.Damage = 40
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 2
 SWEP.Spread = 0.02
-SWEP.Recoil = 1.25
+SWEP.Recoil = 2
 SWEP.RateOfFire = 300
 
 SWEP.SpreadSightsMult = 0.5
@@ -57,9 +57,9 @@ SWEP.AutoAimSpeed = 60
 SWEP.AutoAimSeek = "both"
 
 SWEP.Primary.Ammo = "pistol"
-SWEP.Primary.ClipSize = 10
+SWEP.Primary.ClipSize = 7
 SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize * 3
-SWEP.FastReloadBonus = 5
+SWEP.FastReloadBonus = 3
 
 SWEP.Magnification = 1.25
 

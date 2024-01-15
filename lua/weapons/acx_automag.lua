@@ -7,7 +7,7 @@ SWEP.PrintName = "Automag"
 SWEP.Category = "ACXION"
 
 -- Infobox
-SWEP.Description = "Accurate and high damage."
+SWEP.Description = "Accurate and powerful."
 SWEP.TypeName = "Pistol"
 
 SWEP.Model = "models/tak/gtaiv/auto-mag_pistol.mdl"
@@ -23,16 +23,16 @@ SWEP.Slot = 1
 
 ----------------- Stats
 
-SWEP.Damage = 40
+SWEP.Damage = 35
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 2
 SWEP.Spread = 0.015
-SWEP.Recoil = 2
+SWEP.Recoil = 1.5
 SWEP.RateOfFire = 300
 
 SWEP.SpreadSightsMult = 0.25
 SWEP.RecoilSightsMult = 0.5
-SWEP.AutoAimSpeedSightsMult = 1
+SWEP.AutoAimSpeedSightsMult = 0.75
 
 SWEP.SpreadAkimboMult = 2
 SWEP.RecoilAkimboMult = 1.25
@@ -51,15 +51,15 @@ SWEP.ReloadTime = 0.5
 SWEP.ReloadDifficultyMult = 1
 SWEP.ShotgunReload = false
 
-SWEP.AutoAimAngle = math.cos(math.rad(60))
-SWEP.AutoAimRange = 2500
-SWEP.AutoAimSpeed = 60
+SWEP.AutoAimAngle = math.cos(math.rad(45))
+SWEP.AutoAimRange = 3500
+SWEP.AutoAimSpeed = 45
 SWEP.AutoAimSeek = "both"
 
 SWEP.Primary.Ammo = "pistol"
-SWEP.Primary.ClipSize = 7
+SWEP.Primary.ClipSize = 10
 SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize * 3
-SWEP.FastReloadBonus = 3
+SWEP.FastReloadBonus = 5
 
 SWEP.Magnification = 1.25
 
