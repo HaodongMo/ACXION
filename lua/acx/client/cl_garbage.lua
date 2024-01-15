@@ -7,7 +7,7 @@ function ACX.CollectGarbage()
     local newpile = {}
 
     for _, k in ipairs(ACX.CSModelPile) do
-        if IsValid(k.Weapon) and k.Weapon:GetOwner() and k.Weapon:GetOwner():GetActiveWeapon() == k.Weapon then
+        if IsValid(k.Weapon) and IsValid(k.Weapon:GetOwner()) and k.Weapon:GetOwner():GetActiveWeapon() == k.Weapon then
             kept = kept + 1
             newpile[kept] = k
             continue
