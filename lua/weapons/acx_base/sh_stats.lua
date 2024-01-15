@@ -113,3 +113,17 @@ function SWEP:GetRecoilDelta(left)
 
     return recoil_delta
 end
+
+function SWEP:GetTraceFilter()
+    local filter = {}
+    table.insert(filter, self:GetOwner())
+    table.insert(filter, self)
+    if self:GetOwner():GetVehicle() then
+        table.insert(filter, self:GetOwner():GetVehicle())
+
+        for _, v in pairs(self:GetOwner():GetVehicle():GetChildren()) do
+            table.insert(filter, v)
+        end
+    end
+    return filter
+end

@@ -16,7 +16,6 @@ end
 function SWEP:Initialize()
     self:SetHolstering(false)
     self:SetBurstCount(0)
-    self:GetOwner():SetCanZoom(false)
     self:SetShouldHoldType()
 
     self:SetShotQueued(false)

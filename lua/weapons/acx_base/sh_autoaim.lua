@@ -96,6 +96,7 @@ function SWEP:ThinkLockOn()
                             if ent == try_target then return false end
                             if ent == owner then return false end
                             if ent:GetOwner() == try_target then return false end
+                            if ent:IsVehicle() and ent:GetDriver() == owner then return false end
                             return true
                         end
                     })

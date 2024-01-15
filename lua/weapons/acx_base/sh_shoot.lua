@@ -142,6 +142,8 @@ function SWEP:Shoot(left)
             end
         end
     else
+        ignore_entity = self:GetOwner():GetVehicle()
+
         local bullet = {
             Attacker = self:GetOwner(),
             Damage = damage,
@@ -153,6 +155,7 @@ function SWEP:Shoot(left)
             Src = self:GetShootPos(),
             Spread = Vector(spread, spread, 0),
             Distance = 50000,
+            IgnoreEntity = ignore_entity,
             Callback = function(attacker, tr, dmginfo)
                 local dmg = dmginfo:GetDamage()
 
