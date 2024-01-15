@@ -11,45 +11,6 @@ local head = Material("particle/fire")
 local tracer = Material("effects/tracer_middle2")
 local tracerhead = Material("effects/tracer_cap")
 
-function EFFECT:IsThirdPerson()
-    return self.Weapon:GetOwner():ShouldDrawLocalPlayer()
-end
-
-function EFFECT:GetShouldPos()
-    if self:IsThirdPerson() then
-        local bone_name = "ValveBiped.Bip01_R_Hand"
-        if self.Left then
-            bone_name = "ValveBiped.Bip01_L_Hand"
-        end
-        local boneid = self.Weapon:GetOwner():LookupBone(bone_name)
-        local bone_matrix = self.Weapon:GetOwner():GetBoneMatrix(boneid)
-        if not bone_matrix then
-            return self.Weapon:GetPos()
-        end
-        local wpos = bone_matrix:GetTranslation()
-        local wang = bone_matrix:GetAngles()
-
-        local pos, ang = self.Weapon:GetCustomWorldPos(wpos, wang, self.Left)
-
-        pos = pos + ang:Right() * self.Weapon.MuzzleOffset.x
-        pos = pos + ang:Forward() * self.Weapon.MuzzleOffset.y
-        pos = pos + ang:Up() * self.Weapon.MuzzleOffset.z
-
-        return pos, ang
-    else
-        local vpos = self.Weapon:GetOwner():EyePos()
-        local vang = self.Weapon:GetOwner():EyeAngles()
-
-        local pos, ang = self.Weapon:GetCustomViewPos(vpos, vang, self.Left, true)
-
-        pos = pos + ang:Right() * self.Weapon.MuzzleOffset.x
-        pos = pos + ang:Forward() * self.Weapon.MuzzleOffset.y
-        pos = pos + ang:Up() * self.Weapon.MuzzleOffset.z
-
-        return pos, ang
-    end
-end
-
 function EFFECT:Init(data)
 
     local hit = data:GetOrigin()
@@ -63,7 +24,7 @@ function EFFECT:Init(data)
     local start = data:GetStart()
 
     if self.Weapon.ACX then
-        start = self:GetShouldPos(left)
+        start = self.Weapon:FX_GetShouldPos(left)
     elseif !start then
         start = self.Weapon:GetPos() -- ???
     end

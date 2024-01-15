@@ -1,4 +1,8 @@
 function SWEP:Reload()
+    if self:GetOwner():IsNPC() then
+        self:NPC_Reload()
+        return
+    end
 end
 
 function SWEP:CustomReload()

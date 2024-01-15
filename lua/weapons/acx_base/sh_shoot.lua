@@ -1,5 +1,9 @@
 -- We use our own custom functions to handle these!
 function SWEP:PrimaryAttack()
+    if self:GetOwner():IsNPC() then
+        self:NPC_PrimaryAttack()
+        return
+    end
 end
 
 function SWEP:SecondaryAttack()
@@ -266,4 +270,49 @@ function SWEP:DoMuzzleEffects(left)
     data:SetEntity(self)
     data:SetFlags(left and 1 or 0)
     util.Effect(self.MuzzleEffect, data)
+end
+
+function SWEP:FX_IsThirdPerson()
+    local owner = self:GetOwner()
+    if not IsValid(owner) then return true end
+    if owner:IsNPC() then return true end
+
+    return self:GetOwner():ShouldDrawLocalPlayer()
+end
+
+function SWEP:FX_GetShouldPos(left)
+    if self:FX_IsThirdPerson() then
+        local owner = self:GetOwner()
+        local wpos, wang = self:GetPos(), self:GetAngles()
+
+        if IsValid(owner) then
+            local bone_name = "ValveBiped.Bip01_R_Hand"
+
+            if left then
+                bone_name = "ValveBiped.Bip01_L_Hand"
+            end
+
+            local boneid = self:GetOwner():LookupBone(bone_name)
+            local bone_matrix = self:GetOwner():GetBoneMatrix(boneid)
+            if not bone_matrix then return self:GetPos(), self:GetAngles() end
+            wpos = bone_matrix:GetTranslation()
+            wang = bone_matrix:GetAngles()
+        end
+
+        local pos, ang = self:GetCustomWorldPos(wpos, wang, left)
+        pos = pos + ang:Right() * self.MuzzleOffset.x
+        pos = pos + ang:Forward() * self.MuzzleOffset.y
+        pos = pos + ang:Up() * self.MuzzleOffset.z
+
+        return pos, ang
+    else
+        local vpos = self:GetOwner():EyePos()
+        local vang = self:GetOwner():EyeAngles()
+        local pos, ang = self:GetCustomViewPos(vpos, vang, left)
+        pos = pos + ang:Right() * self.MuzzleOffset.x
+        pos = pos + ang:Forward() * self.MuzzleOffset.y
+        pos = pos + ang:Up() * self.MuzzleOffset.z
+
+        return pos, ang
+    end
 end

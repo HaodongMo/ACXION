@@ -55,14 +55,21 @@ function SWEP:Deploy()
         self:CallOnClient("Deploy")
     end
 
+    local owner = self:GetOwner()
+
     if IsFirstTimePredicted() then
         self.LowerAmountRight = 1
         self.LowerAmountLeft = 1
     end
 
+    if not owner:IsNPC() then
+        self:GetOwner():SetCanZoom(false)
+    else
+        self:NPC_Initialize()
+    end
+
     self:SetHolstering(false)
     self:SetBurstCount(0)
-    self:GetOwner():SetCanZoom(false)
     self:SetShouldHoldType()
 
     self:SetNeedCycle(false)
@@ -111,12 +118,14 @@ end
 function SWEP:SetShouldHoldType()
     local ht = self.HoldType
 
-    if self:ShouldAim() then
-        ht = self.HoldTypeAim
-    end
+    if not self:GetOwner():IsNPC() then
+        if self:ShouldAim() then
+            ht = self.HoldTypeAim
+        end
 
-    if self:GetAkimbo() then
-        ht = "duel"
+        if self:GetAkimbo() then
+            ht = "duel"
+        end
     end
 
     self:SetHoldType(ht)

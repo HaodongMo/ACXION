@@ -162,6 +162,7 @@ SWEP.SightAmount = 0
 SWEP.ACX = true
 
 SWEP.UseHands = false
+SWEP.NPCUsable = true
 
 SWEP.ParticleEmitters = {}
 

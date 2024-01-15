@@ -3,7 +3,7 @@ local rising_edge_firemodes = {
     ["binary"] = true,
     ["pump"] = true,
     ["bolt"] = true,
-    ["burst_3"] = true,
+    ["burst_"] = true,
     ["break"] = true,
     ["single"] = true,
 }
@@ -17,8 +17,18 @@ local auto_firemodes = {
     ["auto"] = true
 }
 
+function SWEP:FiremodeEdge(edge)
+    if edge then
+        return rising_edge_firemodes[self.Firemode] or string.sub(self.Firemode, 1, 6) == "burst_"
+    else
+        return falling_edge_firemodes[self.Firemode]
+    end
+end
+
 function SWEP:Think()
     local owner = self:GetOwner()
+    if owner:IsNPC() then return end
+
     if not IsValid(owner) then return false end
 
     if self:ShouldAim() and not self:GetAiming() then
@@ -150,9 +160,9 @@ function SWEP:Think()
                     self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
                 end
 
-                if owner:KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
+                if owner:KeyPressed(IN_ATTACK) and self:FiremodeEdge(true) then
                     self:SetShot2Queued(true)
-                elseif owner:KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
+                elseif owner:KeyReleased(IN_ATTACK) and self:FiremodeEdge(false) then
                     self:SetShot2Queued(true)
                 elseif owner:KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
                     self:SetShot2Queued(true)
@@ -183,9 +193,9 @@ function SWEP:Think()
                         self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
                     end
 
-                    if owner:KeyPressed(IN_ATTACK) and rising_edge_firemodes[self.Firemode] then
+                    if owner:KeyPressed(IN_ATTACK) and self:FiremodeEdge(true) then
                         self:SetShotQueued(true)
-                    elseif owner:KeyReleased(IN_ATTACK) and falling_edge_firemodes[self.Firemode] then
+                    elseif owner:KeyReleased(IN_ATTACK) and self:FiremodeEdge(false) then
                         self:SetShotQueued(true)
                     elseif owner:KeyDown(IN_ATTACK) and auto_firemodes[self.Firemode] then
                         self:SetShotQueued(true)

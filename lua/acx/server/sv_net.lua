@@ -1,0 +1,1 @@
+util.AddNetworkString("acx_npcweapon")
