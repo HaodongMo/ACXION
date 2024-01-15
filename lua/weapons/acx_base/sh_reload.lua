@@ -5,15 +5,30 @@ function SWEP:Reload()
     end
 end
 
+function SWEP:ShouldReloadBoth()
+    if self.BothReload ~= nil then
+        return self.BothReload
+    else
+        return !ACX.ConVars["single_reload"]:GetBool()
+    end
+end
+
 function SWEP:CustomReload()
     if self:GetReloading() then self:FinishReload() return end
 
+    local both = self:ShouldReloadBoth()
     local left = self:GetAkimbo() and self:Clip1() > self:Clip2()
 
-    if self:GetStillWaiting(left) then return end
+    if self:GetStillWaiting(left) then
+        if !both and !self:GetStillWaiting(!left) then
+            left = !left
+        else
+            return
+        end
+    end
     local bonus = self.FastReloadBonus
 
-    if not ACX.ConVars["dynamic_reload"]:GetBool() then
+    if !ACX.ConVars["dynamic_reload"]:GetBool() then
         bonus = 0
     end
 
@@ -22,7 +37,7 @@ function SWEP:CustomReload()
 
     self:SetReloading(true)
 
-    if self.BothReload  then
+    if both then
         left = false
     end
 
@@ -65,7 +80,7 @@ function SWEP:FinishReload(slow)
 
         local amount_restored = 0
 
-        if self.BothReload then
+        if self:ShouldReloadBoth() then
             if self:GetAkimbo() then
                 local total = self:Clip1() + self:Clip2() + self:Ammo1()
 
