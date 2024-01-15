@@ -13,13 +13,15 @@ hook.Add("InitPostEntity", "ACX_Register", function()
     end
 end)
 
-ACX.WeaponListCache = nil
-function ACX.GetWeaponList()
-    if !ACX.WeaponListCache then
-        ACX.WeaponListCache = {}
+ACX.WeaponListCache = {}
+function ACX.GetWeaponList(cat)
+    if !cat then cat = "" end
+    if !ACX.WeaponListCache[cat] then
+        ACX.WeaponListCache[cat] = {}
         for i, wep in pairs(weapons.GetList()) do
             local weap = weapons.Get(wep.ClassName)
             if !weap or !weap.ACX
+                    or wep.Category != cat
                     or wep.ClassName == "acx_base"
                     or !weap.Spawnable or weap.AdminOnly
                     or !weap.NPCUsable
@@ -27,16 +29,15 @@ function ACX.GetWeaponList()
                 continue
             end
 
-            table.insert(ACX.WeaponListCache, wep.ClassName)
+            table.insert(ACX.WeaponListCache[cat], wep.ClassName)
         end
     end
 
-    return ACX.WeaponListCache
+    return ACX.WeaponListCache[cat]
 end
 
-function ACX.GetRandomWeapon()
-    local tbl = ACX.GetWeaponList()
-    PrintTable(tbl)
+function ACX.GetRandomWeapon(cat)
+    local tbl = ACX.GetWeaponList(cat)
     return tbl[math.random(1, #tbl)]
 end
 
@@ -48,7 +49,7 @@ if CLIENT then
             wpns:AddCVar( "#menubar.npcs.defaultweapon", "gmod_npcweapon", "" )
             wpns:AddCVar( "#menubar.npcs.noweapon", "gmod_npcweapon", "none" )
 
-            wpns:AddCVar("Random ACX Weapon", "gmod_npcweapon", "!ACXRandom")
+            wpns:AddCVar("Random ACX Weapon", "gmod_npcweapon", "!ACXRandom|")
 
             wpns:AddSpacer()
 
@@ -80,6 +81,9 @@ if CLIENT then
 
             for _, cat in SortedPairsByValue(catnames) do
                 cats[cat] = wpns:AddSubMenu(cat)
+                cats[cat]:AddCVar("Random from " .. cat, "gmod_npcweapon", "!ACXRandom|" .. cat)
+
+                cats[cat]:AddSpacer()
                 cats[cat]:SetDeleteSelf(false)
 
                 for _, info in SortedPairsByMemberValue(catcontents[cat], 1) do
@@ -114,8 +118,10 @@ elseif SERVER then
         if bit.band(cap, CAP_USE_WEAPONS) != CAP_USE_WEAPONS then return end
 
         local wpn
-        if class == "!ACXRandom" then
-            class = ACX.GetRandomWeapon()
+        if string.Left(class, 10) == "!ACXRandom" then
+            local args = string.Explode("|", class, false)
+            PrintTable(args)
+            class = ACX.GetRandomWeapon(args[2])
             wpn = weapons.Get(class or "")
             if !class or !wpn then return end
         else
