@@ -360,6 +360,19 @@ function SWEP:CustomAmmoDisplay()
     return self.AmmoDisplay
 end
 
+local function boxes(f)
+    local str = ""
+    local boxc = math.Round(f * 10)
+    for i = 1, 10 do
+        if i <= boxc then
+            str = str .. "■"
+        else
+            str = str .. "□"
+        end
+    end
+    return str
+end
+
 SWEP.InfoMarkup = nil
 function SWEP:PrintWeaponInfo(x, y, alpha)
     if self.DrawWeaponInfoBox == false then return end
@@ -370,7 +383,6 @@ function SWEP:PrintWeaponInfo(x, y, alpha)
         local title_color = "<color=230,230,230,255>"
         local text_color = "<color=150,150,150,255>"
         str = ""
-
 
         str = str .. "<font=ACX_HudSelectionTitle>" .. title_color .. self:GetFiremodeName() .. " " .. self.TypeName .. "</color></font>\n"
 
@@ -399,37 +411,33 @@ function SWEP:PrintWeaponInfo(x, y, alpha)
 
         str = str .. title_color .. "Capacity:</color>\t" .. text_color .. self.Primary.ClipSize .. (bonus > 0 and " (+" .. bonus .. ")" or "") .. "</color>\n"
 
-
-        local max = 10
         local d
         if self.Num > 1 then
             str = str .. title_color .. "Spread:</color>\t" .. text_color
-            d = Lerp(self.Spread / 0.125, 0, max)
+            d = Lerp(self.Spread / 0.125, 0, 1)
         else
             str = str .. title_color .. "Accuracy:</color>\t" .. text_color
-            d = Lerp(math.log(1 + (self.Spread * self.SpreadSightsMult) / 0.03), max, 0)
+            d = Lerp(math.log(1 + (self.Spread * self.SpreadSightsMult) / 0.03), 1, 0)
         end
-        local boxc = math.Round(d)
-        for i = 1, max do
-            if i <= boxc then
-                str = str .. "■"
+        str = str .. boxes(d) .. "</color>\n"
+
+        if self.CanAkimbo and self.SpreadAkimboMult ~= 1 then
+            if self.Num > 1 then
+                d = Lerp(self.Spread * self.SpreadAkimboMult / 0.125, 0, 1)
             else
-                str = str .. "□"
+                d = Lerp(math.log(1 + (self.Spread * self.SpreadAkimboMult) / 0.03), 1, 0)
             end
+            str = str .. title_color .. "  - Akimbo:</color>\t" .. text_color
+            str = str .. boxes(d) .. "</color>\n"
         end
-        str = str .. "</color>\n"
 
         str = str .. title_color .. "Recoil:</color>\t" .. text_color
-        boxc = math.Round(Lerp((math.abs(self.Recoil) ^ 0.5) / 2, 0, max))
-        for i = 1, max do
-            if i <= boxc then
-                str = str .. "■"
-            else
-                str = str .. "□"
-            end
-        end
-        str = str .. "</color>\n"
+        str = str .. boxes(Lerp((math.abs(self.Recoil) ^ 0.5) / 2, 0, 1)) .. "</color>\n"
 
+        if self.CanAkimbo and self.RecoilAkimboMult ~= 1 then
+            str = str .. title_color .. "  - Akimbo:</color>\t" .. text_color
+            str = str .. boxes(Lerp((math.abs(self.Recoil * self.RecoilAkimboMult) ^ 0.5) / 2, 0, 1)) .. "</color>\n"
+        end
 
         str = str .. "</font>"
         self.InfoMarkup = markup.Parse(str, 250)

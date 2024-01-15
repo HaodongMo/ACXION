@@ -35,7 +35,7 @@ SWEP.RecoilSightsMult = 0.5
 SWEP.AutoAimSpeedSightsMult = 1
 
 SWEP.SpreadAkimboMult = 2
-SWEP.RecoilAkimboMult = 1.25
+SWEP.RecoilAkimboMult = 1
 SWEP.AutoAimSpeedAkimboMult = 1
 
 SWEP.Firemode = "auto"
