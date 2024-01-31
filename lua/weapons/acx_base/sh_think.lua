@@ -11,6 +11,7 @@ local rising_edge_firemodes = {
 local falling_edge_firemodes = {
     ["semi_falling"] = true,
     ["binary"] = true,
+    ["throwable"] = true
 }
 
 local auto_firemodes = {

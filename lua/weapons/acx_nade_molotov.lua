@@ -1,19 +1,19 @@
 AddCSLuaFile()
 
 SWEP.Base = "acx_base"
-SWEP.Spawnable = true
+SWEP.Spawnable = false
 
-SWEP.PrintName = "HK69A1"
+SWEP.PrintName = "Molotov Cocktail"
 SWEP.Category = "ACXION"
 
 -- Infobox
-SWEP.Description = "Explosions solve problems."
-SWEP.TypeName = "Launcher"
+SWEP.Description = "To go with his breadbaskets."
+SWEP.TypeName = "Explosive"
 
-SWEP.Model = "models/tak/gtaiv/hk69a1.mdl"
+SWEP.Model = "models/tak/gtaiv/molotov_coctail.mdl"
 SWEP.WorldModel = SWEP.Model
 
-SWEP.ModelOffsetView = Vector(5, 13, -7)
+SWEP.ModelOffsetView = Vector(6, 17, -3)
 SWEP.ModelAngleView = Angle(0, 0, 90)
 
 SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
@@ -23,13 +23,15 @@ SWEP.Slot = 4
 
 ----------------- Stats
 
-SWEP.Damage = 45
+SWEP.Damage = 100
 
-SWEP.ProjectileEntity = "acx_proj_40mm"
+SWEP.ProjectileEntity = "acx_proj_molotov"
+SWEP.ProjectileForce = 1000
+SWEP.ProjectileAngle = Angle(0, 0, 90)
 
-SWEP.Spread = 0.04
-SWEP.Recoil = 1.5
-SWEP.RateOfFire = 100
+SWEP.Spread = 0.1
+SWEP.Recoil = 0.1
+SWEP.RateOfFire = 60
 
 SWEP.SpreadSightsMult = 0.5
 SWEP.RecoilSightsMult = 1
@@ -39,7 +41,7 @@ SWEP.SpreadAkimboMult = 1.5
 SWEP.RecoilAkimboMult = 1
 SWEP.AutoAimSpeedAkimboMult = 0.75
 
-SWEP.Firemode = "break"
+SWEP.Firemode = "throwable"
 -- auto
 -- semi
 -- semi_falling
@@ -48,19 +50,13 @@ SWEP.Firemode = "break"
 -- bolt
 -- burst_3, burst_2
 
-SWEP.ReloadTime = 0.5
-SWEP.ReloadDifficultyMult = 1
-SWEP.ShotgunReload = true
-SWEP.AkimboSingleReload = false
-
-SWEP.AutoAimAngle = math.cos(math.rad(30))
-SWEP.AutoAimRange = 3500
+SWEP.AutoAimAngle = 0
+SWEP.AutoAimRange = 0
 SWEP.AutoAimSpeed = 60
 
-SWEP.Primary.Ammo = "smg1_grenade"
-SWEP.Primary.ClipSize = 1
-SWEP.Primary.DefaultClip = SWEP.Primary.ClipSize * 3
-SWEP.FastReloadBonus = 1
+SWEP.Primary.Ammo = "grenade"
+SWEP.Primary.ClipSize = -1
+SWEP.Primary.DefaultClip = 3
 
 SWEP.Magnification = 1.25
 
@@ -70,7 +66,7 @@ SWEP.ScopeOverlay = nil
 SWEP.AimOffset = Vector(0, 0, 0)
 SWEP.AimAngle = Angle(0, 0, 0)
 
-SWEP.RecoilOffset = Vector(0, -2, 0)
+SWEP.RecoilOffset = Vector(0, 0, -1)
 SWEP.RecoilAngle = Angle(0, 0, 0)
 
 ----------------- Gestures
@@ -78,25 +74,29 @@ SWEP.RecoilAngle = Angle(0, 0, 0)
 SWEP.GestureShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 SWEP.GestureReload = ACT_HL2MP_GESTURE_RELOAD_PISTOL
 
-SWEP.HoldType = "ar2"
-SWEP.HoldTypeAim = "rpg"
+SWEP.HoldType = "grenade"
+SWEP.HoldTypeAim = "grenade"
 
 SWEP.HolsterTime = 0.4
 
 ----------------- Effects
 
-SWEP.MuzzleTexture = "effects/gunshipmuzzle"
+SWEP.MuzzleEffect = false
 
-SWEP.MuzzleOffset = Vector(-3.5, 16, 0)
+SWEP.MuzzleOffset = Vector(0, 0, 0)
 SWEP.MuzzleAngle = Angle(0, 0, 0)
 SWEP.MuzzleScale = 1
 
 ----------------- Sounds
 
-SWEP.ShootSound = "acxion/wep/hk69a1.ogg"
-SWEP.ShootVolume = 110
+SWEP.ShootSound = "weapons/slam/throw.wav"
+SWEP.ShootVolume = 75
 
 SWEP.DryFireSound = "weapons/ar2/ar2_empty.wav"
 
 SWEP.ReloadStartSound = "acxion/wep/hk69a1_r1.ogg"
 SWEP.ReloadFinishSound = "acxion/wep/hk69a1_r2.ogg"
+
+SWEP.IsGrenade = true
+
+SWEP.CanAkimbo = false

@@ -66,12 +66,13 @@ local lookup = {
     ["bolt"] = "Bolt-action",
     ["burst"] = "Burst-fire",
     ["single"] = "Single-shot",
-    ["break"] = "Break-action"
+    ["break"] = "Break-action",
+    ["throwable"] = "Throwable"
 }
 function SWEP:GetFiremodeName()
     local fm = self.Firemode
     if string.Left(fm, 6) == "burst_" then fm = "burst" end
-    return lookup[fm]
+    return lookup[fm] or fm
 end
 
 function SWEP:GetSwayOffsetRight()

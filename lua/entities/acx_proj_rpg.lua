@@ -17,7 +17,7 @@ ENT.PhysMat = "grenade"
 ENT.Gravity = false
 
 ENT.SmokeTrail = true
-ENT.SmokeTrailMat = "effects/fas_smoke_beam"
+ENT.SmokeTrailMat = "trails/smoke"
 ENT.SmokeTrailSize = 32
 ENT.SmokeTrailTime = 1
 

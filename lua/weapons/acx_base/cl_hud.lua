@@ -26,6 +26,14 @@ function SWEP:DrawHUD()
     cam.End3D()
     local ss = ScreenScale(1)
 
+    local clip_r = self:Clip1()
+    local clip_l = self:Clip2()
+
+    if self.Primary.ClipSize <= 0 then
+        clip_r = self:Ammo1()
+        clip_l = self:Ammo2()
+    end
+
     if self:ShouldAim() and self.HasScope then
         -- Draw sprites/scope_arc four times to create a full circle
         local s = math.min(ScrW(), ScrH()) / 2
@@ -50,7 +58,7 @@ function SWEP:DrawHUD()
         surface.SetDrawColor(col)
         surface.DrawRect(x, y - 1, 3, 3)
 
-        local text_ammo_r = tostring(self:Clip1())
+        local text_ammo_r = tostring(clip_r)
         surface.SetFont("ACX_8")
         surface.SetTextPos(x + ss * 5, y + ss * 4)
         surface.SetTextColor(col)
@@ -58,7 +66,7 @@ function SWEP:DrawHUD()
         if self:GetNeedCycle() then
             text_ammo_r = string.upper(self.Firemode)
             surface.SetTextColor(col2)
-        elseif self:Clip1() == 0 then
+        elseif clip_r == 0 then
             surface.SetTextColor(col2)
         end
 
@@ -67,7 +75,7 @@ function SWEP:DrawHUD()
         y = y + self.LowerAmountRight * ScrH()
         surface.SetDrawColor(col)
 
-        if self:Clip1() == 0 then
+        if clip_r == 0 then
             surface.SetDrawColor(col2)
         end
 
@@ -75,10 +83,10 @@ function SWEP:DrawHUD()
         local hardlock_r = false
 
         if self.HardLockForTargetData then
-            if self:Clip2() > 0 then
+            if clip_l > 0 then
                 hardlock_l = self:GetHasHardLock(true)
             end
-            if self:Clip1() > 0 then
+            if clip_r > 0 then
                 hardlock_r = self:GetHasHardLock(false)
             end
         end
@@ -108,7 +116,7 @@ function SWEP:DrawHUD()
         end
 
         render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-        local text_ammo_r = tostring(self:Clip1())
+        local text_ammo_r = tostring(clip_r)
         surface.SetFont("ACX_8")
         surface.SetTextPos(x + crosshair_radius + ss * 4, y + ss * 4)
         surface.SetTextColor(col)
@@ -116,7 +124,7 @@ function SWEP:DrawHUD()
         if self:GetNeedCycle() then
             text_ammo_r = string.upper(self.Firemode)
             surface.SetTextColor(col2)
-        elseif self:Clip1() == 0 then
+        elseif clip_r == 0 then
             surface.SetTextColor(col2)
         end
 
@@ -149,7 +157,7 @@ function SWEP:DrawHUD()
             yl = yl + self.LowerAmountLeft * ScrH()
             surface.SetDrawColor(col)
 
-            if self:Clip2() == 0 then
+            if clip_l == 0 then
                 surface.SetDrawColor(col2)
             end
 
@@ -175,11 +183,11 @@ function SWEP:DrawHUD()
             end
 
             render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-            local text_ammo_l = tostring(self:Clip2())
+            local text_ammo_l = tostring(clip_l)
             if self:GetNeedCycle2() then
                 text_ammo_l = string.upper(self.Firemode)
                 surface.SetTextColor(col2)
-            elseif self:Clip2() == 0 then
+            elseif clip_l == 0 then
                 surface.SetTextColor(col2)
             else
                 surface.SetTextColor(col)
@@ -357,6 +365,11 @@ function SWEP:CustomAmmoDisplay()
     self.AmmoDisplay.PrimaryClip = self:Clip1()
     self.AmmoDisplay.PrimaryAmmo = self:Ammo1()
 
+    if self.Primary.ClipSize < 0 then
+        self.AmmoDisplay.PrimaryClip = self:Ammo1()
+        self.AmmoDisplay.PrimaryAmmo = nil
+    end
+
     return self.AmmoDisplay
 end
 
@@ -403,13 +416,15 @@ function SWEP:PrintWeaponInfo(x, y, alpha)
             str = str .. title_color .. "Fire Rate:</color>\t" .. text_color .. self.RateOfFire .. " RPM</color>\n"
         end
 
-        local bonus = self.FastReloadBonus
+        if self.Primary.ClipSize > 0 then
+            local bonus = self.FastReloadBonus
 
-        if not ACX.ConVars["dynamic_reload"]:GetBool() or not ACX.ConVars["reload_bonus"]:GetBool() then
-            bonus = 0
+            if not ACX.ConVars["dynamic_reload"]:GetBool() or not ACX.ConVars["reload_bonus"]:GetBool() then
+                bonus = 0
+            end
+
+            str = str .. title_color .. "Capacity:</color>\t" .. text_color .. self.Primary.ClipSize .. (bonus > 0 and " (+" .. bonus .. ")" or "") .. "</color>\n"
         end
-
-        str = str .. title_color .. "Capacity:</color>\t" .. text_color .. self.Primary.ClipSize .. (bonus > 0 and " (+" .. bonus .. ")" or "") .. "</color>\n"
 
         local d
         if self.Num > 1 then

@@ -204,18 +204,8 @@ if SERVER then
     function ENT:Detonate()
         if !self:IsValid() then return end
         if self.Defused then return end
-        local effectdata = EffectData()
-            effectdata:SetOrigin( self:GetPos() )
 
-        if self:WaterLevel() > 0 then
-            util.Effect( "WaterSurfaceExplosion", effectdata )
-            --self:EmitSound("weapons/underwater_explode3.wav", 125, 100, 1, CHAN_AUTO)
-        else
-            util.Effect( self.ExplosionEffect, effectdata)
-            --self:EmitSound("phx/kaboom.wav", 125, 100, 1, CHAN_AUTO)
-        end
-
-        util.BlastDamage(self, IsValid(self:GetOwner()) and self:GetOwner() or self, self:GetPos(), self.Radius, self.DamageOverride or self.Damage)
+        self:Explode()
 
         if SERVER then
             local dir = self.HitVelocity or self:GetVelocity()
@@ -245,6 +235,21 @@ if SERVER then
         self:SetRenderMode(RENDERMODE_NONE)
         self:SetMoveType(MOVETYPE_NONE)
         self:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+    end
+
+    function ENT:Explode()
+        local effectdata = EffectData()
+            effectdata:SetOrigin( self:GetPos() )
+
+        if self:WaterLevel() > 0 then
+            util.Effect( "WaterSurfaceExplosion", effectdata )
+            --self:EmitSound("weapons/underwater_explode3.wav", 125, 100, 1, CHAN_AUTO)
+        else
+            util.Effect( self.ExplosionEffect, effectdata)
+            --self:EmitSound("phx/kaboom.wav", 125, 100, 1, CHAN_AUTO)
+        end
+
+        util.BlastDamage(self, IsValid(self:GetOwner()) and self:GetOwner() or self, self:GetPos(), self.Radius, self.DamageOverride or self.Damage)
     end
 
     function ENT:PhysicsCollide(colData, physobj)
@@ -320,6 +325,10 @@ if SERVER then
             end
 
             tgt:TakeDamageInfo(dmg)
+        end
+
+        if self.BounceSounds and colData.DeltaTime > 0.1 then
+            self:EmitSound(self.BounceSounds[math.random(1, #self.BounceSounds)], 75)
         end
 
         if self.ExplodeOnImpact then

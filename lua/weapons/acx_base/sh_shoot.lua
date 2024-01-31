@@ -91,22 +91,28 @@ end
 function SWEP:Shoot(left)
     if self:GetStillWaiting(left) then return end
 
+    clip = self:Clip1()
+    if self.Primary.ClipSize <= 0 then
+        clip = self:Ammo1()
+    end
+
+    if left then
+        clip = self:Clip2()
+        if self.Primary.ClipSize <= 0 then
+            clip = self:Ammo1()
+        end
+    end
+
     if left then
         if self:GetNeedCycle2() then return end
-
-        if self:Clip2() < self.AmmoPerShot then
-            self:DryFire(true)
-
-            return
-        end
     else
         if self:GetNeedCycle() then return end
+    end
 
-        if self:Clip1() < self.AmmoPerShot then
-            self:DryFire()
+    if clip < self.AmmoPerShot then
+        self:DryFire()
 
-            return
-        end
+        return
     end
 
     local spread = self:GetSpread()
@@ -151,7 +157,7 @@ function SWEP:Shoot(left)
             ang = ang + AngleRand() / 360 * math.deg(spread)
             shoot_entity.ShootEntData = shootentdata
             shoot_entity:SetPos(pos)
-            shoot_entity:SetAngles(ang)
+            shoot_entity:SetAngles(ang + self.ProjectileAngle)
             shoot_entity:SetOwner(self:GetOwner())
             shoot_entity:Spawn()
             shoot_entity:Activate()
@@ -282,6 +288,7 @@ end
 
 function SWEP:DoMuzzleEffects(left)
     if not IsFirstTimePredicted() then return end
+    if not self.MuzzleEffect then return end
     local data = EffectData()
     data:SetEntity(self)
     data:SetFlags(left and 1 or 0)

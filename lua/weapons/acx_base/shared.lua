@@ -37,6 +37,7 @@ SWEP.AmmoPerShot = 1
 
 SWEP.ProjectileEntity = nil
 SWEP.ProjectileForce = 5000
+SWEP.ProjectileAngle = Angle(0, 0, 0)
 
 SWEP.Spread = 0.01
 SWEP.Recoil = 1
@@ -166,6 +167,8 @@ SWEP.ACX = true
 SWEP.UseHands = false
 SWEP.NPCUsable = true
 
+SWEP.IsGrenade = false
+
 SWEP.ParticleEmitters = {}
 
 local searchdir = "weapons/acx_base"
@@ -225,6 +228,7 @@ function SWEP:SetupDataTables()
     self:NetworkVar("Bool", 10, "NeedCycle")
     self:NetworkVar("Bool", 11, "NeedCycle2")
     self:NetworkVar("Bool", 12, "LastShotLeft")
+    self:NetworkVar("Bool", 13, "SecondGunAvailable")
 
     self:NetworkVar("Entity", 0, "HolsterEntity")
     self:NetworkVar("Entity", 1, "LockOnEntity")

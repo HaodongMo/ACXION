@@ -4,11 +4,21 @@ function SWEP:DrawWorldModel()
         return
     end
 
-    self:TryCreateModel()
+    local should_draw_left = true
+    local should_draw_right = true
+
+    if self.IsGrenade and self:Ammo1() <= 0 then
+        should_draw_left = false
+        should_draw_right = false
+    end
+
+    if should_draw_left or should_draw_right then
+        self:TryCreateModel()
+    end
 
     local model_right = self.ModelRightView
 
-    if IsValid(model_right) then
+    if IsValid(model_right) and should_draw_right then
         model_right:SetupBones()
 
         self:UpdateModelBodygroups(model_right)
@@ -33,7 +43,7 @@ function SWEP:DrawWorldModel()
 
     local model_left = self.ModelLeftView
 
-    if IsValid(model_left) then
+    if IsValid(model_left) and should_draw_left then
         self:UpdateModelBodygroups(model_left, true)
 
         model_left:SetupBones()

@@ -15,6 +15,7 @@ end
 
 function SWEP:CustomReload()
     if self:GetReloading() then self:FinishReload() return end
+    if self.Primary.ClipSize <= 0 then return end
 
     local both = self:ShouldReloadBoth()
     local left = self:GetAkimbo() and self:Clip1() > self:Clip2()
