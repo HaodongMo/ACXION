@@ -405,7 +405,9 @@ function SWEP:PrintWeaponInfo(x, y, alpha)
 
         str = str .. "\n<font=HudSelectionText>"
 
-        str = str .. title_color .. "Ammo:</color>\t" .. text_color .. language.GetPhrase(self.Primary.Ammo .. "_ammo") .. "</color>\n"
+        if self.AmmoPerShot > 0 then
+            str = str .. title_color .. "Ammo:</color>\t" .. text_color .. language.GetPhrase(self.Primary.Ammo .. "_ammo") .. "</color>\n"
+        end
 
         str = str .. title_color .. "Damage:</color>\t" .. text_color .. self.Damage .. (self.Num > 1 and ("x" .. self.Num) or "") .. "</color>\n"
 

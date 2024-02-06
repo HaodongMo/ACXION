@@ -6,6 +6,7 @@ local rising_edge_firemodes = {
     ["burst_"] = true,
     ["break"] = true,
     ["single"] = true,
+    ["melee"] = true
 }
 
 local falling_edge_firemodes = {
