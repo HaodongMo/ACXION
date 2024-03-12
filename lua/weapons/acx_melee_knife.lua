@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 SWEP.Base = "acx_base"
-SWEP.Spawnable = true
+SWEP.Spawnable = false
 
 SWEP.PrintName = "Knife"
 SWEP.Category = "ACXION"
@@ -14,8 +14,8 @@ SWEP.Model = "models/tak/gtaiv/combat_knife.mdl"
 SWEP.WorldModel = SWEP.Model
 SWEP.Bodygroups = ""
 
-SWEP.ModelOffsetView = Vector(4.5, 9, -6.5)
-SWEP.ModelAngleView = Angle(0, 0, 90)
+SWEP.ModelOffsetView = Vector(4.5, 9, -4)
+SWEP.ModelAngleView = Angle(-90, 0, 90)
 
 SWEP.ModelOffsetWorld = Vector(1.5, 4, -1)
 SWEP.ModelAngleWorld = Angle(5, 0, -90)
@@ -24,12 +24,14 @@ SWEP.Slot = 3
 
 ----------------- Stats
 
-SWEP.Damage = 24
+SWEP.Damage = 100
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 1.5
 SWEP.Spread = 0.01
 SWEP.Recoil = 0
 SWEP.RateOfFire = 60
+
+SWEP.Distance = 64
 
 SWEP.SpreadSightsMult = 0.5
 SWEP.RecoilSightsMult = 0.5
@@ -66,8 +68,8 @@ SWEP.ScopeOverlay = nil
 SWEP.AimOffset = Vector(-0.25, 0, 0)
 SWEP.AimAngle = Angle(0, 0, 0)
 
-SWEP.RecoilOffset = Vector(0, 0.1, 0.02)
-SWEP.RecoilAngle = Angle(math.rad(-90), 0, 0)
+SWEP.RecoilOffset = Vector(0, 0.1, 0)
+SWEP.RecoilAngle = Angle(0, 0, 0)
 
 ----------------- Gestures
 

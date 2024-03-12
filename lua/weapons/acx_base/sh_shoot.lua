@@ -180,7 +180,7 @@ function SWEP:Shoot(left)
             Dir = ang:Forward(),
             Src = self:GetShootPos(),
             Spread = Vector(spread, spread, 0),
-            Distance = 50000,
+            Distance = self.Distance,
             IgnoreEntity = ignore_entity,
             Callback = function(attacker, tr, dmginfo)
                 local dmg = dmginfo:GetDamage()

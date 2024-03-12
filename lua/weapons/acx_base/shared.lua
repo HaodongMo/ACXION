@@ -34,6 +34,7 @@ SWEP.Damage = 30
 SWEP.Num = 1
 SWEP.HeadshotMultiplier = 2
 SWEP.AmmoPerShot = 1
+SWEP.Distance = 16000
 
 SWEP.ProjectileEntity = nil
 SWEP.ProjectileForce = 5000
