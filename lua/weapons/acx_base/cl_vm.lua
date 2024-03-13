@@ -50,8 +50,6 @@ function SWEP:PreDrawViewModel(vm, weapon, ply)
 end
 
 function SWEP:GetViewModelPosition(pos, ang)
-    pos = pos - ang:Forward() * 32
-
     return pos, ang
 end
 
@@ -59,6 +57,8 @@ SWEP.InterpolatedLockAngle = Angle(0, 0, 0)
 SWEP.InterpolatedLockAngle2 = Angle(0, 0, 0)
 
 function SWEP:GetCustomViewPos(pos, ang, left, tracer)
+    pos, ang = hook.Run("CalcViewModelView", self, self, Vector(pos), Vector(ang), pos, ang)
+
     local owner = self:GetOwner()
     left = left or false
     tracer = tracer or false
@@ -126,6 +126,7 @@ function SWEP:GetCustomViewPos(pos, ang, left, tracer)
     ang:RotateAroundAxis(up, aim_angle.x)
     ang:RotateAroundAxis(right, aim_angle.y)
     ang:RotateAroundAxis(forward, aim_angle.z)
+
     pos, ang = self:DoSway(pos, ang, old_ang)
 
     return pos, ang
