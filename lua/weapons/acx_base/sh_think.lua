@@ -126,9 +126,9 @@ function SWEP:Think()
                     self:EmitSound(self.TriggerSound, 75, 100, 1, CHAN_AUTO)
                 end
 
-                if owner:KeyPressed(IN_ATTACK2) and rising_edge_firemodes[self.Firemode] then
+                if owner:KeyPressed(IN_ATTACK2) and self:FiremodeEdge(true) then
                     self:SetShotQueued(true)
-                elseif owner:KeyReleased(IN_ATTACK2) and falling_edge_firemodes[self.Firemode] then
+                elseif owner:KeyReleased(IN_ATTACK2) and self:FiremodeEdge(false) then
                     self:SetShotQueued(true)
                 elseif owner:KeyDown(IN_ATTACK2) and auto_firemodes[self.Firemode] then
                     self:SetShotQueued(true)
