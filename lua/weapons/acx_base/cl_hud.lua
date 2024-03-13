@@ -19,6 +19,7 @@ end
 SWEP.TrueFOV = 90
 
 function SWEP:DrawHUD()
+    local hudstate = ACX.ConVars["hud"]:GetInt()
     local aim_angle = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self.InterpolatedLockAngle
     local pos = self:GetShootPos(false) + aim_angle:Forward() * 15000
     cam.Start3D(nil, nil, self:WidescreenFix(self.TrueFOV))
@@ -72,148 +73,157 @@ function SWEP:DrawHUD()
 
         surface.DrawText(text_ammo_r)
     else
-        y = y + self.LowerAmountRight * ScrH()
-        surface.SetDrawColor(col)
 
-        if clip_r == 0 then
-            surface.SetDrawColor(col2)
-        end
-
-        local hardlock_l = false
-        local hardlock_r = false
-
-        if self.HardLockForTargetData then
-            if clip_l > 0 then
-                hardlock_l = self:GetHasHardLock(true)
-            end
-            if clip_r > 0 then
-                hardlock_r = self:GetHasHardLock(false)
-            end
-        end
-
-        render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-        // surface.DrawRect(crosshair_x - 1, crosshair_y - 1, 3, 3)
-        local trueFOV = self:WidescreenFix(self.TrueFOV)
-        local crosshair_radius = (ScrH() / trueFOV) * math.deg(self:GetSpread()) + ScreenScale(1)
-
-        for i = 0, 15 do
-            local angle = (i / 16) * math.pi * 2
-            local x1 = x + math.cos(angle) * crosshair_radius
-            local y1 = y + math.sin(angle) * crosshair_radius
-            local x2 = x + math.cos(angle + (math.pi * 2 / 16)) * crosshair_radius
-            local y2 = y + math.sin(angle + (math.pi * 2 / 16)) * crosshair_radius
-            surface.DrawLine(x1, y1, x2, y2)
-        end
-
-        if hardlock_r then
-            local x1 = x - crosshair_radius
-            local y1 = y - crosshair_radius
-            local x2 = x + crosshair_radius
-            local y2 = y + crosshair_radius
-
-            surface.DrawLine(x, y1, x, y2)
-            surface.DrawLine(x1, y, x2, y)
-        end
-
-        render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-        local text_ammo_r = tostring(clip_r)
-        surface.SetFont("ACX_8")
-        surface.SetTextPos(x + crosshair_radius + ss * 4, y + ss * 4)
-        surface.SetTextColor(col)
-
-        if self:GetNeedCycle() then
-            text_ammo_r = string.upper(self.Firemode)
-            surface.SetTextColor(col2)
-        elseif clip_r == 0 then
-            surface.SetTextColor(col2)
-        end
-
-        surface.DrawText(text_ammo_r)
-
-        local text_r = ""
-
-        if self:GetAkimbo() then
-            text_r = "R"
-        end
-
-        if IsValid(self:GetLockOnEntity()) then
-            text_r = "R-TRK"
-        end
-
-        if hardlock_r then
-            if math.sin(CurTime() * 10) > 0 then
-                text_r = "SHOOT"
-            end
-        end
-
-        surface.SetFont("ACX_8")
-        surface.SetTextPos(x + crosshair_radius + ss * 6, y - ss * 10)
-        surface.DrawText(text_r)
-
-        if self:GetAkimbo() then
-            local aim_angle2 = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self.InterpolatedLockAngle2
-            local pos2 = self:GetShootPos(true) + aim_angle2:Forward() * 15000
-            local xl, yl = pos2:ToScreen().x, pos2:ToScreen().y
-            yl = yl + self.LowerAmountLeft * ScrH()
+        if hudstate >= 1 then
+            y = y + self.LowerAmountRight * ScrH()
             surface.SetDrawColor(col)
 
-            if clip_l == 0 then
+            if clip_r == 0 then
                 surface.SetDrawColor(col2)
             end
 
-            render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+            local hardlock_l = false
+            local hardlock_r = false
 
-            for i = 0, 3 do
-                local angle = (i / 4) * math.pi * 2
-                local x1 = xl + math.cos(angle) * crosshair_radius
-                local y1 = yl + math.sin(angle) * crosshair_radius
-                local x2 = xl + math.cos(angle + (math.pi * 2 / 4)) * crosshair_radius
-                local y2 = yl + math.sin(angle + (math.pi * 2 / 4)) * crosshair_radius
-                surface.DrawLine(x1, y1, x2, y2)
-            end
-
-            if hardlock_l then
-                local x1 = xl - crosshair_radius
-                local y1 = yl - crosshair_radius
-                local x2 = xl + crosshair_radius
-                local y2 = yl + crosshair_radius
-
-                surface.DrawLine(xl, y1, xl, y2)
-                surface.DrawLine(x1, yl, x2, yl)
-            end
-
-            render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
-            local text_ammo_l = tostring(clip_l)
-            if self:GetNeedCycle2() then
-                text_ammo_l = string.upper(self.Firemode)
-                surface.SetTextColor(col2)
-            elseif clip_l == 0 then
-                surface.SetTextColor(col2)
-            else
-                surface.SetTextColor(col)
-            end
-
-            surface.SetFont("ACX_8")
-            local text_ammo_w, text_ammo_h = surface.GetTextSize(text_ammo_l)
-            surface.SetTextPos(xl - crosshair_radius - text_ammo_w - ss * 4, yl + ss * 4)
-
-            surface.DrawText(text_ammo_l)
-            local text_l = "L"
-
-            if IsValid(self:GetLockOnEntity2()) then
-                text_l = "L-TRK"
-            end
-
-            if hardlock_l then
-                if math.sin(CurTime() * 10) > 0 then
-                    text_l = "SHOOT"
+            if self.HardLockForTargetData then
+                if clip_l > 0 then
+                    hardlock_l = self:GetHasHardLock(true)
+                end
+                if clip_r > 0 then
+                    hardlock_r = self:GetHasHardLock(false)
                 end
             end
 
-            surface.SetFont("ACX_8")
-            local text_l_w, _ = surface.GetTextSize(text_l)
-            surface.SetTextPos(xl - text_l_w - crosshair_radius - ss * 6, yl - ss * 10)
-            surface.DrawText(text_l)
+            render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+            // surface.DrawRect(crosshair_x - 1, crosshair_y - 1, 3, 3)
+            local trueFOV = self:WidescreenFix(self.TrueFOV)
+            local crosshair_radius = (ScrH() / trueFOV) * math.deg(self:GetSpread()) + ScreenScale(1)
+
+            for i = 0, 15 do
+                local angle = (i / 16) * math.pi * 2
+                local x1 = x + math.cos(angle) * crosshair_radius
+                local y1 = y + math.sin(angle) * crosshair_radius
+                local x2 = x + math.cos(angle + (math.pi * 2 / 16)) * crosshair_radius
+                local y2 = y + math.sin(angle + (math.pi * 2 / 16)) * crosshair_radius
+                surface.DrawLine(x1, y1, x2, y2)
+            end
+
+            if hardlock_r then
+                local x1 = x - crosshair_radius
+                local y1 = y - crosshair_radius
+                local x2 = x + crosshair_radius
+                local y2 = y + crosshair_radius
+
+                surface.DrawLine(x, y1, x, y2)
+                surface.DrawLine(x1, y, x2, y)
+            end
+
+            render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+
+            if hudstate == 1 then
+                local text_ammo_r = tostring(clip_r)
+                surface.SetFont("ACX_8")
+                surface.SetTextPos(x + crosshair_radius + ss * 4, y + ss * 4)
+                surface.SetTextColor(col)
+
+                if self:GetNeedCycle() then
+                    text_ammo_r = string.upper(self.Firemode)
+                    surface.SetTextColor(col2)
+                elseif clip_r == 0 then
+                    surface.SetTextColor(col2)
+                end
+
+                surface.DrawText(text_ammo_r)
+
+                local text_r = ""
+
+                if self:GetAkimbo() then
+                    text_r = "R"
+                end
+
+                if IsValid(self:GetLockOnEntity()) then
+                    text_r = "R-TRK"
+                end
+
+                if hardlock_r then
+                    if math.sin(CurTime() * 10) > 0 then
+                        text_r = "SHOOT"
+                    end
+                end
+
+                surface.SetFont("ACX_8")
+                surface.SetTextPos(x + crosshair_radius + ss * 6, y - ss * 10)
+                surface.DrawText(text_r)
+            end
+
+            if self:GetAkimbo() then
+                local aim_angle2 = self:GetOwner():EyeAngles() - self:GetOwner():GetViewPunchAngles() - self.InterpolatedLockAngle2
+                local pos2 = self:GetShootPos(true) + aim_angle2:Forward() * 15000
+                local xl, yl = pos2:ToScreen().x, pos2:ToScreen().y
+                yl = yl + self.LowerAmountLeft * ScrH()
+                surface.SetDrawColor(col)
+
+                if clip_l == 0 then
+                    surface.SetDrawColor(col2)
+                end
+
+                render.OverrideBlend(true, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+
+                for i = 0, 3 do
+                    local angle = (i / 4) * math.pi * 2
+                    local x1 = xl + math.cos(angle) * crosshair_radius
+                    local y1 = yl + math.sin(angle) * crosshair_radius
+                    local x2 = xl + math.cos(angle + (math.pi * 2 / 4)) * crosshair_radius
+                    local y2 = yl + math.sin(angle + (math.pi * 2 / 4)) * crosshair_radius
+                    surface.DrawLine(x1, y1, x2, y2)
+                end
+
+                if hardlock_l then
+                    local x1 = xl - crosshair_radius
+                    local y1 = yl - crosshair_radius
+                    local x2 = xl + crosshair_radius
+                    local y2 = yl + crosshair_radius
+
+                    surface.DrawLine(xl, y1, xl, y2)
+                    surface.DrawLine(x1, yl, x2, yl)
+                end
+
+                render.OverrideBlend(false, BLEND_ONE, BLEND_ONE, BLENDFUNC_ADD)
+
+                if hudstate == 1 then
+                    local text_ammo_l = tostring(clip_l)
+                    if self:GetNeedCycle2() then
+                        text_ammo_l = string.upper(self.Firemode)
+                        surface.SetTextColor(col2)
+                    elseif clip_l == 0 then
+                        surface.SetTextColor(col2)
+                    else
+                        surface.SetTextColor(col)
+                    end
+
+                    surface.SetFont("ACX_8")
+                    local text_ammo_w, text_ammo_h = surface.GetTextSize(text_ammo_l)
+                    surface.SetTextPos(xl - crosshair_radius - text_ammo_w - ss * 4, yl + ss * 4)
+
+                    surface.DrawText(text_ammo_l)
+                    local text_l = "L"
+
+                    if IsValid(self:GetLockOnEntity2()) then
+                        text_l = "L-TRK"
+                    end
+
+                    if hardlock_l then
+                        if math.sin(CurTime() * 10) > 0 then
+                            text_l = "SHOOT"
+                        end
+                    end
+
+                    surface.SetFont("ACX_8")
+                    local text_l_w, _ = surface.GetTextSize(text_l)
+                    surface.SetTextPos(xl - text_l_w - crosshair_radius - ss * 6, yl - ss * 10)
+                    surface.DrawText(text_l)
+                end
+            end
         end
     end
 
