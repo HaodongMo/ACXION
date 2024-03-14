@@ -190,3 +190,7 @@ function SWEP:NPC_Initialize()
 
     self:SetClip1(self.Primary.ClipSize)
 end
+
+function SWEP:OnDrop()
+    self:SetClip1(math.random(0, self.Primary.ClipSize))
+end
