@@ -57,7 +57,7 @@ SWEP.InterpolatedLockAngle = Angle(0, 0, 0)
 SWEP.InterpolatedLockAngle2 = Angle(0, 0, 0)
 
 function SWEP:GetCustomViewPos(pos, ang, left, tracer)
-    pos, ang = hook.Run("CalcViewModelView", self, self, Vector(pos), Vector(ang), pos, ang)
+    pos, ang = hook.Run("CalcViewModelView", self, self, Vector(pos), Angle(ang), pos, ang)
 
     local owner = self:GetOwner()
     left = left or false

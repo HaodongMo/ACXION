@@ -8,7 +8,9 @@ EFFECT.Left = false
 function EFFECT:Init(data)
     local wpn = data:GetEntity()
     self.Weapon = wpn
+    if not IsValid(wpn) then return end
     local ply = wpn:GetOwner()
+    if not IsValid(ply) then return end
     local left = data:GetFlags() == 1
     self.Left = left
     self.StartTime = CurTime()
